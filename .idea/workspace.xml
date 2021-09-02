@@ -55,7 +55,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1630492396800</updated>
-      <workItem from="1630492397932" duration="1899000" />
+      <workItem from="1630492397932" duration="4553000" />
     </task>
     <task id="LOCAL-00001" summary="add init auto file">
       <created>1630492726150</created>
@@ -64,7 +64,14 @@
       <option name="project" value="LOCAL" />
       <updated>1630492726150</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add init auto file">
+      <created>1630547492838</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1630547492838</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -86,13 +93,13 @@
     <option name="LAST_COMMIT_MESSAGE" value="add init auto file" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2381" y="164" key="SettingsEditor" timestamp="1630492888633">
+    <state x="2381" y="164" key="SettingsEditor" timestamp="1630564414088">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2381" y="164" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1630492888633" />
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1630492728661">
+    <state x="2381" y="164" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1630564414088" />
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1630547500989">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1630492728661" />
+    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1630547500989" />
   </component>
 </project>

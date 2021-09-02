@@ -19,7 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4c61586d-275d-4d6f-a5be-eaee6b0c7e98" name="Default Changelist" comment="add init auto file" />
+    <list default="true" id="4c61586d-275d-4d6f-a5be-eaee6b0c7e98" name="Default Changelist" comment="add init auto file">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,7 +55,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1630492396800</updated>
-      <workItem from="1630492397932" duration="1274000" />
+      <workItem from="1630492397932" duration="1899000" />
     </task>
     <task id="LOCAL-00001" summary="add init auto file">
       <created>1630492726150</created>

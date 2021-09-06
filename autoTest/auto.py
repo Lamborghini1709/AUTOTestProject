@@ -6,14 +6,13 @@ import sys
 import re
 
 file_Num = 0
-UPDATE_TAG = 1
+UPDATE_TAG = 0
 
 is_netlist = lambda x:any(x.endswith(extension)
     for extension in ['.sp', '.cir', 'scs'])
 netlist_list = []
 log_list = []
 line_list = []
-
 time_list = []
 str_list = []
 
@@ -55,7 +54,7 @@ def run_simulation(spfile):
         logfile = change_suffix(spfile, '.log')
 	# changed 0904 >> to >为了每次重新仿真得到的log不会记录之前的结果，
 	# 否则autoRun.log的自动判断会出错
-        RunCmd = os.path.dirname(__file__) + "/simulator {} > {}".format(spfile, logfile)
+        RunCmd = "/simulator {} > {}".format(spfile, logfile)
         log_list.append(logfile)
                     # os.system(' '.join(RunCmd))
         os.system(RunCmd)

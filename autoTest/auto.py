@@ -55,11 +55,14 @@ def run_simulation(spfile):
         logfile = change_suffix(spfile, '.log')
 	# changed 0904 >> to >为了每次重新仿真得到的log不会记录之前的结果，
 	# 否则autoRun.log的自动判断会出错
-        RunCmd = "simulator {} > {}".format(spfile, logfile)
+        RunCmd = os.path.dirname(__file__) + "/simulator {} > {}".format(spfile, logfile)
         log_list.append(logfile)
                     # os.system(' '.join(RunCmd))
         os.system(RunCmd)
         get_time(logfile)
+        line_list = []
+        time_list = []
+        str_list = []
         #print("rcmd:", RunCmd)
 
 def change_suffix(file, suffix):
@@ -146,7 +149,7 @@ def get_time(file):
                                                                 (time_list[10] * 10 + time_list[11])
     rst = time2 - time1
     msg = "running time: {} s".format(rst)
-    print(msg)    
+    print(msg)
 
 def main():
     print("Start AutoSim...")
@@ -161,7 +164,7 @@ def main():
         
     #print('ref_filename:', ref_filename)
     sim_folder(test_dir, ref_filename)
-    print("Total: %d files (.sp or .cir)\n" % (file_Num))
+    print("Total: %d files (.sp .scs or .cir)\n" % (file_Num))
     #print netlist_list
     global_out_check()
 

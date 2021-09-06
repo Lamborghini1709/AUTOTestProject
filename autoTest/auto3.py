@@ -2,35 +2,46 @@ import os
 import datetime
 import subprocess
 import sys
+import argparse
+
+
+
 
 file_Num = 0
-UPDATE_TAG = 0
 
 is_netlist = lambda x:any(x.endswith(extension)
-    for extension in ['.sp','.cir'])
+    for extension in ['.sp','.cir', 'scs'])
 netlist_list = []
 
-def sim_folder(test_dir):
+def sim_folder(opt):
+    test_dir = opt.test_path
     if isinstance(test_dir,str):
         for filepath,dirnames,filenames in os.walk(test_dir, topdown=False):
             for filename in filenames:
                 if is_netlist(filename):
                     spfile = os.path.join(filepath,filename)
                     netlist_list.append(spfile)
-                    print "Find %s \n" % (spfile)
+                    print("Find %s \n" % (spfile))
                     global file_Num
                     file_Num += 1
-                    if not_simulated(spfile) and not UPDATE_TAG:
-			# RunCmd = ['simulator',spfile]
-			RunCmd = "simulator {} >> {}.log".format(spfile, spfile)
-                        # os.system(' '.join(RunCmd))
-			os.system(RunCmd)
-			print("rcmd:", RunCmd)
+                    if not_simulated(spfile) and not opt.update:
+            # RunCmd = ['simulator',spfile]
+                        RunCmd = "simulator {} >> {}.log".format(spfile, spfile)
+            # os.system(' '.join(RunCmd))
+                        os.system(RunCmd)
+
+                        print("rcmd:", RunCmd)
 
     else:
-        print "Please specify the test folder in string format."
+        print("Please specify the test folder in string format.")
 
 def not_simulated(file):
+    if file.endswith('.sp'):
+        out_file = file.replace('.sp', '.out');
+    elif file.endswith('.cir'):
+        out_file = file.replace('.cir', '.out');
+
+
     out_file = file.replace('.sp','.out');
     out_file = out_file.replace('.cir','.out');
 
@@ -40,7 +51,7 @@ def not_simulated(file):
         return 1
 
 def global_out_check():
-    print "Check output...."
+    print("Check output....")
     logfile = open("autoRun.log", "a")
     now = datetime.datetime.now()
     logfile.write(now.strftime("%Y-%m-%d %H:%M:%S \n"))
@@ -61,11 +72,19 @@ def global_out_check():
     print("The result is in autoRun.log.")
 
 
+
+
+
 def main():
-    print "Start AutoSim..."
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--test_path", type=str, default="./", help="path to test")
+    parser.add_argument("--update", type=int, default=0, help="update out file")
+    opt = parser.parse_args()
+    print(opt)
+    print("Start AutoSim...")
     test_dir = '.'
-    sim_folder(test_dir)
-    print "Total: %d files (.sp or .cir)\n" % (file_Num);
+    sim_folder(opt)
+    print("Total: %d files (.sp or .cir)\n" % (file_Num));
     #print netlist_list
     global_out_check()
 

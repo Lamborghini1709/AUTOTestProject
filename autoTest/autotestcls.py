@@ -126,7 +126,7 @@ class AutoTestCls():
             # changed 0904 >> to >为了每次重新仿真得到的log不会记录之前的结果，
             # 否则autoRun.log的自动判断会出错
 
-            RunCmd = self.sh + "simulator-klu-1.0 {} -f nutascii > {}".format(spfile, logfile)
+            RunCmd = self.sh + " {} -f nutascii > {}".format(spfile, logfile)
             # os.system(' '.join(RunCmd))
             start = time.time()
             os.system(RunCmd)
@@ -179,7 +179,13 @@ class AutoTestCls():
                         if 'SIMULATION is completed sucessfully' in line:
                             return 1
             except:
-                print("error decode:" + file)
+                try:
+                    with open(file, encoding='latin-1') as f:
+                        for line in f.readlines():
+                            if 'SIMULATION is completed sucessfully' in line:
+                                return 1
+                except:
+                    print("error decode:" + file)
         return 0
 
 

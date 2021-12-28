@@ -75,9 +75,11 @@ class AutoTestCls():
             for filepath, dirnames, filenames in os.walk(self.test_dir, topdown=False):
                 for filename in filenames:
                     if self.is_netlist(filename):
-                        self.spfile_Num += 1
                         # sp文件
                         spfile = os.path.join(filepath, filename)
+                        if ("model" in spfile or "AHDLINCLUDE" in spfile or "SPECTREINCLUDE" in spfile):
+                            continue
+                        self.spfile_Num += 1
                         # log文件
                         logFile = self.change_suffix(spfile, '.log')
                         # 仿真sp得到的out文件

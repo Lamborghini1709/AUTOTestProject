@@ -19,9 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4c61586d-275d-4d6f-a5be-eaee6b0c7e98" name="Default Changelist" comment="add init auto file2">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autoTest/auto.py" beforeDir="false" afterPath="$PROJECT_DIR$/autoTest/auto.py" afterDir="false" />
+    <list default="true" id="4c61586d-275d-4d6f-a5be-eaee6b0c7e98" name="Default Changelist" comment="add v3 into git2">
+      <change afterPath="$PROJECT_DIR$/AutoTestV3/cases_nodes.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AutoTestV3/testbenchcompare.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AutoTestV3/testbenchcompare_v1.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,6 +140,7 @@
       <option name="presentableId" value="Default" />
       <updated>1630492396800</updated>
       <workItem from="1630492397932" duration="15845000" />
+      <workItem from="1648024813453" duration="378000" />
     </task>
     <task id="LOCAL-00001" summary="add init auto file">
       <created>1630492726150</created>
@@ -168,7 +170,21 @@
       <option name="project" value="LOCAL" />
       <updated>1630913420478</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="add v3 into git">
+      <created>1648024964518</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1648024964518</updated>
+    </task>
+    <task id="LOCAL-00006" summary="add v3 into git2">
+      <created>1648025185169</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1648025185169</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,7 +205,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add init auto file" />
     <MESSAGE value="add init auto file2" />
-    <option name="LAST_COMMIT_MESSAGE" value="add init auto file2" />
+    <MESSAGE value="add v3 into git" />
+    <MESSAGE value="add v3 into git2" />
+    <option name="LAST_COMMIT_MESSAGE" value="add v3 into git2" />
   </component>
   <component name="WindowStateProjectService">
     <state width="1877" height="348" key="GridCell.Tab.0.bottom" timestamp="1630919489579">

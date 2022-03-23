@@ -19,11 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4c61586d-275d-4d6f-a5be-eaee6b0c7e98" name="Default Changelist" comment="add v3 into git2">
-      <change afterPath="$PROJECT_DIR$/AutoTestV3/cases_nodes.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AutoTestV3/testbenchcompare.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AutoTestV3/testbenchcompare_v1.py" afterDir="false" />
-    </list>
+    <list default="true" id="4c61586d-275d-4d6f-a5be-eaee6b0c7e98" name="Default Changelist" comment="add v3 into git2" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -140,7 +136,7 @@
       <option name="presentableId" value="Default" />
       <updated>1630492396800</updated>
       <workItem from="1630492397932" duration="15845000" />
-      <workItem from="1648024813453" duration="378000" />
+      <workItem from="1648024813453" duration="1193000" />
     </task>
     <task id="LOCAL-00001" summary="add init auto file">
       <created>1630492726150</created>
@@ -184,7 +180,21 @@
       <option name="project" value="LOCAL" />
       <updated>1648025185169</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="add v3 into git2">
+      <created>1648025301746</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1648025301746</updated>
+    </task>
+    <task id="LOCAL-00008" summary="add v3 into git2">
+      <created>1648025811301</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1648025811301</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,10 +220,22 @@
     <option name="LAST_COMMIT_MESSAGE" value="add v3 into git2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="239" key="Vcs.Push.Dialog.v2" timestamp="1648025306926">
+    <state x="552" y="239" key="Vcs.Push.Dialog.v2" timestamp="1648025817447">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="239" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1648025306926" />
+    <state x="552" y="239" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1648025817447" />
+    <state x="753" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1648025469813">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="753" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1648025469813" />
+    <state x="740" y="380" key="git4idea.rebase.GitRebaseDialog" timestamp="1648025461599">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="380" key="git4idea.rebase.GitRebaseDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1648025461599" />
+    <state x="702" y="419" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1648025369589">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="702" y="419" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1648025369589" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -210,46 +210,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="add v3 into git2" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="348" key="GridCell.Tab.0.bottom" timestamp="1630919489579">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="552" y="239" key="Vcs.Push.Dialog.v2" timestamp="1648025306926">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1630919489579" />
-    <state width="1877" height="348" key="GridCell.Tab.0.center" timestamp="1630919489579">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1630919489579" />
-    <state width="1877" height="348" key="GridCell.Tab.0.left" timestamp="1630919489579">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1630919489579" />
-    <state width="1877" height="348" key="GridCell.Tab.0.right" timestamp="1630919489579">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1630919489579" />
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1630919489530">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1630919489530" />
-    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1630919489530">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1630919489530" />
-    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1630919489530">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1630919489530" />
-    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1630919489530">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1630919489530" />
-    <state x="2381" y="164" key="SettingsEditor" timestamp="1630564414088">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2381" y="164" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1630564414088" />
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2" timestamp="1630913422580">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2472" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1630913422580" />
+    <state x="552" y="239" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1648025306926" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

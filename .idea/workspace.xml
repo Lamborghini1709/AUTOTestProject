@@ -19,7 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4c61586d-275d-4d6f-a5be-eaee6b0c7e98" name="Default Changelist" comment="add v3 into git2" />
+    <list default="true" id="4c61586d-275d-4d6f-a5be-eaee6b0c7e98" name="Default Changelist" comment="add v3 into git3">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AutoTestV3/testbenchcompare.py" beforeDir="false" afterPath="$PROJECT_DIR$/AutoTestV3/testbenchcompare.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,7 +47,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../CV/Realtime_Multi-Person_Pose_Estimation" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -136,7 +139,7 @@
       <option name="presentableId" value="Default" />
       <updated>1630492396800</updated>
       <workItem from="1630492397932" duration="15845000" />
-      <workItem from="1648024813453" duration="1193000" />
+      <workItem from="1648024813453" duration="4412000" />
     </task>
     <task id="LOCAL-00001" summary="add init auto file">
       <created>1630492726150</created>
@@ -194,7 +197,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648025811301</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="add v3 into git3">
+      <created>1648026017622</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1648026017622</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,13 +227,18 @@
     <MESSAGE value="add init auto file2" />
     <MESSAGE value="add v3 into git" />
     <MESSAGE value="add v3 into git2" />
-    <option name="LAST_COMMIT_MESSAGE" value="add v3 into git2" />
+    <MESSAGE value="add v3 into git3" />
+    <option name="LAST_COMMIT_MESSAGE" value="add v3 into git3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="239" key="Vcs.Push.Dialog.v2" timestamp="1648025817447">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1648111988423">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="239" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1648025817447" />
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1648111988423" />
+    <state x="552" y="239" key="Vcs.Push.Dialog.v2" timestamp="1648026018855">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="239" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1648026018855" />
     <state x="753" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1648025469813">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

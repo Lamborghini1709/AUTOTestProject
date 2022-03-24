@@ -13,6 +13,7 @@ import pandas as pd
 import numpy as np
 from math import sqrt
 import ast
+from matplotlib import pyplot as plt
 
 
 class AutoTestCls():

@@ -19,8 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4c61586d-275d-4d6f-a5be-eaee6b0c7e98" name="Default Changelist" comment="add matplotlib">
+    <list default="true" id="4c61586d-275d-4d6f-a5be-eaee6b0c7e98" name="Default Changelist" comment="1、优化代码，摘出部分函数放进utils">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AutoTestV3/testbenchcompare.py" beforeDir="false" afterPath="$PROJECT_DIR$/AutoTestV3/testbenchcompare.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +139,7 @@
       <option name="presentableId" value="Default" />
       <updated>1630492396800</updated>
       <workItem from="1630492397932" duration="15845000" />
-      <workItem from="1648024813453" duration="5906000" />
+      <workItem from="1648024813453" duration="7660000" />
     </task>
     <task id="LOCAL-00001" summary="add init auto file">
       <created>1630492726150</created>
@@ -210,7 +211,21 @@
       <option name="project" value="LOCAL" />
       <updated>1648113670989</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="1、修改cases_nodes.xlsx 文件路径：之前需放在testpath子孙目录下，修改需放在脚本同级目录。&#10;2、增加结果画图模块：&#10;细节：1）如果是noise分析，x轴需取对数；&#10;          2）如果是频谱图，画柱状图，否则画折线图；&#10;          3）根据当前case对比结果决定标题背景颜色，红色表示对比失败，绿色表示对比成功；&#10;3、log文件、仿真状态xlsx文件、结果对比xlsx文件、结果图放在脚本同级目录下output文件夹，如果没有会自动创建；&#10;4、引入有序字典oredereddict ,确保存入字典的键值对有序，主要是为了取出plotname的第一个键值对，用来作为x轴；&#10;5、noden 修改为：nodename----unit  前面是节点名，后面是单位，用于画图；&#10;6、增加MAPE评估指标，默认还是RMSE ,可通过--metric 指定，可选[MAPE,RMSE]；&#10;7、增加参数--savesimcsv, 默认是True，用于选择是否保存仿真状态结果表，可选[True, False]；&#10;8、增加参数--savediffcsv, 默认是True，用于选择是否保存仿真对比结果表，可选[True, False]；&#10;9、增加参数--savefig, 默认是True，用于选择是否进行仿真结果画图，可选[True, False]；">
+      <created>1648198592092</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1648198592092</updated>
+    </task>
+    <task id="LOCAL-00012" summary="1、优化代码，摘出部分函数放进utils">
+      <created>1648198725852</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1648198725852</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -235,17 +250,19 @@
     <MESSAGE value="add v3 into git2" />
     <MESSAGE value="add v3 into git3" />
     <MESSAGE value="add matplotlib" />
-    <option name="LAST_COMMIT_MESSAGE" value="add matplotlib" />
+    <MESSAGE value="1、修改cases_nodes.xlsx 文件路径：之前需放在testpath子孙目录下，修改需放在脚本同级目录。&#10;2、增加结果画图模块：&#10;细节：1）如果是noise分析，x轴需取对数；&#10;          2）如果是频谱图，画柱状图，否则画折线图；&#10;          3）根据当前case对比结果决定标题背景颜色，红色表示对比失败，绿色表示对比成功；&#10;3、log文件、仿真状态xlsx文件、结果对比xlsx文件、结果图放在脚本同级目录下output文件夹，如果没有会自动创建；&#10;4、引入有序字典oredereddict ,确保存入字典的键值对有序，主要是为了取出plotname的第一个键值对，用来作为x轴；&#10;5、noden 修改为：nodename----unit  前面是节点名，后面是单位，用于画图；&#10;6、增加MAPE评估指标，默认还是RMSE ,可通过--metric 指定，可选[MAPE,RMSE]；&#10;7、增加参数--savesimcsv, 默认是True，用于选择是否保存仿真状态结果表，可选[True, False]；&#10;8、增加参数--savediffcsv, 默认是True，用于选择是否保存仿真对比结果表，可选[True, False]；&#10;9、增加参数--savefig, 默认是True，用于选择是否进行仿真结果画图，可选[True, False]；" />
+    <MESSAGE value="1、优化代码，摘出部分函数放进utils" />
+    <option name="LAST_COMMIT_MESSAGE" value="1、优化代码，摘出部分函数放进utils" />
   </component>
   <component name="WindowStateProjectService">
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1648111988423">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1648111988423" />
-    <state x="552" y="239" key="Vcs.Push.Dialog.v2" timestamp="1648113672792">
+    <state x="552" y="239" key="Vcs.Push.Dialog.v2" timestamp="1648198727696">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="239" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1648113672792" />
+    <state x="552" y="239" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1648198727696" />
     <state x="753" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1648025469813">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

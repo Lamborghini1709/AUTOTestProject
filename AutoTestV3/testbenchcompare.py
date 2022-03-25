@@ -233,8 +233,11 @@ class AutoTestCls():
             # read the names of the variables
             variable_name_unit = []
             for variable in titles[8:8 + number_of_variables]:
+                # 取节点名
                 var_name = variable.split('\t', -1)[2]
+                # 取节点单位
                 var_unit = variable.split('\t', -1)[3].split('\n')[0]
+                #节点名和单位之间用----拼接，赋给variable_name_unit
                 var_name_unit = var_name + "----" + var_unit
                 variable_name_unit.append(var_name_unit)
             # print(variable_name_unit)
@@ -259,6 +262,7 @@ class AutoTestCls():
                     if st.startswith("FAIL"):
                         st = "0"
                     vlu = eval(st)
+                    #如果是虚数，out文件中会有两个值，我们只取实部
                     if type(vlu) == tuple:
                         results[variable_name_unit[variable_index]].append(vlu[0])
                     else:
@@ -266,6 +270,8 @@ class AutoTestCls():
                     variable_index += 1
                 else:
                     st = value.split('\t', -1)[-1].split('\n')[0]
+
+                    #如果out文件中出现Fail字符串，将其转换成0
                     if st.startswith("FAIL"):
                         st = "0"
                     vlu = eval(st)
@@ -281,20 +287,24 @@ class AutoTestCls():
         assert len(nodelistsresult) > 0
         return nodelistsresult, plotname_arr
 
-
+    #根据netlist name 获取 caseindex,后续根据caseindex去找对应的输出节点
     def getCaseIndex(self, index):
         netfile = self.data_df_simulator.loc[index].netFile
+        # netfile: /home/IC/Case_wayne/TestBench_1BaseCases1/>>>>>case1<<<<<</VCO/lab1_pss_pnoise_btd.scs
         caseindex = netfile.split('/case')[1].split('/')[0]
-        print(caseindex)
+        # print(caseindex)
         return int(caseindex)
 
     def calc_error(self, index, original_results_dict, new_results_dict):
 
         plotname_nodes = []
+        #获取所有的plotnames
         plotnames = original_results_dict.keys()
-        check_nodes = []
+
         for plotname in plotnames:
             node_dict = original_results_dict[plotname]
+
+            #获取所有的nodename
             nodes = node_dict.keys()
             for node in nodes:
                 plotname_nodes.append('--'.join((plotname, node)))
@@ -349,12 +359,12 @@ class AutoTestCls():
         return compare, str(comp_result)
 
     def save_plot(self, index, out_results_dict, ref_results_dict, compare):
-        # define title color
+        # 根据对比结果定义标题颜色
         titlecolor = 'green' if compare else 'red'
 
         plotname_nodes = []
         plotnames = out_results_dict.keys()
-        check_nodes = []
+
         for plotname in plotnames:
             node_dict = out_results_dict[plotname]
             nodes = node_dict.keys()
@@ -364,7 +374,7 @@ class AutoTestCls():
         # 读取case number，作为index找到对应case需要查看的节点
         caseindex = self.getCaseIndex(index)
         check_nodes = self.check_nodes_dict[caseindex]
-        pass
+
 
         for plotname_node in check_nodes:
             plotn = plotname_node.split('--')[0]
@@ -372,12 +382,14 @@ class AutoTestCls():
             out_plot = out_results_dict[plotn]
             ref_plot = ref_results_dict[plotn]
 
+            #得到第一个nodename、单位、值，因为plotname中第一个节点会作为后续节点画图的横坐标
             for xname_unit, xvalue in out_plot.items():
                 out_xname = xname_unit.split('----')[0]
                 out_xunit = xname_unit.split('----')[1]
                 outx = xvalue
                 break
 
+            #因为refout节点名和单位一致，所以不用重复获取
             for xname_unit, xvalue in ref_plot.items():
                 refx = xvalue
                 break
@@ -386,11 +398,13 @@ class AutoTestCls():
 
             for nodename in out_plot.keys():
                 if nodename.startswith(noden):
+                    #得到y轴的单位
                     yunit = nodename.split("----")[1]
+                    #得到y轴的数据
                     outdata = out_plot[nodename]
                     refdata = ref_plot[nodename]
 
-
+            #长度不一致需做数据对齐
             if len(refdata) != len(outdata):
                 xnew, outdata, refdata = self.AlignDataLen(outx, refx, outdata, refdata)
             else:
@@ -401,10 +415,12 @@ class AutoTestCls():
             if len(outdata) == 1:
                 continue
 
-            #plot or bar  (Spectrum)
+            # 折线图还是柱状图
             # print("Spectrum" in noden)
             # print(noden)
-            if "Spectrum" in plotn: #bar
+            # 如果是频谱图，画柱状图
+            if "Spectrum" in plotn:
+                #设置柱状图y轴的起始值
                 bottomvalue = np.min(np.array(outdata)) - 10
 
                 # GHz transform
@@ -434,6 +450,7 @@ class AutoTestCls():
                 # plt.show()
                 plt.close()
 
+            #否则，画折线图
             else:# plot
 
                 # GHz transform
@@ -480,9 +497,14 @@ class AutoTestCls():
                 com_result = str({})
                 # 解析两份out文件，找到对比的内容，并执行对比
                 if os.path.exists(outfile) and os.path.exists(ref_file):
+
                     results_1_dict, plotname_arr1 = self.outfile_parser(outfile)
                     results_2_dict, plotname_arr2 = self.outfile_parser(ref_file)
+
+                    # 计算误差
                     compare, com_result = self.calc_error(j, results_1_dict, results_2_dict)
+
+                    # 如果参数指定了保存图片，则开始画图
                     if opt.savefig:
                         self.save_plot(j, results_1_dict, results_2_dict, compare)
                 AnalysisTypes = list(set(plotname_arr1))

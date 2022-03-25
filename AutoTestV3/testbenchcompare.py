@@ -14,6 +14,8 @@ import numpy as np
 from math import sqrt
 import ast
 from matplotlib import pyplot as plt
+import collections
+from tool_utils import get_rmse, get_mape, AlignDataLen
 
 
 class AutoTestCls():
@@ -25,10 +27,11 @@ class AutoTestCls():
         self.str_list = []
         self.test_dir = opt.tp
         self.ref_filename = 'bench'
+        self.cases_nodes_path = "cases_nodes.xlsx"
         self.sh = opt.sh
 
         # def logfile
-        self.autoRunlogfile = open("autoRun.log", "a")
+        self.autoRunlogfile = open("./output/autoRun.log", "a")
         now = datetime.datetime.now()
         self.autoRunlogfile.write(now.strftime("%Y-%m-%d %H:%M:%S \n"))
 
@@ -50,40 +53,12 @@ class AutoTestCls():
                                         for extension in ['.sp', '.cir', 'scs'])
 
         # 选择对比节点
-        self.check_nodes_stella = dict()
-        # self.check_nodes = {
-        #     1: ["Transient Analysis--Vout", "Oscillator Period and Frequency--period",
-        #         "Oscillator Period and Frequency--frequency", "Single-sideband Phase Noise Spectral Density--phnoise"],
-        #     2: ["Oscillator Period and Frequency--period", "Oscillator Period and Frequency--frequency",
-        #         "Harmonic Balance Oscillator Steady State Analysis--vout",
-        #         "Harmonic Balance Oscillator Steady State Spectrum--vout"],
-        #     3: ["Harmonic Balance Noise Analysis--out", "Harmonic Balance Steady State Analysis--net037",
-        #         "Harmonic Balance Steady State Spectrum--net037"],
-        #     4: ["Harmonic Balance Steady State Analysis--RF", "Harmonic Balance Steady State Spectrum--RF",
-        #         "Harmonic Balance AC Analysis--RF"],
-        #     5: ["Harmonic Balance Steady State Analysis--RF", "Harmonic Balance Steady State Spectrum--RF"],
-        #     6: ["Harmonic Balance Steady State Spectrum--RF", "Harmonic Balance Steady State Spectrum--IFp"],
-        #     7: ["Harmonic Balance Steady State Analysis--RFOUT", "Harmonic Balance Steady State Spectrum--RFOUT"],
-        #     8: ["Transient Analysis--net44", "Periodic Steady State Analysis--net44",
-        #         "Periodic Steady State Spectrum--net44",
-        #         "Periodic Noise Analysis--out", "Integrated Noise--onoise_total"],
-        #     9: ["Harmonic Balance Steady State Analysis--SUB_LNA", "Harmonic Balance Steady State Spectrum--SUB_LNA",
-        #         "Harmonic Balance Noise Analysis--out", "Integrated Noise--onoise_total"],
-        #     10: ["Transient Analysis--ip(V37)", "Transient Analysis--VVCOBYP"],
-        #     11: ["Transient Analysis--I0.net4", "Transient Analysis--I0.net3"],
-        #     12: ["Transient Analysis--I71.I8_CC0_pos", "Transient Analysis--I71.I8_CC0_neg"],
-        #     13: ["Transient Analysis--i1(ravdi)", "Transient Analysis--x01.xck0_clk1600a"],
-        #     14: ["Transient Analysis--ip(V1)", "Transient Analysis--D7", "Transient Analysis--I0.VOUT_DAC"],
-        #     15: ["Operating Point--i1(m2)", "Operating Point--i4(m2)"],
-        #     16: ["AC Analysis--out", "AC Analysis--vp(out)"],
-        #     17: ["AC Analysis--ip(V0)", "AC Analysis--net02"],
-        #     18: ["Periodic Steady State Analysis--RFout", "Periodic Steady State Spectrum--RFout",
-        #          "Periodic Noise Analysis--out",
-        #          "Integrated Noise--onoise_total"],
-        #     19: ["Transient Analysis--voqb", "Transient Analysis--voi"],
-        #     20: ["AC Analysis--anot", "AC Analysis--out", "Noise Analysis--out",
-        #          "Integrated Noise--onoise_total"]
-        # }
+        self.check_nodes_dict = dict()
+        nodes_df = pd.read_excel(self.cases_nodes_path, index_col=0)  # 指定第一列为行索引
+        for row in range(1, len(nodes_df) + 1):
+            row_value = nodes_df.loc[row, 'nodes'].split(", ")
+            self.check_nodes_dict[row] = row_value
+
 
         self.InitCaseForm()
 
@@ -128,15 +103,6 @@ class AutoTestCls():
                         self.data_df_diff.loc[self.spfile_Num] = [netfile, logFile, outFile, ref_file, AnalysisType,
                                                                   SimulatorStat, Simulatorcost, Simulatordiff,
                                                                   outdiffdetail]
-
-                    if filename == 'cases_nodes.xlsx':
-                        nodes_df = pd.read_excel('cases_nodes.xlsx', index_col = 0) # 指定第一列为行索引
-                        for row in range(1, self.spfile_Num + 1):
-                            row_value = nodes_df.loc[row, 'nodes'].split(", ")
-                            self.check_nodes_stella[row] = row_value
-                        # print(self.check_nodes_stella)
-                        # print(self.check_nodes)
-                        # print(self.check_nodes_stella == self.check_nodes)
 
         else:
             print("Please specify the test folder in string format.")
@@ -256,24 +222,27 @@ class AutoTestCls():
 
         nodelists.append(nodelist)
         assert len(nodelists) == notenum
-        nodelistsresult = {}
+        nodelistsresult = collections.OrderedDict()
         # read the number of variables and number of points
         for titles in nodelists:
             number_of_variables = int(titles[4].split(':', 1)[1])
             plotname = titles[2].split(': ')[-1].split('\n')[0]
             plotname_arr.append(plotname)
-            nodelistsresult[plotname] = {}
+            nodelistsresult[plotname] = collections.OrderedDict()
 
             # read the names of the variables
-            variable_name = []
+            variable_name_unit = []
             for variable in titles[8:8 + number_of_variables]:
-                variable_name.append(variable.split('\t', -1)[2])
-            # print(variable_name)
+                var_name = variable.split('\t', -1)[2]
+                var_unit = variable.split('\t', -1)[3].split('\n')[0]
+                var_name_unit = var_name + "----" + var_unit
+                variable_name_unit.append(var_name_unit)
+            # print(variable_name_unit)
 
             # read the values of the variables
-            results = {}
+            results = collections.OrderedDict()
             variable_index = 0
-            for variable in variable_name:
+            for variable in variable_name_unit:
                 results[variable] = []
 
             # if this node is PSS
@@ -291,9 +260,9 @@ class AutoTestCls():
                         st = "0"
                     vlu = eval(st)
                     if type(vlu) == tuple:
-                        results[variable_name[variable_index]].append(vlu[0])
+                        results[variable_name_unit[variable_index]].append(vlu[0])
                     else:
-                        results[variable_name[variable_index]].append(vlu)
+                        results[variable_name_unit[variable_index]].append(vlu)
                     variable_index += 1
                 else:
                     st = value.split('\t', -1)[-1].split('\n')[0]
@@ -301,9 +270,9 @@ class AutoTestCls():
                         st = "0"
                     vlu = eval(st)
                     if type(vlu) == tuple:
-                        results[variable_name[variable_index]].append(vlu[0])
+                        results[variable_name_unit[variable_index]].append(vlu[0])
                     else:
-                        results[variable_name[variable_index]].append(vlu)
+                        results[variable_name_unit[variable_index]].append(vlu)
                     variable_index = 0
             nodelistsresult[plotname] = results
         # close the output_file
@@ -312,30 +281,6 @@ class AutoTestCls():
         assert len(nodelistsresult) > 0
         return nodelistsresult, plotname_arr
 
-    def get_mse(self, records_real, records_predict):
-        """
-        均方误差 估计值与真值 偏差
-        """
-        if len(records_real) == len(records_predict):
-            return sum([(x - y) ** 2 for x, y in zip(records_real, records_predict)]) / len(records_real)
-        else:
-            return None
-
-    def get_rmse(self, records_real, records_predict):
-        """
-        均方根误差：是均方误差的算术平方根
-        """
-        mse = self.get_mse(records_real, records_predict)
-        if mse or mse == 0:
-            return math.sqrt(mse)
-        else:
-            return None
-
-    def get_ae(self, records_real, records_predict):
-        if len(records_real) == len(records_predict):
-            return sum([np.abs(x - y) for x, y in zip(records_real, records_predict)]) / len(records_real)
-        else:
-            return None
 
     def getCaseIndex(self, index):
         netfile = self.data_df_simulator.loc[index].netFile
@@ -356,26 +301,172 @@ class AutoTestCls():
 
         # 读取case number，作为index找到对应case需要查看的节点
         caseindex = self.getCaseIndex(index)
-        check_nodes = self.check_nodes_stella[caseindex]
+        check_nodes = self.check_nodes_dict[caseindex]
 
         comp_result = {}
         comparelist = []
         for plotname_node in check_nodes:
             plotn = plotname_node.split('--')[0]
             noden = plotname_node.split('--')[1]
-            outdata = original_results_dict[plotn][noden]
-            refdata = new_results_dict[plotn][noden]
+
+            out_plot = original_results_dict[plotn]
+            ref_plot = new_results_dict[plotn]
+
+            for xname_unit, xvalue in out_plot.items():
+                outx = xvalue
+                break
+
+            for xname_unit, xvalue in ref_plot.items():
+                refx = xvalue
+                break
+
+            for nodename in out_plot.keys():
+                if nodename.startswith(noden):
+                    outdata = out_plot[nodename]
+                    refdata = ref_plot[nodename]
+
+            # 对齐数据
+            if len(refdata) != len(outdata):
+                _, outdata, refdata = AlignDataLen(outx, refx, outdata, refdata)
 
             assert len(refdata) == len(outdata)
 
-            rmse = self.get_rmse(outdata, refdata)
-            # rmse = self.get_ae(outdata, refdata)
-            comp_value = 1e-3 if np.average(outdata) == 0 else np.abs(np.average(outdata))
-            compareflag = True if rmse <= comp_value or rmse < 1e-5 else False
-            comp_result[plotname_node] = str((rmse, comp_value, compareflag))
+            # 评估指标
+            if opt.metric == "RMSE":
+                rmse = get_rmse(outdata, refdata)
+                # rmse = self.get_ae(outdata, refdata)
+                comp_value = 1e-3 if np.average(outdata) == 0 else np.abs(np.average(outdata))
+                compareflag = True if rmse <= comp_value or rmse < 1e-5 else False
+                comp_result[plotname_node] = str((rmse, comp_value, compareflag))
+
+            else:
+                mape = get_mape(outdata, refdata)
+                comp_value = 1e-3 if np.average(outdata) > 1e-6 else 1
+                compareflag = True if mape <= comp_value else False
+                comp_result[plotname_node] = str((mape, comp_value, compareflag))
             comparelist.append(compareflag)
             compare = False if False in comparelist else True
         return compare, str(comp_result)
+
+    def save_plot(self, index, out_results_dict, ref_results_dict, compare):
+        # define title color
+        titlecolor = 'green' if compare else 'red'
+
+        plotname_nodes = []
+        plotnames = out_results_dict.keys()
+        check_nodes = []
+        for plotname in plotnames:
+            node_dict = out_results_dict[plotname]
+            nodes = node_dict.keys()
+            for node in nodes:
+                plotname_nodes.append('--'.join((plotname, node)))
+
+        # 读取case number，作为index找到对应case需要查看的节点
+        caseindex = self.getCaseIndex(index)
+        check_nodes = self.check_nodes_dict[caseindex]
+        pass
+
+        for plotname_node in check_nodes:
+            plotn = plotname_node.split('--')[0]
+            noden = plotname_node.split('--')[1]
+            out_plot = out_results_dict[plotn]
+            ref_plot = ref_results_dict[plotn]
+
+            for xname_unit, xvalue in out_plot.items():
+                out_xname = xname_unit.split('----')[0]
+                out_xunit = xname_unit.split('----')[1]
+                outx = xvalue
+                break
+
+            for xname_unit, xvalue in ref_plot.items():
+                refx = xvalue
+                break
+
+
+
+            for nodename in out_plot.keys():
+                if nodename.startswith(noden):
+                    yunit = nodename.split("----")[1]
+                    outdata = out_plot[nodename]
+                    refdata = ref_plot[nodename]
+
+
+            if len(refdata) != len(outdata):
+                xnew, outdata, refdata = self.AlignDataLen(outx, refx, outdata, refdata)
+            else:
+                xnew = outx
+
+            assert len(refdata) == len(outdata)
+
+            if len(outdata) == 1:
+                continue
+
+            #plot or bar  (Spectrum)
+            # print("Spectrum" in noden)
+            # print(noden)
+            if "Spectrum" in plotn: #bar
+                bottomvalue = np.min(np.array(outdata)) - 10
+
+                # GHz transform
+                if np.max(xnew) > 1e9:
+                    xnew = (np.array(xnew) * 1e-9).tolist()
+                    out_xunit = "G" + out_xunit
+
+                total_width, n = 0.6, 2
+                width = total_width / n
+                # fig = plt.figure()
+                outdata = (np.array(outdata) + np.abs(bottomvalue)).tolist()
+                refdata = (np.array(refdata) + np.abs(bottomvalue)).tolist()
+                plt.bar(xnew, outdata, width=width, color='b', label='outdata', bottom=bottomvalue)
+                # for a, b in zip(xnew, outdata):  # 柱子上的数字显示
+                #     plt.text(a, b, '%.3f' % b, ha='center', va='bottom', fontsize=10);
+                for i in range(len(xnew)):
+                    xnew[i] = xnew[i] + width
+                plt.bar(xnew, refdata, width=width, color='r', label='refdata', bottom=bottomvalue)
+                plt.xticks(rotation=90)  # 横坐标旋转45度
+                plt.xlabel(out_xname + "(" + out_xunit + ")")  # 横坐标标签
+                plt.ylabel(noden + "(" + yunit + ")")  # 纵坐标标签
+                plt.title(plotname_node, backgroundcolor=titlecolor)  # bar图标题
+                # plt.grid(axis='x')
+                plt.legend(loc='best')
+                savepath = "./output/case" + str(caseindex) + "_" + plotname_node + '.jpg'
+                plt.savefig(savepath)
+                # plt.show()
+                plt.close()
+
+            else:# plot
+
+                # GHz transform
+                if "noise" in plotname_node or "Noise" in plotname_node:
+                    # log transform
+                    # if "noise" in noden or "Hz" in out_xunit:
+                    xnew = np.log10(xnew)
+                    out_xname = out_xname + "_log"
+                else:
+                    if np.max(xnew) > 1e6:
+                        xnew = (np.array(xnew) * 1e-9).tolist()
+                        out_xunit = "G" + out_xunit
+                    # nano transform
+                    elif np.max(xnew) < 1e-6:
+                        xnew = (np.array(xnew) * 1e9).tolist()
+                        out_xunit = "n" + out_xunit
+                    else:
+                        pass
+
+                plt.plot(xnew, outdata, 'b', label='outdata')  # (横坐标，纵坐标)
+                plt.plot(xnew, refdata, 'r', label='refdata')  # (横坐标，纵坐标)
+                plt.xlabel(out_xname + "(" + out_xunit + ")")  # 横坐标标签
+                plt.ylabel(noden + "(" + yunit + ")")  # 纵坐标标签
+                plt.grid()
+                plt.title(plotname_node, backgroundcolor=titlecolor)  # 折线图标题
+
+                plt.legend(loc='best')
+
+                savepath = "./output/case" + str(caseindex) + "_" + plotname_node + '.jpg'
+                plt.savefig(savepath)
+                # plt.show()
+                plt.close()
+
 
     def diffout(self):
         for j in range(1, self.spfile_Num + 1):
@@ -392,6 +483,8 @@ class AutoTestCls():
                     results_1_dict, plotname_arr1 = self.outfile_parser(outfile)
                     results_2_dict, plotname_arr2 = self.outfile_parser(ref_file)
                     compare, com_result = self.calc_error(j, results_1_dict, results_2_dict)
+                    if opt.savefig:
+                        self.save_plot(j, results_1_dict, results_2_dict, compare)
                 AnalysisTypes = list(set(plotname_arr1))
                 self.data_df_diff.loc[j, "AnalysisType"] = ";".join(AnalysisTypes)
                 self.data_df_diff.loc[j, "outdiff"] = compare
@@ -404,8 +497,14 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--tp", type=str, default="./", help="path to test case")
     parser.add_argument("--sh", type=str, default='btdsim', help="choose simulator path")
+    parser.add_argument("--savesimcsv", type=bool, default=True, help="save final simulator csv file")
+    parser.add_argument("--savediffcsv", type=bool, default=True, help="save final diff csv file")
+    parser.add_argument("--savefig", type=bool, default=True, help="save final plot")
+    parser.add_argument("--metric", type=str, default="MAPE", help="select metrics for diff, i.e. RMSE or MAPE")
     opt = parser.parse_args()
     print(opt)
+
+    os.makedirs("output", exist_ok=True)
 
     # 执行仿真
     print("Start AutoSimulator...")
@@ -421,15 +520,17 @@ if __name__ == '__main__':
     # print("start check out Analysis Type...")
     # atc.global_out_check()
 
-    # 将仿真结果写入excel
     date_str = time.strftime("%m%d%H%M%S", time.localtime())
-    writer1 = pd.ExcelWriter('data_df_simulator_' + date_str + '.xlsx')
-    atc.data_df_simulator.to_excel(writer1)
-    writer1.save()
+    if opt.savesimcsv:
+        # 将仿真结果写入excel
+        writer1 = pd.ExcelWriter('./output/data_df_simulator_' + date_str + '.xlsx')
+        atc.data_df_simulator.to_excel(writer1)
+        writer1.save()
 
     # 仿真结果对比，并写入excel
     print("start diff out file...")
-    atc.diffout()
-    writer2 = pd.ExcelWriter('data_df_diff_' + date_str + '.xlsx')
-    atc.data_df_diff.to_excel(writer2)
-    writer2.save()
+    if opt.savediffcsv:
+        atc.diffout()
+        writer2 = pd.ExcelWriter('./output/data_df_diff_' + date_str + '.xlsx')
+        atc.data_df_diff.to_excel(writer2)
+        writer2.save()

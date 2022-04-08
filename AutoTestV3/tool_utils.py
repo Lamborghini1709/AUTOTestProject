@@ -44,14 +44,26 @@ def AlignDataLen(outx, refx, outdata, refdata):
     """
     三次样条插值
     """
-    x = outx
-    y = outdata
-    x_new = refx
     kind = "cubic"  # 插值方式
     from scipy import interpolate
-    f = interpolate.interp1d(x, y, kind=kind)
-    outdata_cubic = f(x_new)
-    return refx, outdata_cubic, refdata
+    if len(outdata) > len(refdata):
+        x = refx
+        y = refdata
+        x_new = outx
+        f = interpolate.interp1d(x, y, kind=kind)
+        outdata_cubic = f(x_new)
+        newrefdata = outdata_cubic
+        newoutdata = outdata
+    else:
+        x = outx
+        y = outdata
+        x_new = refx
+        f = interpolate.interp1d(x, y, kind=kind)
+        outdata_cubic = f(x_new)
+        newrefdata = refdata
+        newoutdata = outdata_cubic
+
+    return x_new, newoutdata, newrefdata
 
 if __name__ == '__main__':
     a = [1,2,3,4]

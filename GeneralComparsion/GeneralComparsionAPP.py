@@ -52,9 +52,9 @@ class GeneralComparsionCls():
 
     def get_comp_resut(self):
         if (np.array(self.ae_points) <= self.AEthreshold).all() and (np.array(self.re_points) <= self.REthreshold).all():
-            self.com_result = True
+            self.com_result = "PASS"
         else:
-            self.com_result = False
+            self.com_result = "FAIL"
         return self.com_result
 
     def get_reports_AE(self):
@@ -72,6 +72,7 @@ class GeneralComparsionCls():
         return self.reports_RE
 
     def get_sort_report_outliers(self):
+        # // TODO
         return self.sort_report_outliers
 
     def run_comparsion(self):

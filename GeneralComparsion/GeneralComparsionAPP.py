@@ -19,6 +19,7 @@ from dash import Dash
 class GeneralComparsionCls():
     # 定义、创建对象初始化
     def __init__(self, data=None):
+        #可在类初始化时传递所有数据和阈值，也可以不传递参数，后面调用成员函数设置数据和阈值
         if data:
             self.silver_points = data['silver_points']
             self.golden_points = data['golden_points']
@@ -125,21 +126,31 @@ if __name__ == '__main__':
     # def General Comparison Utility
     silver_points = [d * 1e7 for d in btd_data['ids'].values.tolist()]
     golden_points = [d * 1e7 for d in spec_data['ids'].values.tolist()]
+    AEthreshold = 0.3
+    REthreshold = 0.05
 
     #传入类的参数
     inputs = {
         'silver_points': silver_points,
         'golden_points': golden_points,
-        'AEthreshold': 0.3,
-        'REthreshold': 0.05,
+        'AEthreshold': AEthreshold,
+        'REthreshold': REthreshold,
     }
 
     #类初始化
     gcc = GeneralComparsionCls(data=inputs)
-    #调用成员函数
+
+
+    #调用成员函数设置数据和阈值
+    gcc.set_silver_points(silver_points)
+    gcc.set_golden_points(golden_points)
+    gcc.set_AEthreshold(AEthreshold)
+    gcc.set_REthreshold(REthreshold)
+
+    #调用成员函数开始比较
     gcc.run_comparsion()
 
-    #返回比较结果
+    #调用成员函数获取比较结果
     print("comp_resut:", gcc.get_comp_resut())
     print("reports_AE:", gcc.get_reports_AE())
     print("reports_RE:", gcc.get_reports_RE())

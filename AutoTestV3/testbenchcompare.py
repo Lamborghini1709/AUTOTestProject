@@ -187,13 +187,13 @@ class AutoTestCls():
             try:
                 with open(file) as f:
                     for line in f.readlines():
-                        if 'SIMULATION is completed sucessfully' in line:
+                        if 'SIMULATION is completed successfully' in line:
                             return 1
             except:
                 try:
                     with open(file, encoding='latin-1') as f:
                         for line in f.readlines():
-                            if 'SIMULATION is completed sucessfully' in line:
+                            if 'SIMULATION is completed successfully' in line:
                                 return 1
                 except:
                     print("error decode:" + file)

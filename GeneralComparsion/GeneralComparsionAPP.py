@@ -15,17 +15,20 @@ import dash_html_components as html                 # 代码转html
 from dash.dependencies import Input, Output         # 回调
 from jupyter_plotly_dash import JupyterDash         # Jupyter中的Dash
 from dash import Dash
+from tools_utils import cross_point
 
 class GeneralComparsionCls():
     # 定义、创建对象初始化
     def __init__(self, data=None):
         #可在类初始化时传递所有数据和阈值，也可以不传递参数，后面调用成员函数设置数据和阈值
         if data:
+            self.labels = data['labels']
             self.silver_points = data['silver_points']
             self.golden_points = data['golden_points']
             self.AEthreshold = data['AEthreshold']
             self.REthreshold = data['REthreshold']
         else:
+            self.labels = None
             self.silver_points = None
             self.golden_points = None
             self.AEthreshold = 0
@@ -36,6 +39,9 @@ class GeneralComparsionCls():
         self.reports_RE = {}
         self.sort_report_outliers = None
         self.app = None
+
+    def set_labels(self, labels):
+        self.labels = labels
 
     def set_silver_points(self, silver_points):
         self.silver_points = silver_points
@@ -88,6 +94,24 @@ class GeneralComparsionCls():
         RE_line1 = [i * (1 - self.REthreshold) for i in x]
         RE_line2 = [i * (1 + self.REthreshold) for i in x]
 
+        #计算交点
+        AE_line1s = [x[0], AE_line1[0], x[1], AE_line1[1]]
+        AE_line2s = [x[0], AE_line2[0], x[1], AE_line2[1]]
+        RE_line1s = [x[0], RE_line1[0], x[1], RE_line1[1]]
+        RE_line2s = [x[0], RE_line2[0], x[1], RE_line2[1]]
+
+        point_is_exist11, [x11, y11] = cross_point(AE_line1s, RE_line1s)
+        point_is_exist12, [x12, y12] = cross_point(AE_line1s, RE_line2s)
+        point_is_exist21, [x21, y21] = cross_point(AE_line2s, RE_line1s)
+        point_is_exist22, [x22, y22] = cross_point(AE_line2s, RE_line2s)
+        posAE_negRE_point = ([x11, y11])
+        posAE_posRE_point = ([x12, y12])
+        negAE_negRE_point = ([x21, y21])
+        negAE_posRE_point = ([x22, y22])
+
+
+        print(x)
+
         self.app = Dash('BTD Dash', )
         self.app.layout = html.Div(
             children=[
@@ -96,16 +120,22 @@ class GeneralComparsionCls():
                 dcc.Graph(
                     id='example-graph',
                     figure=dict(
-                        data=[{'x': x, 'y': x, 'type': 'lines', 'name': 'y=x'},
-                              {'x': x, 'y': AE_line1, 'type': 'lines', 'name': '+AE'},
-                              {'x': x, 'y': AE_line2, 'type': 'lines', 'name': '-AE'},
-                              {'x': x, 'y': RE_line1, 'type': 'lines', 'name': '-RE'},
-                              {'x': x, 'y': RE_line2, 'type': 'lines', 'name': '+RE'},
+                        data=[
+                              # {'x': x, 'y': x, 'type': 'lines', 'name': 'y=x'},
+                              {'x': [x11, x12], 'y': [y11, y12], 'type': 'lines', 'name': '+AE'},
+                              {'x': [x21, x22], 'y': [y21, y22], 'type': 'lines', 'name': '-AE'},
+                              {'x': [x[0], x11], 'y': [RE_line1[0], y11], 'type': 'lines', 'name': '-RE1'},
+                              {'x': [x21, x[-1]], 'y': [y21, RE_line1[-1]], 'type': 'lines', 'name': '-RE2'},
+                              # {'x': [x21, x[-1]], 'y': [y21, 1], 'type': 'lines', 'name': '-RE2'},
+                              {'x': [x[0], x22], 'y': [RE_line2[0], y22], 'type': 'lines', 'name': '+RE1'},
+                              {'x': [x12, x[-1]], 'y': [y12, RE_line2[-1]], 'type': 'lines', 'name': '+RE2'},
                               go.Scatter(
                                   x=self.silver_points,
                                   y=self.golden_points,
                                   mode='markers',
                                   name='data',
+                                  hoverinfo='text',
+                                  hovertext=self.labels
 
                               )
                               ],
@@ -125,6 +155,7 @@ if __name__ == '__main__':
     spec_data = pd.read_csv("spectre_gummel_pmos_btdsim6_ids_vg0_data.csv", skiprows=1, names=['vd', 'ids'])
 
     # def General Comparison Utility
+    labels = [str(i) for i in btd_data['vd'].values.tolist()]
     silver_points = [d * 1e7 for d in btd_data['ids'].values.tolist()]
     golden_points = [d * 1e7 for d in spec_data['ids'].values.tolist()]
     AEthreshold = 0.3
@@ -132,6 +163,7 @@ if __name__ == '__main__':
 
     #传入类的参数
     inputs = {
+        'labels': labels,
         'silver_points': silver_points,
         'golden_points': golden_points,
         'AEthreshold': AEthreshold,
@@ -143,6 +175,7 @@ if __name__ == '__main__':
 
 
     #调用成员函数设置数据和阈值
+    gcc.set_labels(labels)
     gcc.set_silver_points(silver_points)
     gcc.set_golden_points(golden_points)
     gcc.set_AEthreshold(AEthreshold)

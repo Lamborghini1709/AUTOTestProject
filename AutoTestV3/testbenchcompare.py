@@ -406,7 +406,7 @@ class AutoTestCls():
 
             #长度不一致需做数据对齐
             if len(refdata) != len(outdata):
-                xnew, outdata, refdata = self.AlignDataLen(outx, refx, outdata, refdata)
+                xnew, outdata, refdata = AlignDataLen(outx, refx, outdata, refdata)
             else:
                 xnew = outx
 

@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+# @Time    : 2021/8/25 14:18
+# @Author  : Wayne
+# @File    : app.py.py
+# @Software: PyCharm
+
+gui工具：
+选择(btd, btd)导出的csv文件；
+可视化两条数据的对比图，并计算MAPE;
+
+1、新增复数处理：
+    if isinstance(self.srcdata.srcvalue[0], str):
+      self.srcdata['srcvalue'] = [np.absolute(complex(i)) for i in self.srcdata.srcvalue.values.tolist()]

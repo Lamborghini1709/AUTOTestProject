@@ -11,6 +11,7 @@ from PyQt5.QtWidgets import QApplication, QDialog, QMainWindow, QFileDialog, QSi
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from tool_utils import get_rmse, get_mape, AlignDataLen, mean_absolute_percentage_error, mape_vectorized_v2
 
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
@@ -91,35 +92,59 @@ class DiffCSVFile(QMainWindow, Ui_MainWindow):
 
 
   def diffCSVFile(self):
-    self.srcdata = pd.read_csv(self.srcFile, skiprows=1, sep=self.comboBox_2.currentData(),
-                               names=['time', 'srcvalue'])
+    self.srcdata = pd.read_csv(self.srcFile, skiprows=1, names=['time', 'srcvalue'])
 
-
-    self.dstdata = pd.read_csv(self.dstFile, skiprows=1, sep=self.comboBox_2.currentData(),
-                               names=['time', 'dstvalue'])
-    print(len(self.srcdata.srcvalue))
-    print(len(self.dstdata.dstvalue))
+    self.dstdata = pd.read_csv(self.dstFile, skiprows=1, names=['time', 'dstvalue'])
+    # print(len(self.srcdata.srcvalue))
+    # print(len(self.dstdata.dstvalue))
+    # print(type(self.srcdata.srcvalue[0]))
     # if len(self.dstdata.dstvalue) != len(self.srcdata.srcvalue):
     #   QMessageBox.about(self, "警告", "数据长度不一致，请重新选择！")
     #   self.label.setText(' ')
     #   self.label_2.setText(' ')
     #   return
 
-    print(self.srcdata.head())
-    print(self.dstdata.head())
+    #处理复数
+    if isinstance(self.srcdata.srcvalue[0], str):
+      str_data1 = self.srcdata.srcvalue.values.tolist()
+      # test = np.absolute(complex(str_data1[0]))
+      self.srcdata['srcvalue'] = [np.absolute(complex(i)) for i in str_data1]
+    if isinstance(self.dstdata.dstvalue[0], str):
+      str_data2 = self.dstdata.dstvalue.values.tolist()
+      self.dstdata['dstvalue'] = [np.absolute(complex(j)) for j in str_data2]
+
+
+    # print(self.srcdata.head())
+    # print(self.dstdata.head())
 
 
     title = str(pd.read_csv(self.srcFile).columns.values).split('|')[-2]
 
     self.srcdata['dstvalue'] = self.dstdata["dstvalue"]
     print(self.srcdata)
+
+    refdata = self.srcdata.srcvalue
+    outdata = self.srcdata.dstvalue
+    # 对齐数据
+    if len(self.srcdata.srcvalue) != len(self.srcdata.dstvalue):
+      _, outdata, refdata = AlignDataLen(self.srcdata.time, self.srcdata.time, self.srcdata.srcvalue, self.srcdata.dstvalue)
+
+    assert len(refdata) == len(outdata)
+
     del self.srcdata["time"]
 
-    rmse = ((self.srcdata.srcvalue - self.srcdata.dstvalue) ** 2).mean() ** .5
-    title = title + "\n" + "RMSE:" + str(rmse)
+    # 计算mape
+    # mape = get_mape(outdata, refdata)
+    # mape = mean_absolute_percentage_error(outdata, refdata)
+    mape = mape_vectorized_v2(outdata, refdata)
+    title = title + "\n" + "mape:" + str(mape)
+
+    # rmse = ((self.srcdata.srcvalue - self.srcdata.dstvalue) ** 2).mean() ** .5
+    # title = title + "\n" + "RMSE:" + str(rmse)
     print(title)
 
-    self.textBrowser.setText("RMSE:" + str(rmse))
+    # self.textBrowser.setText("RMSE:" + str(rmse))
+    self.textBrowser.setText("mape:" + str(mape))
 
     m = PlotCanvas(self)
     m.plot(self.srcdata, title)

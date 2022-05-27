@@ -45,28 +45,34 @@ def mean_absolute_percentage_error(y_true, y_pred):
 
 def mape_vectorized_v2(a, b):
     mask = b != 0
-    return (np.fabs(b - a)/b)[mask].mean() * 100
+    return (np.fabs(b - a)/np.fabs(b))[mask].mean()
 
 
 
-def AlignDataLen(outx, refx, outdata, refdata):
+def AlignDataLen(outdata_df, refdata_df):
     """
     三次样条插值
     """
+    outdata_df.drop_duplicates(subset=['time'], inplace=True)
+    refdata_df.drop_duplicates(subset=['time'], inplace=True)
+    outtime = outdata_df['time']
+    outdata = outdata_df['srcvalue']
+    reftime = refdata_df['time']
+    refdata = refdata_df['dstvalue']
     kind = "cubic"  # 插值方式
     from scipy import interpolate
     if len(outdata) > len(refdata):
-        x = refx
+        x = reftime
         y = refdata
-        x_new = outx
+        x_new = outtime
         f = interpolate.interp1d(x, y, kind=kind)
         outdata_cubic = f(x_new)
         newrefdata = outdata_cubic
         newoutdata = outdata
     else:
-        x = outx
+        x = outtime
         y = outdata
-        x_new = refx
+        x_new = reftime
         f = interpolate.interp1d(x, y, kind=kind)
         outdata_cubic = f(x_new)
         newrefdata = refdata

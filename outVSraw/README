@@ -1,0 +1,11 @@
+# -*- coding: utf-8 -*-
+# @Time    : 2022/5/26 14:18
+# @Author  : chenyn
+# @File    : app.py.py
+# @Software: PyCharm
+
+用法：test-tool.py xxx.out xxx.raw [3]
+
+前面两个是仿真结果文件，不分先后，谁先谁后都可以，最后一个表示精度
+
+默认是3，表示0.001（如果abs(out[n]-raw[n])/out[n]<0.001，则可以判定out[n]=raw[n]),n为结果中的ids数组的具体每一个元素

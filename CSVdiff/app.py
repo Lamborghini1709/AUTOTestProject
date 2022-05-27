@@ -26,13 +26,13 @@ class PlotCanvas(FigureCanvas):
     FigureCanvas.setSizePolicy(self, QSizePolicy.Expanding, QSizePolicy.Expanding)
     FigureCanvas.updateGeometry(self)
 
-  def plot(self, data, title):
+  def plot(self, data, title, marker=None):
     print(data.head())
     ax = self.figure.add_subplot(1, 1, 1)
     ax.set_title(title)
-    ax.plot(data)
+    ax.plot(data['time'], data['dstvalue'], marker)
     # ax.plot(data.index, data.dstvalue)
-    ax.legend(['src', 'dst'])
+    ax.legend(['btd', 'spe'])
     self.show()
 
 
@@ -95,14 +95,6 @@ class DiffCSVFile(QMainWindow, Ui_MainWindow):
     self.srcdata = pd.read_csv(self.srcFile, skiprows=1, names=['time', 'srcvalue'])
 
     self.dstdata = pd.read_csv(self.dstFile, skiprows=1, names=['time', 'dstvalue'])
-    # print(len(self.srcdata.srcvalue))
-    # print(len(self.dstdata.dstvalue))
-    # print(type(self.srcdata.srcvalue[0]))
-    # if len(self.dstdata.dstvalue) != len(self.srcdata.srcvalue):
-    #   QMessageBox.about(self, "警告", "数据长度不一致，请重新选择！")
-    #   self.label.setText(' ')
-    #   self.label_2.setText(' ')
-    #   return
 
     #处理复数
     if isinstance(self.srcdata.srcvalue[0], str):
@@ -113,25 +105,22 @@ class DiffCSVFile(QMainWindow, Ui_MainWindow):
       str_data2 = self.dstdata.dstvalue.values.tolist()
       self.dstdata['dstvalue'] = [np.absolute(complex(j)) for j in str_data2]
 
-
-    # print(self.srcdata.head())
-    # print(self.dstdata.head())
-
-
     title = str(pd.read_csv(self.srcFile).columns.values).split('|')[-2]
 
-    self.srcdata['dstvalue'] = self.dstdata["dstvalue"]
-    print(self.srcdata)
-
-    refdata = self.srcdata.srcvalue
-    outdata = self.srcdata.dstvalue
     # 对齐数据
-    if len(self.srcdata.srcvalue) != len(self.srcdata.dstvalue):
-      _, outdata, refdata = AlignDataLen(self.srcdata.time, self.srcdata.time, self.srcdata.srcvalue, self.srcdata.dstvalue)
+    if len(self.srcdata.srcvalue) != len(self.dstdata.dstvalue):
+      _, outdata, refdata = AlignDataLen(self.srcdata, self.dstdata)
+    else:
+      refdata = self.dstdata.dstvalue
+      outdata = self.srcdata.srcvalue
 
     assert len(refdata) == len(outdata)
-
-    del self.srcdata["time"]
+    self.srcdata_new = self.dstdata.copy()
+    self.srcdata_new['time'] = self.dstdata['time']
+    self.srcdata_new['dstvalue'] = outdata
+    # del self.srcdata["time"]
+    # self.srcdata['srcvalue'] = outdata
+    # self.srcdata['dstvalue'] = refdata
 
     # 计算mape
     # mape = get_mape(outdata, refdata)
@@ -147,7 +136,8 @@ class DiffCSVFile(QMainWindow, Ui_MainWindow):
     self.textBrowser.setText("mape:" + str(mape))
 
     m = PlotCanvas(self)
-    m.plot(self.srcdata, title)
+    m.plot(self.srcdata_new, title, marker='r-')
+    m.plot(self.dstdata, title, marker='b')
     m.move(270, 30)
     self.show()
 

@@ -45,7 +45,20 @@ def mean_absolute_percentage_error(y_true, y_pred):
 
 def mape_vectorized_v2(a, b):
     mask = b != 0
-    return (np.fabs(b - a)/np.fabs(b))[mask].mean()
+    re = (np.fabs(np.abs(b) - np.abs(a))/np.fabs(b))[mask]
+    ids = np.argmax(re)
+    max_a = a[ids]
+    max_b = b[ids]
+    reval = sorted(re.values)
+    outlines = reval[:int(0.75 * len(reval))]
+    mape = np.mean(outlines)
+    # mean = np.mean(reval)
+    # std = np.std(reval)
+    # relist = reval.tolist()
+    # outline = [x for x in relist if (x > mean - 2 * std and x < mean + 2 * std)]
+    # mape = np.mean(outline)
+    # mape = np.percentile(re, 95, 0).mean()
+    return mape
 
 
 

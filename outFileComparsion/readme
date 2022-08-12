@@ -1,0 +1,10 @@
+1、配置文件中指定两个out文件的路径，指定要对比的节点，允许的误差值（默认0.001）
+benchoutpath = filepath1
+compoutpath = filepath2
+compnodes = [plotname1--node1, plotname1--node2, plotname2--node1]
+savefig = True
+
+Plotname: Operating Point
+Variables: Vout
+
+注意：btdsim test.sp -f nutascii  确保out文件不能是二进制格式

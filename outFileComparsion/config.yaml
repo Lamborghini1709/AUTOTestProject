@@ -1,0 +1,9 @@
+{
+  'benchoutpath' : 'lab4_hb_1.115g_btd.out',
+  'compoutpath' : 'bench/lab4_hb_1.115g_btd.out',
+  'compnodes' : ['Oscillator Period and Frequency--period', 'Oscillator Period and Frequency--frequency', 'Harmonic Balance Oscillator Steady State Analysis--vout', 'Harmonic Balance Oscillator Steady State Spectrum--vout'],
+  'savefig': True,
+  'metric': 'RMSE',
+  'threshold': 0.001
+
+}

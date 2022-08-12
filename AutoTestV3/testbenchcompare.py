@@ -59,7 +59,6 @@ class AutoTestCls():
             row_value = nodes_df.loc[row, 'nodes'].split(", ")
             self.check_nodes_dict[row] = row_value
 
-
         self.InitCaseForm()
 
     def InitCaseForm(self):
@@ -130,13 +129,17 @@ class AutoTestCls():
             RunCmd = self.sh + " {} -f nutascii > {}".format(netfile, logfile)
             # os.system(' '.join(RunCmd))
             start = time.time()
+            # print("start time: {}".format(start))
+            print("cmd: {}".format(RunCmd))
             os.system(RunCmd)
             end = time.time()
             cost = int((end - start) * 1000) / 1000
+            # print("end time: {}".format(end))
+            # print("cost: {}".format(cost))
 
             self.data_df_simulator.loc[netfileID, "Simulatorcost"] = cost
             self.data_df_diff.loc[netfileID, "Simulatorcost"] = cost
-
+            # print("Simulatorcost: {}".format(self.data_df_simulator.loc[netfileID].Simulatorcost))
             # print("rcmd:", RunCmd)
 
     # 修改文件后缀
@@ -157,6 +160,7 @@ class AutoTestCls():
             logfile = self.data_df_simulator.loc[id].logFile
             if logfile:
                 stat = self.logfile_check(logfile)
+                # print("stat: {}".format(stat))
                 if stat:
                     SimulatorStat = 1
                     # self.get_time(id)
@@ -212,6 +216,7 @@ class AutoTestCls():
         for i, line in enumerate(output_file):
             if i != 0 and line.startswith('Title'):
                 nodelists.append(nodelist)
+                # print(nodelists)
                 notenum += 1
                 nodelist = []
                 nodelist.append(line)
@@ -221,6 +226,7 @@ class AutoTestCls():
                 nodelist.append(line)
 
         nodelists.append(nodelist)
+        # print(nodelists)
         assert len(nodelists) == notenum
         nodelistsresult = collections.OrderedDict()
         # read the number of variables and number of points
@@ -228,7 +234,15 @@ class AutoTestCls():
             number_of_variables = int(titles[4].split(':', 1)[1])
             plotname = titles[2].split(': ')[-1].split('\n')[0]
             plotname_arr.append(plotname)
-            nodelistsresult[plotname] = collections.OrderedDict()
+            # multi_plotname_result = list()
+            if plotname not in nodelistsresult.keys():
+                #     mark = True
+                #     # print("aaaaa" + str(mark))
+                #     # print(nodelistsresult[plotname])
+                #     multi_plotname_result.append(nodelistsresult[plotname])
+                # else:
+                nodelistsresult[plotname] = list()
+                # print("bbbb")
 
             # read the names of the variables
             variable_name_unit = []
@@ -237,7 +251,7 @@ class AutoTestCls():
                 var_name = variable.split('\t', -1)[2]
                 # 取节点单位
                 var_unit = variable.split('\t', -1)[3].split('\n')[0]
-                #节点名和单位之间用----拼接，赋给variable_name_unit
+                # 节点名和单位之间用----拼接，赋给variable_name_unit
                 var_name_unit = var_name + "----" + var_unit
                 variable_name_unit.append(var_name_unit)
             # print(variable_name_unit)
@@ -262,7 +276,7 @@ class AutoTestCls():
                     if st.startswith("FAIL"):
                         st = "0"
                     vlu = eval(st)
-                    #如果是虚数，out文件中会有两个值，我们只取实部
+                    # 如果是虚数，out文件中会有两个值，我们只取实部
                     if type(vlu) == tuple:
                         results[variable_name_unit[variable_index]].append(vlu[0])
                     else:
@@ -271,7 +285,7 @@ class AutoTestCls():
                 else:
                     st = value.split('\t', -1)[-1].split('\n')[0]
 
-                    #如果out文件中出现Fail字符串，将其转换成0
+                    # 如果out文件中出现Fail字符串，将其转换成0
                     if st.startswith("FAIL"):
                         st = "0"
                     vlu = eval(st)
@@ -280,34 +294,56 @@ class AutoTestCls():
                     else:
                         results[variable_name_unit[variable_index]].append(vlu)
                     variable_index = 0
-            nodelistsresult[plotname] = results
+            # multi_plotname_result.append(results)
+            nodelistsresult[plotname].append(results)
+            # nodelistsresult[plotname] = results
+            # print("FINAL result: {}".format(nodelistsresult))
         # close the output_file
         fo.close()
 
         assert len(nodelistsresult) > 0
         return nodelistsresult, plotname_arr
 
-    #根据netlist name 获取 caseindex,后续根据caseindex去找对应的输出节点
+    # 根据netlist name 获取 caseindex,后续根据caseindex去找对应的输出节点
     def getCaseIndex(self, index):
         netfile = self.data_df_simulator.loc[index].netFile
         # netfile: /home/IC/Case_wayne/TestBench_1BaseCases1/>>>>>case1<<<<<</VCO/lab1_pss_pnoise_btd.scs
-        caseindex = netfile.split('/case')[1].split('/')[0]
+        caseindex = netfile.split('case')[1].split('/')[0]
         # print(caseindex)
         return int(caseindex)
 
     def calc_error(self, index, original_results_dict, new_results_dict):
 
         plotname_nodes = []
-        #获取所有的plotnames
-        plotnames = original_results_dict.keys()
+        plotnames = set()
+        # 获取所有的plotnames
+        # print("HEREHEREHEREHEREHEREHEREHEREHERE")
+        # print(original_results_dict)
+        # print(type(original_results_dict))
+        for item in original_results_dict:
+            # print(item)
+            plotnames.add(item)
+        print("Total plotnames: {}".format(plotnames))
+        # print("Original_results_dict: {}".format(original_results_dict))
 
         for plotname in plotnames:
+            # node_dict is a list of ordered dictionaries
             node_dict = original_results_dict[plotname]
-
-            #获取所有的nodename
-            nodes = node_dict.keys()
+            # print(type(node_dict))
+            # 获取所有的nodename
+            if type(node_dict) == list:
+                # print("True")
+                # print(type(node_dict))
+                # print(type(node_dict[0]))
+                nodes = node_dict[0].keys()
+                # print('node_dict: {}'.format(node_dict))
+                # print("nodes: {}".format(nodes))
+                # print(len(nodes))
+            else:
+                print("node_dict type error.")
             for node in nodes:
                 plotname_nodes.append('--'.join((plotname, node)))
+                # print(plotname_nodes)
 
         # 读取case number，作为index找到对应case需要查看的节点
         caseindex = self.getCaseIndex(index)
@@ -318,44 +354,62 @@ class AutoTestCls():
         for plotname_node in check_nodes:
             plotn = plotname_node.split('--')[0]
             noden = plotname_node.split('--')[1]
-
+            # print(original_results_dict)
+            # print("{}".format(plotn))
             out_plot = original_results_dict[plotn]
+            # print(len(out_plot))
             ref_plot = new_results_dict[plotn]
+            # print(ref_plot)
 
-            for xname_unit, xvalue in out_plot.items():
-                outx = xvalue
-                break
+            for i in range(len(out_plot)):
+                # 同名plotname情况下，第i个plotname中的所有nodes
+                # print("aaa: {}".format(out_plot[i]))
+                # each out_plot[i] is an OrderedDict
+                # print(type(out_plot[i]))
+                copy_out_plot = out_plot[i]
+                # first one is x axis
+                first_out = next(iter(copy_out_plot.values()))
 
-            for xname_unit, xvalue in ref_plot.items():
-                refx = xvalue
-                break
+                outx = first_out
+                copy_ref_plot = ref_plot[i]
+                first_ref = next(iter(copy_ref_plot.values()))
+                refx = first_ref
+                #
+                # for xname_unit, xvalue in ref_plot[0].items():
+                #     refx = xvalue
+                #     break
 
-            for nodename in out_plot.keys():
-                if nodename.startswith(noden):
-                    outdata = out_plot[nodename]
-                    refdata = ref_plot[nodename]
+                for nodename in out_plot[i].keys():
+                    if nodename.startswith(noden):
+                        outdata = out_plot[i][nodename]
+                        refdata = ref_plot[i][nodename]
 
-            # 对齐数据
-            if len(refdata) != len(outdata):
-                _, outdata, refdata = AlignDataLen(outx, refx, outdata, refdata)
 
-            assert len(refdata) == len(outdata)
+                            # 对齐数据
+                        if len(refdata) != len(outdata):
+                            x_value, outdata, refdata = AlignDataLen(outx, refx, outdata, refdata)
 
-            # 评估指标
-            if opt.metric == "RMSE":
-                rmse = get_rmse(outdata, refdata)
-                # rmse = self.get_ae(outdata, refdata)
-                comp_value = 1e-3 if np.average(outdata) == 0 else np.abs(np.average(outdata))
-                compareflag = True if rmse <= comp_value or rmse < 1e-5 else False
-                comp_result[plotname_node] = str((rmse, comp_value, compareflag))
+                        assert len(refdata) == len(outdata)
 
-            else:
-                mape = get_mape(outdata, refdata)
-                comp_value = 1e-3 if np.average(outdata) > 1e-6 else 1
-                compareflag = True if mape <= comp_value else False
-                comp_result[plotname_node] = str((mape, comp_value, compareflag))
-            comparelist.append(compareflag)
+                        # 评估指标
+                        if opt.metric == "RMSE":
+                            rmse = get_rmse(outdata, refdata)
+                            # rmse = self.get_ae(outdata, refdata)
+                            comp_value = 1e-3 if np.average(outdata) == 0 else np.abs(
+                                np.average(outdata))
+                            compareflag = True if rmse <= comp_value or rmse < 1e-5 else False
+                            comp_result[plotname_node] = str((rmse, comp_value, compareflag))
+
+                        else:
+                            mape = get_mape(outdata, refdata)
+                            comp_value = 1e-3 if np.average(outdata) > 1e-6 else 1
+                            compareflag = True if mape <= comp_value else False
+                            comp_result[plotname_node] = str((mape, comp_value, compareflag))
+
+                        comparelist.append(compareflag)
+
             compare = False if False in comparelist else True
+
         return compare, str(comp_result)
 
     def save_plot(self, index, out_results_dict, ref_results_dict, compare):
@@ -363,18 +417,24 @@ class AutoTestCls():
         titlecolor = 'green' if compare else 'red'
 
         plotname_nodes = []
+        # print("PART B: od {}".format(out_results_dict))
         plotnames = out_results_dict.keys()
+        # print("PART B: {}".format(plotnames))
 
         for plotname in plotnames:
             node_dict = out_results_dict[plotname]
-            nodes = node_dict.keys()
+            # print("PART B: odkey already matched: {}".format(node_dict))
+            code_node_dict = node_dict
+            nodes = node_dict[0].keys()
+            # print("PART B: nodes: {}".format(nodes))
             for node in nodes:
                 plotname_nodes.append('--'.join((plotname, node)))
+            # print("PART B: plotname and nodes: {}".format(plotname_nodes))
 
         # 读取case number，作为index找到对应case需要查看的节点
         caseindex = self.getCaseIndex(index)
         check_nodes = self.check_nodes_dict[caseindex]
-
+        # print("PART B: check_nodes: {}".format(check_nodes))
 
         for plotname_node in check_nodes:
             plotn = plotname_node.split('--')[0]
@@ -382,114 +442,130 @@ class AutoTestCls():
             out_plot = out_results_dict[plotn]
             ref_plot = ref_results_dict[plotn]
 
-            #得到第一个nodename、单位、值，因为plotname中第一个节点会作为后续节点画图的横坐标
-            for xname_unit, xvalue in out_plot.items():
-                out_xname = xname_unit.split('----')[0]
-                out_xunit = xname_unit.split('----')[1]
-                outx = xvalue
-                break
+            for i in range(len(out_plot)):
+                # print("current i: {}".format(i))
+                x_info_key = list(out_plot[i].keys())[0]
+                out_xname = x_info_key.split('----')[0]
+                out_xunit = x_info_key.split('----')[1]
+                outx = next(iter(out_plot[i].values()))
+                refx = next(iter(ref_plot[i].values()))
+                # print("out_xname: {}, out_xunit: {}, outx: {}, refx: {}".format(out_xname, out_xunit, outx, refx))
 
-            #因为refout节点名和单位一致，所以不用重复获取
-            for xname_unit, xvalue in ref_plot.items():
-                refx = xvalue
-                break
+                for nodename in out_plot[i].keys():
+                    # print("PART C: out_plot[i]: {}".format(out_plot[i]))
+                    if nodename.startswith(noden):
+                        # 得到y轴的单位
+                        yunit = nodename.split("----")[1]
+                        # 得到y轴的数据
+                        outdata = out_plot[i][nodename]
+                        refdata = ref_plot[i][nodename]
+                        # print("PART C: yname: {}, yunit: {}".format(nodename, yunit))
+                        # print("PART C: outdata: {}".format(outdata))
+                        # print("PART C: refdata: {}".format(refdata))
 
+                        # 长度不一致需做数据对齐
+                        if len(refdata) != len(outdata):
+                            xnew, outdata, refdata = AlignDataLen(outx, refx, outdata, refdata)
+                        else:
+                            xnew = outx
 
+                        assert len(refdata) == len(outdata)
 
-            for nodename in out_plot.keys():
-                if nodename.startswith(noden):
-                    #得到y轴的单位
-                    yunit = nodename.split("----")[1]
-                    #得到y轴的数据
-                    outdata = out_plot[nodename]
-                    refdata = ref_plot[nodename]
+                        if len(outdata) == 1:
+                            continue
 
-            #长度不一致需做数据对齐
-            if len(refdata) != len(outdata):
-                xnew, outdata, refdata = AlignDataLen(outx, refx, outdata, refdata)
-            else:
-                xnew = outx
+                        # 折线图还是柱状图
+                        # print("Spectrum" in noden)
+                        # print(noden)
+                        # 如果是频谱图，画柱状图
+                        # 同一个plotname的该节点的所有值，只画第一张和最后一张
+                        if i == 0 or i == len(out_plot) - 1:
+                            # print("PART D: current plot i: {}".format(i))
+                            try:
+                                if "Spectrum" in plotn:
+                                    # 设置柱状图y轴的起始值
+                                    bottomvalue = np.min(np.array(outdata)) - 10
 
-            assert len(refdata) == len(outdata)
+                                    # GHz transform
+                                    if np.max(xnew) > 1e9:
+                                        xnew = (np.array(xnew) * 1e-9).tolist()
+                                        out_xunit = "G" + out_xunit
 
-            if len(outdata) == 1:
-                continue
+                                    total_width, n = 0.6, 2
+                                    width = total_width / n
+                                    # fig = plt.figure()
+                                    outdata = (np.array(outdata) + np.abs(bottomvalue)).tolist()
+                                    refdata = (np.array(refdata) + np.abs(bottomvalue)).tolist()
+                                    plt.bar(xnew, outdata, width=width, color='b', label='outdata', bottom=bottomvalue)
+                                    # for a, b in zip(xnew, outdata):  # 柱子上的数字显示
+                                    #     plt.text(a, b, '%.3f' % b, ha='center', va='bottom', fontsize=10);
+                                    for j in range(len(xnew)):
+                                        xnew[j] = xnew[j] + width
+                                    plt.bar(xnew, refdata, width=width, color='r', label='refdata', bottom=bottomvalue)
+                                    plt.xticks(rotation=90)  # 横坐标旋转45度
+                                    plt.xlabel(out_xname + "(" + out_xunit + ")")  # 横坐标标签
+                                    plt.ylabel(noden + "(" + yunit + ")")  # 纵坐标标签
+                                    if i == 0:
+                                        mark = "first"
+                                    else:
+                                        mark = "last"
+                                    plt.title("{} {}".format(plotname_node, mark), backgroundcolor=titlecolor)  # bar图标题
+                                    # plt.grid(axis='x')
+                                    plt.legend(loc='best')
+                                    savepath = "./output/case" + str(caseindex) + "_" + plotname_node + " " + mark + '.jpg'
+                                    plt.savefig(savepath)
+                                    # plt.show()
+                                    plt.close()
 
-            # 折线图还是柱状图
-            # print("Spectrum" in noden)
-            # print(noden)
-            # 如果是频谱图，画柱状图
-            if "Spectrum" in plotn:
-                #设置柱状图y轴的起始值
-                bottomvalue = np.min(np.array(outdata)) - 10
+                                # 否则，画折线图
+                                else:  # plot
 
-                # GHz transform
-                if np.max(xnew) > 1e9:
-                    xnew = (np.array(xnew) * 1e-9).tolist()
-                    out_xunit = "G" + out_xunit
+                                    # GHz transform
+                                    if "noise" in plotname_node or "Noise" in plotname_node:
+                                        # log transform
+                                        # if "noise" in noden or "Hz" in out_xunit:
+                                        xnew = np.log10(xnew)
+                                        out_xname = out_xname + "_log"
+                                    else:
+                                        if np.max(xnew) > 1e6:
+                                            xnew = (np.array(xnew) * 1e-9).tolist()
+                                            out_xunit = "G" + out_xunit
+                                        # nano transform
+                                        elif np.max(xnew) < 1e-6:
+                                            xnew = (np.array(xnew) * 1e9).tolist()
+                                            out_xunit = "n" + out_xunit
+                                        else:
+                                            pass
 
-                total_width, n = 0.6, 2
-                width = total_width / n
-                # fig = plt.figure()
-                outdata = (np.array(outdata) + np.abs(bottomvalue)).tolist()
-                refdata = (np.array(refdata) + np.abs(bottomvalue)).tolist()
-                plt.bar(xnew, outdata, width=width, color='b', label='outdata', bottom=bottomvalue)
-                # for a, b in zip(xnew, outdata):  # 柱子上的数字显示
-                #     plt.text(a, b, '%.3f' % b, ha='center', va='bottom', fontsize=10);
-                for i in range(len(xnew)):
-                    xnew[i] = xnew[i] + width
-                plt.bar(xnew, refdata, width=width, color='r', label='refdata', bottom=bottomvalue)
-                plt.xticks(rotation=90)  # 横坐标旋转45度
-                plt.xlabel(out_xname + "(" + out_xunit + ")")  # 横坐标标签
-                plt.ylabel(noden + "(" + yunit + ")")  # 纵坐标标签
-                plt.title(plotname_node, backgroundcolor=titlecolor)  # bar图标题
-                # plt.grid(axis='x')
-                plt.legend(loc='best')
-                savepath = "./output/case" + str(caseindex) + "_" + plotname_node + '.jpg'
-                plt.savefig(savepath)
-                # plt.show()
-                plt.close()
+                                    # print("xnew: {}".format(xnew))
+                                    # print("outdata: {}".format(outdata))
+                                    # print("refdata: {}".format(refdata))
+                                    plt.plot(xnew, outdata, 'b', label='outdata')  # (横坐标，纵坐标)
+                                    plt.plot(xnew, refdata, 'r', label='refdata')  # (横坐标，纵坐标)
+                                    plt.xlabel(out_xname + "(" + out_xunit + ")")  # 横坐标标签
+                                    plt.ylabel(noden + "(" + yunit + ")")  # 纵坐标标签
+                                    plt.grid()
+                                    if i == 0:
+                                        mark = "first"
+                                    else:
+                                        mark = "last"
+                                    plt.title("{} {}".format(plotname_node, mark), backgroundcolor=titlecolor)  # 折线图标题
 
-            #否则，画折线图
-            else:# plot
+                                    plt.legend(loc='best')
 
-                # GHz transform
-                if "noise" in plotname_node or "Noise" in plotname_node:
-                    # log transform
-                    # if "noise" in noden or "Hz" in out_xunit:
-                    xnew = np.log10(xnew)
-                    out_xname = out_xname + "_log"
-                else:
-                    if np.max(xnew) > 1e6:
-                        xnew = (np.array(xnew) * 1e-9).tolist()
-                        out_xunit = "G" + out_xunit
-                    # nano transform
-                    elif np.max(xnew) < 1e-6:
-                        xnew = (np.array(xnew) * 1e9).tolist()
-                        out_xunit = "n" + out_xunit
-                    else:
-                        pass
+                                    savepath = "./output/case" + str(caseindex) + "_" + plotname_node + " " + mark + '.jpg'
+                                    plt.savefig(savepath)
+                                    # plt.show()
+                                    plt.close()
 
-                plt.plot(xnew, outdata, 'b', label='outdata')  # (横坐标，纵坐标)
-                plt.plot(xnew, refdata, 'r', label='refdata')  # (横坐标，纵坐标)
-                plt.xlabel(out_xname + "(" + out_xunit + ")")  # 横坐标标签
-                plt.ylabel(noden + "(" + yunit + ")")  # 纵坐标标签
-                plt.grid()
-                plt.title(plotname_node, backgroundcolor=titlecolor)  # 折线图标题
-
-                plt.legend(loc='best')
-
-                savepath = "./output/case" + str(caseindex) + "_" + plotname_node + '.jpg'
-                plt.savefig(savepath)
-                # plt.show()
-                plt.close()
-
+                            except TypeError as e:
+                                print("Errors occured in plotting. {}".format(e))
 
     def diffout(self):
         for j in range(1, self.spfile_Num + 1):
             if self.data_df_diff.loc[j].SimulatorStat & os.path.exists(self.data_df_diff.loc[j].outFile):
                 outfile = self.data_df_diff.loc[j].outFile
-                print(outfile)
+                # print(outfile)
                 # bench文件
                 ref_file = self.data_df_diff.loc[j].RefoutFile
 

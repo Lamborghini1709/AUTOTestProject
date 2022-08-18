@@ -277,8 +277,13 @@ class AutoTestCls():
                         st = "0"
                     vlu = eval(st)
                     # 如果是虚数，out文件中会有两个值，我们只取实部
+                    # if type(vlu) == tuple:
+                    #     results[variable_name_unit[variable_index]].append(vlu[0])
+                    # 如果是虚数，out文件中会有两个值，我们取abs
+
                     if type(vlu) == tuple:
-                        results[variable_name_unit[variable_index]].append(vlu[0])
+                        vlu_abs = abs(complex(vlu[0], vlu[1]))
+                        results[variable_name_unit[variable_index]].append(vlu_abs)
                     else:
                         results[variable_name_unit[variable_index]].append(vlu)
                     variable_index += 1
@@ -393,18 +398,12 @@ class AutoTestCls():
 
                         # 评估指标
                         if opt.metric == "RMSE":
-                            rmse = get_rmse(outdata, refdata)
-                            # rmse = self.get_ae(outdata, refdata)
-                            comp_value = 1e-3 if np.average(outdata) == 0 else np.abs(
-                                np.average(outdata))
-                            compareflag = True if rmse <= comp_value or rmse < 1e-5 else False
-                            comp_result[plotname_node] = str((rmse, comp_value, compareflag))
-
+                            metrix_value = get_rmse(outdata, refdata)
                         else:
-                            mape = get_mape(outdata, refdata)
-                            comp_value = 1e-3 if np.average(outdata) > 1e-6 else 1
-                            compareflag = True if mape <= comp_value else False
-                            comp_result[plotname_node] = str((mape, comp_value, compareflag))
+                            metrix_value = get_mape(outdata, refdata)
+                        comp_value = 5e-3
+                        compareflag = True if metrix_value <= comp_value else False
+                        comp_result[plotname_node] = str((metrix_value, comp_value, compareflag))
 
                         comparelist.append(compareflag)
 

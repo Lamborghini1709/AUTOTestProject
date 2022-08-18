@@ -34,10 +34,18 @@ def get_mape(records_real, records_predict):
     """
     平均绝对百分比误差：mean(abs((YReal - YPred)./YReal))
     """
-    error = np.array(records_real) - np.array(records_predict)
-
-    pe = [error / real for real in np.array(records_real) if real != 0]
-    return np.mean(np.abs(pe))
+    print(records_real)
+    print(records_predict)
+    error = (np.array(records_real) - np.array(records_predict)).tolist()
+    pe = []
+    if np.array(records_predict).any():
+        for i, predict in enumerate(records_predict):
+            if predict != 0:
+                pe.append(error[i] / predict)
+        # pe = [error / real for real in np.array(records_real) if real != 0]
+        return np.mean(np.abs(pe))
+    else:
+        return np.mean(np.array(records_real))
 
 
 def AlignDataLen(outx, refx, outdata, refdata):

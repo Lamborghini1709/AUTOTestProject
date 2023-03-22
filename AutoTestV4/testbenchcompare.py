@@ -16,6 +16,9 @@ import ast
 from matplotlib import pyplot as plt
 import collections
 from tool_utils import get_rmse, get_mape, AlignDataLen
+from time import ctime
+import threading
+import sys
 
 
 class AutoTestCls():
@@ -27,7 +30,7 @@ class AutoTestCls():
         self.str_list = []
         self.sh = opt.sh
         self.dir_dict = {
-            0: "regress_Cases_all-cmg-bulk_20221202-1600",
+            0: "All_regress_Cases",
             1: "hisiCaseAll",
             2: "cmg_regress_Cases_version-106.1_20230201",
             3: "cmg_regress_Cases_version-107_20220909",
@@ -36,7 +39,9 @@ class AutoTestCls():
             6: "regress_Cases_bulk107_2022-11-30",
             7: "haisiRegre",
             8: "radioCircuit", 
-            9: "huali_Case_regress_20221015"
+            9: "huali_Case_regress_20221015",
+            10: "regress_Cases_all-cmg-bulk_20221202-1600",
+            11: "regress_cases_all-cmg-bulk_20230307-1400"
         }
         self.test_dir = os.path.join(opt.tp, self.dir_dict[int(opt.rp)])
         self.ref_filename = 'bench'
@@ -45,8 +50,8 @@ class AutoTestCls():
         self.case_dir = os.path.join(self.test_dir, opt.cn)
 
         # 回归测试集初始化
-        initCmd = f"cp -r /mnt/BTD/{self.dir_dict[int(opt.rp)]}  {opt.tp}"
-        print(initCmd)
+        initCmd = f"cp -r /home/mnt/BTD/{self.dir_dict[int(opt.rp)]}  {opt.tp}"
+        print("CMD: "+initCmd)
         os.system(initCmd)
 
         # def logfile
@@ -75,7 +80,7 @@ class AutoTestCls():
         # 选择对比节点
         self.check_nodes_dict = dict()
         nodes_df = pd.read_excel(self.cases_nodes_path, index_col=0)  # 指定第一列为行索引
-        for row in range(1, len(nodes_df) + 1):
+        for row in list(nodes_df.index):
             row_value = nodes_df.loc[row, 'nodes'].split(", ")
             self.check_nodes_dict[row] = row_value
 
@@ -126,16 +131,73 @@ class AutoTestCls():
         else:
             print("Please specify the test folder in string format.")
 
-    # 执行仿真
-    def sim_folder(self):
-        for index in range(1, self.spfile_Num + 1):
-            # 找case对应的bench文件结果
-            ref_file = self.data_df_diff.loc[index].RefoutFile
-            if not os.path.exists(ref_file):
-                self.data_df_diff.loc[index, "RefoutFile"] = None
-                self.data_df_diff.loc[index, "RefoutFile"] = None
-            # 执行仿真
-            self.run_simulation(index)
+
+    def not_check_file_list(self, netfile):
+        #测试打通阶段略略这些case
+        # if (#"case12" in netfile
+        #     #特殊格式问题先屏蔽
+        #     "case41" in netfile
+        #     or "case44" in netfile
+        #     or "case54" in netfile
+        #     or "case55" in netfile
+        #     #仿真直接报错的问题，先直接忽略
+        #     or "case10" in netfile
+        #     or "case48" in netfile
+        #     or "case51" in netfile
+        #     or "case53" in netfile
+        #     or "case65" in netfile
+        #     #end
+        #     or "case68" in netfile
+        #     or "case74" in netfile
+        #     or "case69" in netfile
+        #     or "case67" in netfile
+        #     or "case50" in netfile
+        #     or "case43" in netfile
+        #     or "case42" in netfile
+        #     or "case40" in netfile
+        #     or "case36" in netfile
+        #     or "case28" in netfile
+        #     or "case14" in netfile
+        #     or "case13" in netfile
+        #     or "case12" in netfile
+        #     ):
+        #     ##print( netfile + " run take too long time , current don't run... return 0")
+        #     return 1
+        # else:
+            return 0
+        
+        
+    def run_simulation_g(self, netfileID):
+        netfile = self.data_df_simulator.loc[netfileID].netFile
+        ##print("Find %s \n" % (netfile))
+
+        ret = self.not_check_file_list(netfile)
+        if(ret == 1):
+            ##print("this thread to nohting...")
+            return 0 # do nothing,but success
+
+        if netfile:
+            # RunCmd = ['simulator',spfile]
+            logfile = self.data_df_simulator.loc[netfileID].logFile
+            # changed 0904 >> to >为了每次重新仿真得到的log不会记录之前的结果，
+            # 否则autoRun.log的自动判断会出错
+            # 执行仿真并记录仿真时间
+            RunCmd = self.sh + " {} -f nutascii -m16 > {}".format(netfile, logfile)
+            # os.system(' '.join(RunCmd))
+            start = time.time()
+            # print("start time: {}".format(start))
+            ##print("cmd: {}".format(RunCmd))
+            #os.system("source ~/.bashrc")
+            os.system(RunCmd)
+            end = time.time()
+            cost = int((end - start) * 1000) / 1000
+            # print("end time: {}".format(end))
+            # print("cost: {}".format(cost))
+
+            self.data_df_simulator.loc[netfileID, "Simulatorcost"] = cost
+            self.data_df_diff.loc[netfileID, "Simulatorcost"] = cost
+            # print("Simulatorcost: {}".format(self.data_df_simulator.loc[netfileID].Simulatorcost))
+            # print("rcmd:", RunCmd)
 
     def run_simulation(self, netfileID):
         netfile = self.data_df_simulator.loc[netfileID].netFile
@@ -161,6 +223,18 @@ class AutoTestCls():
             self.data_df_diff.loc[netfileID, "Simulatorcost"] = cost
             # print("Simulatorcost: {}".format(self.data_df_simulator.loc[netfileID].Simulatorcost))
             # print("rcmd:", RunCmd)
+
+    # 执行仿真
+    def sim_folder(self,thread_list):
+        for index in range(1, self.spfile_Num + 1):
+            # 找case对应的bench文件结果
+            ref_file = self.data_df_diff.loc[index].RefoutFile
+            if not os.path.exists(ref_file):
+                self.data_df_diff.loc[index, "RefoutFile"] = None
+                self.data_df_diff.loc[index, "RefoutFile"] = None
+            # 执行仿真
+            t1 = threading.Thread(target=self.run_simulation_g,args=(index,))
+            thread_list.append(t1)
 
     # 修改文件后缀
     def change_suffix(self, file, suffix):
@@ -334,7 +408,7 @@ class AutoTestCls():
         netfile = self.data_df_simulator.loc[index].netFile
         print(netfile)
         # netfile: /home/IC/Case_wayne/TestBench_1BaseCases1/>>>>>case1<<<<<</VCO/lab1_pss_pnoise_btd.scs
-        caseindex = netfile.split('case')[1].split('\\')[0]
+        caseindex = netfile.split('case')[1].split('/')[0]
         print(caseindex)
         # print(caseindex)
         return int(caseindex)
@@ -595,12 +669,16 @@ class AutoTestCls():
 
     def diffout(self):
         for j in range(1, self.spfile_Num + 1):
-            print(j)
             if self.data_df_diff.loc[j].SimulatorStat & os.path.exists(self.data_df_diff.loc[j].outFile):
                 outfile = self.data_df_diff.loc[j].outFile
                 # print(outfile)
                 # bench文件
                 ref_file = self.data_df_diff.loc[j].RefoutFile
+                
+                ret = self.not_check_file_list(ref_file)
+                if(1 == ret):
+                    #return 0 # do nothing,but return success
+                    continue
 
                 compare = None
                 com_result = str({})
@@ -642,6 +720,22 @@ class AutoTestCls():
         r.write(f"    Successed: {t}条\n")
         r.write(f"    Failed: {f}条\n")
         r.close()
+        print(f"本次回归测试共执行 {t+f} 条case, 其中:\n")
+        print(f"    Successed: {t} 条\n")
+        print(f"       Failed: {f} 条\n")
+
+    def outputTerm(self):
+        df = atc.data_df_diff
+        failed_df = df[(df['SimulatorStat'] == 0) | (df['outdiff'] is False)]
+        # 可以在大数据量下，没有省略号
+        pd.set_option('display.max_columns', 1000000)
+        pd.set_option('display.max_rows', 1000000)
+        pd.set_option('display.max_colwidth', 1000000)
+        pd.set_option('display.width', 1000000)
+        print(failed_df.loc[:, ['spFile', 'SimulatorStat', 'outdiff']])
+        return len(failed_df['spFile'])
+
+
 
 if __name__ == '__main__':
     # 创建解析对象，并向对象添加关注的命令参数，解析参数
@@ -662,10 +756,22 @@ if __name__ == '__main__':
     # 初始化
     atc = AutoTestCls(opt)
 
+    # 创建线程池
+    thread_list = []
+
     # 执行仿真
-    print("Start AutoSimulator...")
-    atc.sim_folder()
-    print("Total: %d files (.sp .scs or .cir)\n" % (atc.spfile_Num))
+    ##print("Start AutoSimulator...")
+    atc.sim_folder(thread_list)
+    ##print("Total: %d files (.sp .scs or .cir)\n" % (atc.spfile_Num))
+
+    #等待子线程全部运行完毕
+    for t in thread_list:
+        t.setDaemon(True)  # 设置为守护线程，不会因主线程结束而中断
+        t.start()
+        time.sleep(0.1)
+    for t in thread_list:
+        t.join()  # 子线程全部加入，主线程等所有子线程运行完毕
+
 
     # 仿真状态统计
     print("start check out simulator stat...")
@@ -692,5 +798,11 @@ if __name__ == '__main__':
         atc.data_df_diff.to_excel(writer2)
         writer2.save()
 
-    atc.outputTerm()
+    ret = atc.outputTerm()
+    if(ret >=1):
+        print("ERROR Count: ")
+        print(ret)
+        sys.exit(1)
+    else:
+        sys.exit(0)
 

@@ -15,7 +15,8 @@ from math import sqrt
 import ast
 from matplotlib import pyplot as plt
 import collections
-from tool_utils import get_rmse, get_mape, AlignDataLen
+from AutoTestV4.tool_utils import max_diff
+from tool_utils import get_rmse, get_mape, AlignDataLen, max_diff
 from time import ctime
 import threading
 import sys
@@ -498,12 +499,20 @@ class AutoTestCls():
 
                         assert len(refdata) == len(outdata)
 
-                        # 评估指标
-                        if opt.metric == "RMSE":
-                            metrix_value = get_rmse(outdata, refdata)
+                        unit = nodename.split("----")[-1]
+                        if unit=="A":
+                            metrix_value = max_diff(outdata, refdata)
+                            comp_value = 1e-12
+                        elif unit=="V":
+                            metrix_value = max_diff(outdata, refdata)
+                            comp_value = 1e-6
                         else:
-                            metrix_value = get_mape(outdata, refdata)
-                        comp_value = 5e-3
+                            # 评估指标
+                            if opt.metric == "RMSE":
+                                metrix_value = get_rmse(outdata, refdata)
+                            else:
+                                metrix_value = get_mape(outdata, refdata)
+                            comp_value = 5e-3
                         compareflag = True if metrix_value <= comp_value else False
                         comp_result[plotname_node] = str((metrix_value, comp_value, compareflag))
 

@@ -75,6 +75,10 @@ def get_mape(records_real, records_predict):
     else:
         return np.mean(np.array(records_real))
 
+def max_diff(outdata, refdata):
+    error = (np.array(outdata) - np.array(refdata)).tolist()
+    l = sorted(error, key=lambda x:x)
+    return l[-1]
 
 def AlignDataLen(outx, refx, outdata, refdata):
     """

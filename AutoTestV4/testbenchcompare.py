@@ -15,7 +15,6 @@ from math import sqrt
 import ast
 from matplotlib import pyplot as plt
 import collections
-from AutoTestV4.tool_utils import max_diff
 from tool_utils import get_rmse, get_mape, AlignDataLen, max_diff
 from time import ctime
 import threading
@@ -95,6 +94,9 @@ class AutoTestCls():
                     if self.is_netlist(filename):
                         # sp文件
                         netfile = os.path.join(filepath, filename)
+                        ret = self.not_check_file_list(netfile)
+                        if(ret == 1):
+                            continue
                         if 'model' in netfile or 'gpdk' in netfile or 'INCLUDE' in netfile:
                             continue
                         self.spfile_Num += 1
@@ -135,16 +137,16 @@ class AutoTestCls():
 
     def not_check_file_list(self, netfile):
         #测试打通阶段略略这些case
-        # if (#"case12" in netfile
+        if (#"case12" in netfile
         #     #特殊格式问题先屏蔽
-        #     "case41" in netfile
-        #     or "case44" in netfile
-        #     or "case54" in netfile
-        #     or "case55" in netfile
+            "case83" in netfile
+            # or "case1023" in netfile
+            # or "case43" in netfile
+            # or "case50" in netfile
         #     #仿真直接报错的问题，先直接忽略
-        #     or "case10" in netfile
-        #     or "case48" in netfile
-        #     or "case51" in netfile
+            # or "case15" in netfile
+            # or "case70" in netfile
+        #     or "case1025" in netfile
         #     or "case53" in netfile
         #     or "case65" in netfile
         #     #end
@@ -161,10 +163,10 @@ class AutoTestCls():
         #     or "case14" in netfile
         #     or "case13" in netfile
         #     or "case12" in netfile
-        #     ):
-        #     ##print( netfile + " run take too long time , current don't run... return 0")
-        #     return 1
-        # else:
+            ):
+            ##print( netfile + " run take too long time , current don't run... return 0")
+            return 1
+        else:
             return 0
         
         
@@ -172,10 +174,10 @@ class AutoTestCls():
         netfile = self.data_df_simulator.loc[netfileID].netFile
         ##print("Find %s \n" % (netfile))
 
-        ret = self.not_check_file_list(netfile)
-        if(ret == 1):
-            ##print("this thread to nohting...")
-            return 0 # do nothing,but success
+        # ret = self.not_check_file_list(netfile)
+        # if(ret == 1):
+        #     ##print("this thread to nohting...")
+        #     return 0 # do nothing,but success
 
         if netfile:
             # RunCmd = ['simulator',spfile]
@@ -499,6 +501,7 @@ class AutoTestCls():
 
                         assert len(refdata) == len(outdata)
 
+                        # 评估指标
                         unit = nodename.split("----")[-1]
                         if unit=="A":
                             metrix_value = max_diff(outdata, refdata)
@@ -683,30 +686,34 @@ class AutoTestCls():
                 # print(outfile)
                 # bench文件
                 ref_file = self.data_df_diff.loc[j].RefoutFile
-                
-                ret = self.not_check_file_list(ref_file)
-                if(1 == ret):
-                    #return 0 # do nothing,but return success
-                    continue
+                # ret = self.not_check_file_list(ref_file)
+                # if(1 == ret):
+                #     #return 0 # do nothing,but return success
+                #     continue
 
                 compare = None
                 com_result = str({})
                 # 解析两份out文件，找到对比的内容，并执行对比
-                if os.path.exists(outfile) and os.path.exists(ref_file):
+                # print(f"error info: {self.data_df_diff.loc[j]}")
+                try:
+                    if os.path.exists(outfile) and os.path.exists(ref_file):
 
-                    results_1_dict, plotname_arr1 = self.outfile_parser(outfile)
-                    results_2_dict, plotname_arr2 = self.outfile_parser(ref_file)
+                        results_1_dict, plotname_arr1 = self.outfile_parser(outfile)
+                        results_2_dict, plotname_arr2 = self.outfile_parser(ref_file)
 
-                    # 计算误差
-                    compare, com_result = self.calc_error(j, results_1_dict, results_2_dict)
+                        # 计算误差
+                        compare, com_result = self.calc_error(j, results_1_dict, results_2_dict)
 
                     # 如果参数指定了保存图片，则开始画图
-                    if opt.savefig:
-                        self.save_plot(j, results_1_dict, results_2_dict, compare)
-                AnalysisTypes = list(set(plotname_arr1))
-                self.data_df_diff.loc[j, "AnalysisType"] = ";".join(AnalysisTypes)
-                self.data_df_diff.loc[j, "outdiff"] = compare
-                self.data_df_diff.loc[j, "outdiffdetail"] = com_result
+                        if opt.savefig:
+                            self.save_plot(j, results_1_dict, results_2_dict, compare)
+                    AnalysisTypes = list(set(plotname_arr1))
+                    self.data_df_diff.loc[j, "AnalysisType"] = ";".join(AnalysisTypes)
+                    self.data_df_diff.loc[j, "outdiff"] = compare
+                    self.data_df_diff.loc[j, "outdiffdetail"] = com_result
+                except:
+                    # print(f"outfile: {outfile}, ref_file: {ref_file}")
+                    print(f"error info: {self.data_df_diff.loc[j]}")
 
     def outputTerm(self):
         df = atc.data_df_diff

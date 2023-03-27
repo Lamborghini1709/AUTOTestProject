@@ -41,7 +41,7 @@ class AutoTestCls():
             8: "radioCircuit", 
             9: "huali_Case_regress_20221015",
             10: "regress_Cases_all-cmg-bulk_20221202-1600",
-            11: "regress_cases_all-cmg-bulk_20230307-1400"
+            11: "regress_Cases_all-cmg-bulk_20230307-1400"
         }
         self.test_dir = os.path.join(opt.tp, self.dir_dict[int(opt.rp)])
         self.ref_filename = 'bench'
@@ -189,10 +189,10 @@ class AutoTestCls():
             # os.system(' '.join(RunCmd))
             start = time.time()
             # print("start time: {}".format(start))
-            ##print("cmd: {}".format(RunCmd))
             #os.system("source ~/.bashrc")
             os.system(RunCmd)
             end = time.time()
+            # print("cmd: {}".format(RunCmd))
             cost = int((end - start) * 1000) / 1000
             # print("end time: {}".format(end))
             # print("cost: {}".format(cost))
@@ -711,9 +711,10 @@ class AutoTestCls():
                     self.data_df_diff.loc[j, "AnalysisType"] = ";".join(AnalysisTypes)
                     self.data_df_diff.loc[j, "outdiff"] = compare
                     self.data_df_diff.loc[j, "outdiffdetail"] = com_result
-                except:
+                except Exception as err:
                     # print(f"outfile: {outfile}, ref_file: {ref_file}")
                     print(f"error info: {self.data_df_diff.loc[j]}")
+                    print('An exception happened: ' + str(err))
 
     def outputTerm(self):
         df = atc.data_df_diff
@@ -792,8 +793,6 @@ if __name__ == '__main__':
     # 仿真状态统计
     print("start check out simulator stat...")
     atc.global_log_check()
-    atc.result_statistics()
-
 
     # #仿真类型统计
     # print("start check out Analysis Type...")
@@ -813,6 +812,8 @@ if __name__ == '__main__':
         writer2 = pd.ExcelWriter(f'{atc.output_folder}/data_df_diff_{date_str}.xlsx')
         atc.data_df_diff.to_excel(writer2)
         writer2.save()
+    
+    atc.result_statistics()
 
     ret = atc.outputTerm()
     if(ret >=1):

@@ -76,7 +76,7 @@ def get_mape(records_real, records_predict):
         return np.mean(np.array(records_real))
 
 def max_diff(outdata, refdata):
-    error = (np.array(outdata) - np.array(refdata)).tolist()
+    error = np.abs((np.array(outdata) - np.array(refdata))).tolist()
     l = sorted(error, key=lambda x:x)
     return l[-1]
 

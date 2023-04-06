@@ -144,8 +144,15 @@ def r_conversion(b):
 
 def short_conversion(b):
     n = b[0].split(":")[1].lower()
-    a1 = f"R{n}"
-    new_line = f"{a1} ( {b[1]} {b[2]} ) resistor r=0"
+    if "Mode=0" in b:
+        a1 = f"R{n}"
+        new_line = f"{a1} ( {b[1]} {b[2]} ) resistor r=0"
+    elif "Mode=1" in b:
+        a1 = f"C{n}"
+        new_line = f"{a1} ( {b[1]} {b[2]} ) capacitor c=1u"
+    elif "Mode=-1" in b:
+        a1 = f"L{n}"
+        new_line = f"{a1} ( {b[1]} {b[2]} ) inductor l=1u"
     return new_line
 
 def l_conversion(b):

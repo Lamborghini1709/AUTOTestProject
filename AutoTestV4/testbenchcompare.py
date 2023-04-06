@@ -749,7 +749,7 @@ if __name__ == '__main__':
     parser.add_argument("--savediffcsv", type=bool, default=True, help="save final diff csv file")
     parser.add_argument("--savefig", type=bool, default=False, help="save final plot")
     parser.add_argument("--metric", type=str, default="MAPE", help="select metrics for diff, i.e. RMSE or MAPE")
-    parser.add_argument("--isdelout", type=bool, default=True, help="Whether to delete the out file")
+    parser.add_argument("--isdelout", type=bool, default=False, help="Whether to delete the out file")
     parser.add_argument("--rp", type=str, default=0, help="path to test case")
     parser.add_argument("--cn", type=str, default="", help="case name")
     opt = parser.parse_args()

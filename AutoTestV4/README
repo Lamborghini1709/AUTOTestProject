@@ -22,6 +22,7 @@
 ; --savediffcsv: 是否保存仿真数据，例：误差；默认保存
 ; --savefig: 是否保存仿真结果的图片；默认保存
 ; --metric: 计算误差的方式，例：MAPE or RMSE；默认为MAPE
+; --isdelout: 是否删除bench目录外的out文件
 ; --rp: 测试集index；默认为测试集: All_regress_Cases
 ; --cn: 指定具体case；默认测试集下所有case
 

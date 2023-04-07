@@ -132,7 +132,7 @@ class AutoTestCls():
                         
                         # 删除bench目录外的out文件
                         if opt.isdelout == True:
-                            self.del_out(self, netfile)
+                            self.del_out(netfile)
                         else:
                             pass
 
@@ -142,7 +142,8 @@ class AutoTestCls():
 
     def del_out(self, netfile):
         outFile = self.change_suffix(netfile, '.out')
-        os.remove(outFile)
+        if os.path.exists(outFile):
+            os.remove(outFile)
 
 
     def not_check_file_list(self, netfile):
@@ -275,6 +276,23 @@ class AutoTestCls():
                     with open(file, encoding='latin-1') as f:
                         for line in f.readlines():
                             if 'SIMULATION is completed successfully' in line:
+                                return 1
+                except:
+                    print("error decode:" + file)
+        return 0
+
+    def limit_logfile_check(self, file):
+        if os.path.exists(file):
+            try:
+                with open(file) as f:
+                    for line in f.readlines():
+                        if 'This version is limited to 5000 elements' in line:
+                            return 1
+            except:
+                try:
+                    with open(file, encoding='latin-1') as f:
+                        for line in f.readlines():
+                            if 'This version is limited to 5000 elements' in line:
                                 return 1
                 except:
                     print("error decode:" + file)
@@ -704,26 +722,38 @@ class AutoTestCls():
                 self.data_df_diff.loc[netId, "outdiffdetail"] = com_result
             except Exception as err:
                 # print(f"outfile: {outfile}, ref_file: {ref_file}")
-                print(f"error info: {self.data_df_diff.loc[netId]}")
-                print('An exception happened: ' + str(err))
+                print(f"ERROR INFO: {self.data_df_diff.loc[netId]}")
+                print('ERROR INFO: ' + str(err))
 
     def result_statistics(self):
         t = 0
         f = 0
+        dt = 0
+        df = 0
         for id in range(1, self.spfile_Num + 1):
-            status = self.data_df_simulator.loc[id, "SimulatorStat"]
+            status = self.data_df_diff.loc[id, "SimulatorStat"]
+            diff_status = self.data_df_diff.loc[id, "outdiff"]
             if status==1:
                 t+=1
             else:
                 f+=1
+            if diff_status==True:
+                dt+=1
+            else:
+                df+=1
         r = open(f"{self.test_dir}/result_statistics.txt", "w")
         r.write(f"本次回归测试共执行{t+f}条case, 其中:\n")
-        r.write(f"    Successed: {t}条\n")
-        r.write(f"    Failed: {f}条\n")
+        r.write(f"    仿真成功: {t} 条\n")
+        r.write(f"    仿真失败: {f} 条\n")
+        r.write(f"    结果对比成功: {dt} 条\n")
+        r.write(f"    结果对比失败: {df} 条\n")
         r.close()
         print(f"本次回归测试共执行 {t+f} 条case, 其中:\n")
-        print(f"    Successed: {t} 条\n")
-        print(f"       Failed: {f} 条\n")
+        print(f"    仿真成功: {t} 条\n")
+        print(f"    仿真失败: {f} 条\n")
+        print(f"    结果对比成功: {dt} 条\n")
+        print(f"    结果对比失败: {df} 条\n")
+
 
     def outputTerm(self):
         df = self.data_df_diff
@@ -738,6 +768,29 @@ class AutoTestCls():
         return len(failed_df['spFile'])
 
 
+    def outputTerm_1(self):
+        df = self.data_df_simulator
+        t = []
+        f = []
+        for fi in range(1, len(df)+1):
+            logFile = df.loc[fi,"logFile"]
+            stat = self.limit_logfile_check(logFile)
+            if stat == 1:
+                t.append(fi)
+            else:
+                f.append(fi)
+        failed_df = pd.DataFrame(columns=df.columns)
+        # 可以在大数据量下，没有省略号
+        for i in f:
+            failed_df = failed_df.append(df[df["index"]==i])
+        print("与预期不符：" + str(len(failed_df)) + "个用例" + "\n")
+        pd.set_option('display.max_columns', 1000000)
+        pd.set_option('display.max_rows', 1000000)
+        pd.set_option('display.max_colwidth', 1000000)
+        pd.set_option('display.width', 1000000)
+        print(failed_df.loc[:, ['netFile', 'SimulatorStat']])
+        return len(failed_df['netFile'])
+
 
 if __name__ == '__main__':
     # 创建解析对象，并向对象添加关注的命令参数，解析参数
@@ -749,7 +802,7 @@ if __name__ == '__main__':
     parser.add_argument("--savediffcsv", type=bool, default=True, help="save final diff csv file")
     parser.add_argument("--savefig", type=bool, default=False, help="save final plot")
     parser.add_argument("--metric", type=str, default="MAPE", help="select metrics for diff, i.e. RMSE or MAPE")
-    parser.add_argument("--isdelout", type=bool, default=False, help="Whether to delete the out file")
+    parser.add_argument("--isdelout", type=bool, default=True, help="Whether to delete the out file")
     parser.add_argument("--rp", type=str, default=0, help="path to test case")
     parser.add_argument("--cn", type=str, default="", help="case name")
     opt = parser.parse_args()

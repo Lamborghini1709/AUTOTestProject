@@ -2,12 +2,12 @@
 
 ; 执行命令: python testbenchcompare.py --tp ./ --sh btdsim-3512-r41 --rp 1 
 ; 说明: 
-; 将 hisiCaseAll（rp=1）\
+; 将 All_regress_Cases（rp=1）\
 ; 拷贝到 执行命令 所在的目录（tp=./），
 ; 使用btdsim-3512-r41（sh=btdsim-3512-r41）仿真测试集中的case，并对比结果
 
 
-脚本执行过程中：以执行命令所在的路径为current path
+脚本执行过程中：以执行命令所在的路径为初始路径，脚本中所使用的相对路径皆在此基础上
 1、先将测试集拷贝到"tp"路径下
 2、然后开始遍历"tp + rp + cn"路径下所有网表
 3、开始仿真并对比结果，最后生成结果
@@ -16,15 +16,17 @@
 6、data_df_simulator_xxxxx.xlsx 文件中保存 仿真结果、仿真时间 等信息
 7、data_df_diff_xxxx.xlsx 文件中保存 仿真结果、仿真时间、结果误差 等信息
 
+
 ; --tp: 测试集存储路径；默认路径是py文件所在目录
 ; --sh: btdsim版本；默认版本为：btdsim
 ; --savesimcsv: 是否保存仿真结果，例：仿真时间、是否成功；默认保存
 ; --savediffcsv: 是否保存仿真数据，例：误差；默认保存
 ; --savefig: 是否保存仿真结果的图片；默认保存
 ; --metric: 计算误差的方式，例：MAPE or RMSE；默认为MAPE
-; --isdelout: 是否删除bench目录外的out文件
+; --isdelout: 是否删除bench目录外的out文件, 默认为True
 ; --rp: 测试集index；默认为测试集: All_regress_Cases
 ; --cn: 指定具体case；默认测试集下所有case
+
 
 ; rp: 
 ; 0: "All_regress_Cases",

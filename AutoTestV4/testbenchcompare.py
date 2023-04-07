@@ -805,6 +805,7 @@ if __name__ == '__main__':
     parser.add_argument("--isdelout", type=bool, default=True, help="Whether to delete the out file")
     parser.add_argument("--rp", type=str, default=0, help="path to test case")
     parser.add_argument("--cn", type=str, default="", help="case name")
+    parser.add_argument("--si", type=int, default=0, help="execute case selector")
     opt = parser.parse_args()
     print(opt)
 

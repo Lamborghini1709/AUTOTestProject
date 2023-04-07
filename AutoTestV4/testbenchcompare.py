@@ -24,6 +24,7 @@ class AutoTestCls():
         self.time_list = []
         self.str_list = []
         self.sh = opt.sh
+        self.si = opt.exsign
         self.dir_dict = {
             0: "All_regress_Cases",
             1: "hisiCaseAll",
@@ -66,10 +67,10 @@ class AutoTestCls():
         self.data_df_simulator = self.data_df_simulator.set_index(['index'])
 
         # def dataform2
-        data_df_diff = np.arange(1, 11).reshape((1, 10))
+        data_df_diff = np.arange(1, 12).reshape((1, 11))
         self.data_df_diff = pd.DataFrame(data_df_diff)
         self.data_df_diff.columns = ['index', 'spFile', 'logFile', 'outFile', 'RefoutFile', 'AnalysisType',
-                                     'SimulatorStat', 'Simulatorcost', "outdiff", "outdiffdetail"]
+                                     'SimulatorStat', 'Simulatorcost', "time_div", "outdiff", "outdiffdetail"]
         self.data_df_diff = self.data_df_diff.set_index(['index'])
 
         # 判断是否为可执行网表文件
@@ -78,10 +79,13 @@ class AutoTestCls():
 
         # 选择对比节点
         self.check_nodes_dict = dict()
+        self.check_time_dict = dict()
         nodes_df = pd.read_excel(self.cases_nodes_path, index_col=0)  # 指定第一列为行索引
         for row in list(nodes_df.index):
             row_value = nodes_df.loc[row, 'nodes'].split(", ")
             self.check_nodes_dict[row] = row_value
+            time_value = nodes_df.loc[row, 'times']
+            self.check_time_dict[row] = time_value
 
         self.InitCaseForm()
 
@@ -95,6 +99,10 @@ class AutoTestCls():
                         netfile = os.path.join(filepath, filename)
                         ret = self.not_check_file_list(netfile)
                         if(ret == 1):
+                            continue
+                        if self.exsign == 1 and caseindex >=1000:
+                            continue
+                        elif self.exsign == 2 and caseindex <=1000:
                             continue
                         if 'model' in netfile or 'gpdk' in netfile or 'INCLUDE' in netfile:
                             continue
@@ -122,12 +130,15 @@ class AutoTestCls():
 
                         # diff result detail
                         outdiffdetail = {}
+                        
+                        # diff time_div
+                        time_div = None
 
                         self.data_df_simulator.loc[self.spfile_Num] = [netfile, logFile, outFile, SimulatorStat,
                                                                        Simulatorcost]
 
                         self.data_df_diff.loc[self.spfile_Num] = [netfile, logFile, outFile, ref_file, AnalysisType,
-                                                                  SimulatorStat, Simulatorcost, Simulatordiff,
+                                                                  SimulatorStat, Simulatorcost, time_div, Simulatordiff,
                                                                   outdiffdetail]
                         
                         # 删除bench目录外的out文件
@@ -417,6 +428,20 @@ class AutoTestCls():
         print(caseindex)
         # print(caseindex)
         return int(caseindex)
+    
+    def time_divcheck(self):
+        for id in range(1,self.spfile_Num+1):
+            if self.data_df_diff.loc[id].SimulatorStat:
+                simulator_cost = self.data_df_diff.loc[id, "Simulatorcost"]
+                caseindex = self.getCaseIndex(id)
+                stand_cost = self.check_time_dict[caseindex]
+                diff_cost = (stand_cost - simulator_cost)/ stand_cost *100
+                if diff_cost<=0 and abs(diff_cost)<=15:
+                    self.data_df_diff.loc[id,"time_div"] = 1
+                elif diff_cost<0 and abs(diff_cost)>15:
+                    self.data_df_diff.loc[id, "time_div"] = 0
+                elif diff_cost>0 :
+                    self.data_df_diff.loc[id, "time_div"] = 1
 
     def calc_error(self, index, original_results_dict, new_results_dict):
 
@@ -730,11 +755,15 @@ class AutoTestCls():
         f = 0
         dt = 0
         df = 0
+        c = 0
         for id in range(1, self.spfile_Num + 1):
             status = self.data_df_diff.loc[id, "SimulatorStat"]
             diff_status = self.data_df_diff.loc[id, "outdiff"]
+            diff_time = self.data_df_diff.loc[id, "time_div"]
             if status==1:
                 t+=1
+                if diff_time == 0:
+                    c+=1
             else:
                 f+=1
             if diff_status==True:
@@ -744,15 +773,18 @@ class AutoTestCls():
         r = open(f"{self.test_dir}/result_statistics.txt", "w")
         r.write(f"本次回归测试共执行{t+f}条case, 其中:\n")
         r.write(f"    仿真成功: {t} 条\n")
+        r.write(f"    仿真成功 中对比时间超过golden15%的： {c}条\n")
         r.write(f"    仿真失败: {f} 条\n")
         r.write(f"    结果对比成功: {dt} 条\n")
         r.write(f"    结果对比失败: {df} 条\n")
         r.close()
         print(f"本次回归测试共执行 {t+f} 条case, 其中:\n")
         print(f"    仿真成功: {t} 条\n")
+        print(f"    仿真成功 中对比时间超过golden15%的： {c}条\n")
         print(f"    仿真失败: {f} 条\n")
         print(f"    结果对比成功: {dt} 条\n")
         print(f"    结果对比失败: {df} 条\n")
+        
 
 
     def outputTerm(self):
@@ -837,6 +869,7 @@ if __name__ == '__main__':
     # #仿真类型统计
     # print("start check out Analysis Type...")
     # atc.global_out_check()
+    atc.time_divcheck()
 
     date_str = time.strftime("%m%d%H%M%S", time.localtime())
     if opt.savesimcsv:

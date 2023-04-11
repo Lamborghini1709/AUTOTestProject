@@ -24,6 +24,7 @@ class AutoTestCls():
         self.time_list = []
         self.str_list = []
         self.sh = opt.sh
+        self.version = opt.bv
         self.dir_dict = {
             0: "All_regress_Cases",
             1: "hisiCaseAll",
@@ -46,7 +47,7 @@ class AutoTestCls():
         self.case_dir = os.path.join(self.test_dir, opt.cn)
 
         # 需要跳过不进行测试的case
-        self.not_check_case = ["case83"]
+        self.not_check_case = ["case999"]
 
         # 回归测试集初始化
         initCmd = f"cp -r /home/mnt/BTD/{self.dir_dict[int(opt.rp)]}  {opt.tp}"
@@ -78,10 +79,17 @@ class AutoTestCls():
 
         # 选择对比节点
         self.check_nodes_dict = dict()
+        self.case_limit = dict()
         nodes_df = pd.read_excel(self.cases_nodes_path, index_col=0)  # 指定第一列为行索引
         for row in list(nodes_df.index):
             row_value = nodes_df.loc[row, 'nodes'].split(", ")
             self.check_nodes_dict[row] = row_value
+            limit_value = nodes_df.loc[row, 'limits']
+            self.case_limit[row] = limit_value
+            # if pd.isna(limit_value):
+            #     pass
+            # else:
+            #     self.case_limit[row] = limit_value
 
         self.InitCaseForm()
 
@@ -237,7 +245,21 @@ class AutoTestCls():
             spfile = self.data_df_simulator.loc[id].netFile
             logfile = self.data_df_simulator.loc[id].logFile
             if logfile:
-                stat = self.logfile_check(logfile)
+                caseindex = self.getCaseIndex(id)
+                tag = self.case_limit[caseindex]
+                if self.version == "base":
+                    if tag == "base" or tag == "plus":
+                        stat = self.limit_logfile_check(logfile)
+                    else:
+                        stat = self.logfile_check(logfile)
+                elif self.version == "plus":
+                    if tag == "plus":
+                        stat = self.limit_logfile_check(logfile)
+                    else:
+                        stat = self.logfile_check(logfile)
+                else: 
+                    stat = self.logfile_check(logfile)
+              
                 # print("stat: {}".format(stat))
                 if stat:
                     SimulatorStat = 1
@@ -415,7 +437,6 @@ class AutoTestCls():
         # netfile: /home/IC/Case_wayne/TestBench_1BaseCases1/>>>>>case1<<<<<</VCO/lab1_pss_pnoise_btd.scs
         caseindex = netfile.split('case')[1].split('/')[0]
         print(caseindex)
-        # print(caseindex)
         return int(caseindex)
 
     def calc_error(self, index, original_results_dict, new_results_dict):
@@ -487,11 +508,11 @@ class AutoTestCls():
                 #     refx = xvalue
                 #     break
 
+                tag = 1
                 for nodename in out_plot[i].keys():
                     if nodename.startswith(noden):
                         outdata = out_plot[i][nodename]
                         refdata = ref_plot[i][nodename]
-
 
                             # 对齐数据
                         if len(refdata) != len(outdata):
@@ -525,9 +546,14 @@ class AutoTestCls():
                             compareflag = compareflag1 | compareflag2
                         else:
                             compareflag = True if metrix_value <= comp_value else False
-                        comp_result[plotname_node] = str((metrix_value, comp_value, compareflag))
+                        if plotname_node in comp_result.keys():
+                            if compareflag == False:
+                                comp_result[plotname_node+"_"+str(tag)] = str((metrix_value, comp_value, compareflag))
+                        else:
+                            comp_result[plotname_node] = str((metrix_value, comp_value, compareflag))
 
                         comparelist.append(compareflag)
+                        tag+=1
 
             compare = False if False in comparelist else True
 
@@ -694,6 +720,19 @@ class AutoTestCls():
             
 
     def diffAndPlot(self, netId):
+        caseindex = self.getCaseIndex(netId)
+        tag = self.case_limit[caseindex]
+        if self.version == "base" and self.data_df_diff.loc[netId].SimulatorStat:
+            if tag == "base" or tag == "plus":
+                self.data_df_diff.loc[netId, "outdiff"] = "PASS"
+                return 1
+        elif self.version == "plus" and self.data_df_diff.loc[netId].SimulatorStat:
+            if tag == "plus":
+                self.data_df_diff.loc[netId, "outdiff"] = "PASS"
+                return 1
+        else: 
+            pass
+        
         if self.data_df_diff.loc[netId].SimulatorStat & os.path.exists(self.data_df_diff.loc[netId].outFile):
             outfile = self.data_df_diff.loc[netId].outFile
             # print(outfile)
@@ -723,7 +762,7 @@ class AutoTestCls():
             except Exception as err:
                 # print(f"outfile: {outfile}, ref_file: {ref_file}")
                 print(f"ERROR INFO: {self.data_df_diff.loc[netId]}")
-                print('ERROR INFO: ' + str(err))
+                print('ERROR MSG: ' + str(err))
 
     def result_statistics(self):
         t = 0
@@ -737,7 +776,7 @@ class AutoTestCls():
                 t+=1
             else:
                 f+=1
-            if diff_status==True:
+            if diff_status==True or diff_status=="PASS":
                 dt+=1
             else:
                 df+=1
@@ -768,30 +807,6 @@ class AutoTestCls():
         return len(failed_df['spFile'])
 
 
-    def outputTerm_1(self):
-        df = self.data_df_simulator
-        t = []
-        f = []
-        for fi in range(1, len(df)+1):
-            logFile = df.loc[fi,"logFile"]
-            stat = self.limit_logfile_check(logFile)
-            if stat == 1:
-                t.append(fi)
-            else:
-                f.append(fi)
-        failed_df = pd.DataFrame(columns=df.columns)
-        # 可以在大数据量下，没有省略号
-        for i in f:
-            failed_df = failed_df.append(df[df["index"]==i])
-        print("与预期不符：" + str(len(failed_df)) + "个用例" + "\n")
-        pd.set_option('display.max_columns', 1000000)
-        pd.set_option('display.max_rows', 1000000)
-        pd.set_option('display.max_colwidth', 1000000)
-        pd.set_option('display.width', 1000000)
-        print(failed_df.loc[:, ['netFile', 'SimulatorStat']])
-        return len(failed_df['netFile'])
-
-
 if __name__ == '__main__':
     # 创建解析对象，并向对象添加关注的命令参数，解析参数
     # argparse module: 命令参数解析
@@ -805,6 +820,7 @@ if __name__ == '__main__':
     parser.add_argument("--isdelout", type=bool, default=True, help="Whether to delete the out file")
     parser.add_argument("--rp", type=str, default=0, help="path to test case")
     parser.add_argument("--cn", type=str, default="", help="case name")
+    parser.add_argument("--bv", type=str, default="rf", help="btdsim version: base, plus, rf")
     opt = parser.parse_args()
     print(opt)
 

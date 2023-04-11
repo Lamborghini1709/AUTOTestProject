@@ -436,12 +436,10 @@ class AutoTestCls():
                 caseindex = self.getCaseIndex(id)
                 stand_cost = self.check_time_dict[caseindex]
                 diff_cost = (stand_cost - simulator_cost)/ stand_cost *100
-                if diff_cost<=0 and abs(diff_cost)<=15:
+                if abs(diff_cost)<=15:
                     self.data_df_diff.loc[id,"time_div"] = 1
-                elif diff_cost<0 and abs(diff_cost)>15:
+                elif abs(diff_cost)>15:
                     self.data_df_diff.loc[id, "time_div"] = 0
-                elif diff_cost>0 :
-                    self.data_df_diff.loc[id, "time_div"] = 1
 
     def calc_error(self, index, original_results_dict, new_results_dict):
 

@@ -24,7 +24,7 @@ class AutoTestCls():
         self.time_list = []
         self.str_list = []
         self.sh = opt.sh
-        self.si = opt.exsign
+        self.exsign = opt.si
         self.version = opt.bv
         self.dir_dict = {
             0: "All_regress_Cases",
@@ -86,8 +86,8 @@ class AutoTestCls():
         for row in list(nodes_df.index):
             row_value = nodes_df.loc[row, 'nodes'].split(", ")
             self.check_nodes_dict[row] = row_value
-            time_value = nodes_df.loc[row, 'times']
-            self.check_time_dict[row] = time_value
+            # time_value = nodes_df.loc[row, 'times']
+            # self.check_time_dict[row] = time_value
             limit_value = nodes_df.loc[row, 'limits']
             self.case_limit[row] = limit_value
             # if pd.isna(limit_value):
@@ -106,11 +106,12 @@ class AutoTestCls():
                         # sp文件
                         netfile = os.path.join(filepath, filename)
                         ret = self.not_check_file_list(netfile)
+                        caseindex = netfile.split('case')[1].split('/')[0]
                         if(ret == 1):
                             continue
-                        if self.exsign == 1 and caseindex >=1000:
+                        if self.exsign == "huali" and caseindex >=1000:
                             continue
-                        elif self.exsign == 2 and caseindex <=1000:
+                        elif self.exsign == "hisi" and caseindex <=1000:
                             continue
                         if 'model' in netfile or 'gpdk' in netfile or 'INCLUDE' in netfile:
                             continue
@@ -850,7 +851,7 @@ if __name__ == '__main__':
     parser.add_argument("--isdelout", type=bool, default=True, help="Whether to delete the out file")
     parser.add_argument("--rp", type=str, default=0, help="path to test case")
     parser.add_argument("--cn", type=str, default="", help="case name")
-    parser.add_argument("--si", type=int, default=0, help="execute case selector")
+    parser.add_argument("--si", type=str, default="all", help="execute case selector, all、hisi、huali")
     parser.add_argument("--bv", type=str, default="rf", help="btdsim version: base, plus, rf")
     opt = parser.parse_args()
     print(opt)
@@ -871,7 +872,7 @@ if __name__ == '__main__':
     for t in thread_list:
         t.setDaemon(True)  # 设置为守护线程，不会因主线程结束而中断
         t.start()
-        time.sleep(0.1)
+        time.sleep(1)
     for t in thread_list:
         t.join()  # 子线程全部加入，主线程等所有子线程运行完毕
 
@@ -883,7 +884,9 @@ if __name__ == '__main__':
     # #仿真类型统计
     # print("start check out Analysis Type...")
     # atc.global_out_check()
-    atc.time_divcheck()
+
+    # 时间对比(TODO)
+    # atc.time_divcheck()
 
     date_str = time.strftime("%m%d%H%M%S", time.localtime())
     if opt.savesimcsv:
@@ -904,7 +907,7 @@ if __name__ == '__main__':
         for t2 in thread2_list:
             t2.setDaemon(True)  # 设置为守护线程，不会因主线程结束而中断
             t2.start()
-            time.sleep(0.1)
+            time.sleep(1)
         for t2 in thread2_list:
             t2.join()  # 子线程全部加入，主线程等所有子线程运行完毕
         

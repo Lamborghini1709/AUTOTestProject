@@ -26,6 +26,7 @@
 ; --isdelout: 是否删除bench目录外的out文件, 默认为True
 ; --rp: 测试集index；默认为测试集: All_regress_Cases
 ; --cn: 指定具体case；默认测试集下所有case
+; --si: 执行执行测试集，0默认全跑，1跑华力case，2跑海思case
 ; --bv: 指定版本（base、plus、rf）；默认为rf
     ; base：器件数超过5000的例子会判定为正确
     ; plus：器件数超过100000的例子会判定为正确

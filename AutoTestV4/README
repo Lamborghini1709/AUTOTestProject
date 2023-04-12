@@ -49,19 +49,24 @@
 ; 12: "cmg_regress_Cases_version-106.1_20230201"
 
 
+若btdsim的执行文件名字不是'btdsim'
+需要加上参数: --sh btdsim_name
+
 ; 自动化测试 所有测试集，包括 海思和华力 回归case
-python testbenchcompare.py --rp 0
+python testbenchcompare.py --rp 0 
 
 ; 自动化测试 海思测试集，包括所有的海思回归case
 python testbenchcompare.py --rp 1
+python testbenchcompare.py --rp 0 --si hisi
 
 ; 自动化测试 华力测试集，包括所有的华力回归case
 python testbenchcompare.py --rp 2
+python testbenchcompare.py --rp 0 --si huali
+注：
+base 版本仿真需要在命令后面加上: --bv base
+plus 版本仿真需要在命令后面加上: --bv plus 
+例: btdsim v3.7.3 plus: 
+  python testbenchcompare.py --rp 2 --bv plus --sh btdsimP
 
 ; 自动化测试 5000器件数限制测试集
 python testbenchcompare.py --rp 3
-
-; 注意事项
-在10.1.10.13服务器上：可以在任意目录下直接执行testbenchcompare.py
-在其他服务器上：需要让脚本和测试集在同一目录下
-不同的测试集需要加不同rp参数，详情见上

@@ -71,6 +71,8 @@ def get_mape(records_real, records_predict):
             if predict != 0:
                 pe.append(error[i] / predict)
         # pe = [error / real for real in np.array(records_real) if real != 0]
+        m = math.ceil(0.9*len(pe))
+        pe =sorted(np.abs(pe), key=lambda x:x)[:m]
         return np.mean(np.abs(pe))
     else:
         return np.mean(np.array(records_real))

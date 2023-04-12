@@ -1,0 +1,48 @@
+2023-03-30 13:41:08,233 - Arc - INFO - ********************开始转换ads网表：./utils/demo.ads********************
+2023-03-30 13:41:08,237 - Arc - WARNING - line: , 未做转换
+2023-03-30 13:41:08,237 - Arc - WARNING - line: , 未做转换
+2023-03-30 13:41:08,237 - Arc - WARNING - line: , 未做转换
+2023-03-30 13:41:08,237 - Arc - WARNING - line: simulator lang=spectre, 未做转换
+2023-03-30 13:41:08,237 - Arc - WARNING - line: global 0, 未做转换
+2023-03-30 13:41:08,237 - Arc - WARNING - line: include "../model/ads_hbt.1.modelcard", 未做转换
+2023-03-30 13:41:08,238 - Arc - WARNING - line: simulator lang=ads, 未做转换
+2023-03-30 13:41:08,238 - Arc - WARNING - line: , 未做转换
+2023-03-30 13:41:08,238 - Arc - WARNING - line: , 未做转换
+2023-03-30 13:41:08,238 - Arc - WARNING - line: #uselib "ckt", "INDQ_Z", 未做转换
+2023-03-30 13:41:08,238 - Arc - WARNING - line: , 未做转换
+2023-03-30 13:41:08,238 - Arc - WARNING - line: Port:PORT1, 暂未支持该语法转换：Ohm Noise=yes P[1]=dbmtow(Pavs) Freq[1]=RFfreq
+2023-03-30 13:41:08,239 - Arc - WARNING - line: Port:Term2, 暂未支持该语法转换：Ohm
+2023-03-30 13:41:08,239 - Arc - WARNING - line: , 未做转换
+2023-03-30 13:41:08,239 - Arc - WARNING - line: I_Source:SRC5, 暂未支持该语法转换：I[1]=1
+2023-03-30 13:41:08,239 - Arc - WARNING - line: I_Source:SRC5, 暂未支持该语法转换：A
+2023-03-30 13:41:08,239 - Arc - WARNING - line: I_Source:SRC5, 暂未支持该语法转换：Freq[1]=ACfreq
+2023-03-30 13:41:08,239 - Arc - WARNING - line: I_Source:SRC5, 暂未支持该语法转换：GHz
+2023-03-30 13:41:08,239 - Arc - WARNING - line: I_Source:SRC5, 暂未支持该语法转换：Iac=polar(1,0)
+2023-03-30 13:41:08,239 - Arc - WARNING - line: I_Source:SRC5, 暂未支持该语法转换：mA
+2023-03-30 13:41:08,240 - Arc - WARNING - line: , 未做转换
+2023-03-30 13:41:08,240 - Arc - WARNING - line: V_Source:SRC2, 暂未支持该语法转换：V
+2023-03-30 13:41:08,240 - Arc - WARNING - line: V_Source:SRC3, 暂未支持该语法转换：V
+2023-03-30 13:41:08,240 - Arc - WARNING - line: , 未做转换
+2023-03-30 13:41:08,240 - Arc - WARNING - line: , 未做转换
+2023-03-30 13:41:08,240 - Arc - WARNING - line: CAPQ:C2, 暂未支持该语法转换：MHz
+2023-03-30 13:41:08,241 - Arc - WARNING - line: CAPQ:C3, 暂未支持该语法转换：MHz
+2023-03-30 13:41:08,241 - Arc - WARNING - line: CAPQ:C4, 暂未支持该语法转换：MHz
+2023-03-30 13:41:08,241 - Arc - WARNING - line: CAPQ:C5, 暂未支持该语法转换：MHz
+2023-03-30 13:41:08,241 - Arc - WARNING - line: CAPQ:C6, 暂未支持该语法转换：MHz
+2023-03-30 13:41:08,241 - Arc - WARNING - line: CAPQ:C7, 暂未支持该语法转换：MHz
+2023-03-30 13:41:08,241 - Arc - WARNING - line: , 未做转换
+2023-03-30 13:41:08,242 - Arc - WARNING - line: INDQ_Z:L2, 暂未支持该语法转换：MHz
+2023-03-30 13:41:08,242 - Arc - WARNING - line: INDQ_Z:L2, 暂未支持该语法转换：Ohm
+2023-03-30 13:41:08,242 - Arc - WARNING - line: INDQ_Z:L3, 暂未支持该语法转换：MHz
+2023-03-30 13:41:08,242 - Arc - WARNING - line: INDQ_Z:L3, 暂未支持该语法转换：Ohm
+2023-03-30 13:41:08,242 - Arc - WARNING - line: INDQ_Z:L4, 暂未支持该语法转换：MHZ
+2023-03-30 13:41:08,242 - Arc - WARNING - line: INDQ_Z:L4, 暂未支持该语法转换：Ohm
+2023-03-30 13:41:08,242 - Arc - WARNING - line: , 未做转换
+2023-03-30 13:41:08,242 - Arc - WARNING - line: , 未做转换
+2023-03-30 13:41:08,243 - Arc - WARNING - line: "HBTM1":HBT1, 暂未支持该语法转换：SelfTmod=0
+2023-03-30 13:41:08,243 - Arc - WARNING - line: "HBTM1":HBT2, 暂未支持该语法转换：SelfTmod=0
+2023-03-30 13:41:08,243 - Arc - WARNING - line: "HBTM1":HBT3, 暂未支持该语法转换：SelfTmod=0
+2023-03-30 13:41:08,243 - Arc - WARNING - line: "HBTM1":HBT4, 暂未支持该语法转换：SelfTmod=0
+2023-03-30 13:41:08,243 - Arc - WARNING - line: , 未做转换
+2023-03-30 13:41:08,243 - Arc - WARNING - line: , 未做转换
+2023-03-30 13:41:08,244 - Arc - WARNING - line: , 未做转换

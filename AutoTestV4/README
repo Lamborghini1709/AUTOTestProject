@@ -1,0 +1,67 @@
+; -*- coding: utf-8 -*-
+
+; 执行命令: python testbenchcompare.py --tp ./ --sh btdsim-3512-r41 --rp 1 
+; 说明: 
+; 将 All_regress_Cases（rp=1）\
+; 拷贝到 执行命令 所在的目录（tp=./），
+; 使用btdsim-3512-r41（sh=btdsim-3512-r41）仿真测试集中的case，并对比结果
+
+
+脚本执行过程中：以执行命令所在的路径为初始路径，脚本中所使用的相对路径皆在此基础上
+1、先将测试集拷贝到"tp"路径下
+2、然后开始遍历"tp + rp + cn"路径下所有网表
+3、开始仿真并对比结果，最后生成结果
+4、result_statistics.txt 文件中统计了本次回归测试执行了多少条case，以及成功失败多少条
+5、其他输出结果均在测试集的output目录下，包括截图
+6、data_df_simulator_xxxxx.xlsx 文件中保存 仿真结果、仿真时间 等信息
+7、data_df_diff_xxxx.xlsx 文件中保存 仿真结果、仿真时间、结果误差 等信息
+
+
+; --tp: 测试集存储路径；默认路径是py文件所在目录
+; --sh: btdsim版本；默认版本为：btdsim
+; --savesimcsv: 是否保存仿真结果，例：仿真时间、是否成功；默认保存
+; --savediffcsv: 是否保存仿真数据，例：误差；默认保存
+; --savefig: 是否保存仿真结果的图片；默认保存
+; --metric: 计算误差的方式，例：MAPE or RMSE；默认为MAPE
+; --isdelout: 是否删除bench目录外的out文件, 默认为True
+; --rp: 测试集index；默认为测试集: All_regress_Cases
+; --cn: 指定具体case；默认测试集下所有case
+; --si: 执行执行测试集，all 默认全跑，huali:跑华力case，hisi跑海思case
+; --bv: 指定版本（base、plus、rf）；默认为rf
+    ; base：器件数超过5000的例子会判定为正确
+    ; plus：器件数超过100000的例子会判定为正确
+    ; rf：不做任何判定
+
+
+; rp: 
+; 0: "All_regress_Cases",
+; 1: "hisiCaseAll",
+; 2: "regress_Cases_all-cmg-bulk_20230307-1400",
+; 3: "RegressCasesCircuitLimit5K_20230330-1000",
+; 4: "cmg_regress_Cases_version-107_20220909",
+; 5: "cmg_regress_Cases_version-110.0_20220705",
+; 6: "bulk_regress_Cases_version-106.2_20220824",
+; 7: "regress_Cases_bulk107_2022-11-30",
+; 8: "haisiRegre",
+; 9: "radioCircuit", 
+; 10: "huali_Case_regress_20221015",
+; 11: "regress_Cases_all-cmg-bulk_20221202-1600",
+; 12: "cmg_regress_Cases_version-106.1_20230201"
+
+
+; 自动化测试 所有测试集，包括 海思和华力 回归case
+python testbenchcompare.py --rp 0
+
+; 自动化测试 海思测试集，包括所有的海思回归case
+python testbenchcompare.py --rp 1
+
+; 自动化测试 华力测试集，包括所有的华力回归case
+python testbenchcompare.py --rp 2
+
+; 自动化测试 5000器件数限制测试集
+python testbenchcompare.py --rp 3
+
+; 注意事项
+在10.1.10.13服务器上：可以在任意目录下直接执行testbenchcompare.py
+在其他服务器上：需要让脚本和测试集在同一目录下
+不同的测试集需要加不同rp参数，详情见上

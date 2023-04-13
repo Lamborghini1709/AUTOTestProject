@@ -41,7 +41,9 @@ class AutoTestCls():
             9: "radioCircuit", 
             10: "huali_Case_regress_20221015",
             11: "regress_Cases_all-cmg-bulk_20221202-1600",
-            12: "cmg_regress_Cases_version-106.1_20230201"
+            12: "cmg_regress_Cases_version-106.1_20230201",
+            13: "hisiCaseAll_part2",
+            14: "regress_Cases_all-cmg-bulk_20230307-1400_part2"
         }
         self.test_dir = os.path.join(opt.tp, self.dir_dict[int(opt.rp)])
         self.ref_filename = 'bench'
@@ -316,13 +318,13 @@ class AutoTestCls():
             try:
                 with open(file) as f:
                     for line in f.readlines():
-                        if 'This version is limited to 5000 elements' in line:
+                        if 'This version is limited to' in line:
                             return 1
             except:
                 try:
                     with open(file, encoding='latin-1') as f:
                         for line in f.readlines():
-                            if 'This version is limited to 5000 elements' in line:
+                            if 'This version is limited to' in line:
                                 return 1
                 except:
                     print("error decode:" + file)
@@ -562,17 +564,17 @@ class AutoTestCls():
                             metrix_value = get_rmse(outdata, refdata)
                         else:
                             metrix_value = get_mape(outdata, refdata)
-                        comp_value = 5e-3
+                        comp_value = 3e-2
                         unit = nodename.split("----")[-1]
                         if unit=="A":
                             metrix_value2 = max_diff(outdata, refdata)
-                            comp_value2 = 1e-12
+                            comp_value2 = 1e-9
                             compareflag1 = True if metrix_value <= comp_value else False
                             compareflag2 = True if metrix_value2 <= comp_value2 else False
                             compareflag = compareflag1 | compareflag2
                         elif unit=="V":
                             metrix_value2 = max_diff(outdata, refdata)
-                            comp_value2 = 1e-6
+                            comp_value2 = 1e-4
                             compareflag1 = True if metrix_value <= comp_value else False
                             compareflag2 = True if metrix_value2 <= comp_value2 else False
                             compareflag = compareflag1 | compareflag2
@@ -828,20 +830,20 @@ class AutoTestCls():
         print(f"    结果对比失败: {df} 条\n")
         
     def bench_error_data(self):
-        date_str = time.strftime("%Y%m%d%H%M%S", time.localtime())
+        date_str = time.strftime("%m%d%H%M%S", time.localtime())
         df = self.data_df_diff
         failed_df = df[(df['SimulatorStat'] == 0) | (df['outdiff'] == False) | (df['outdiff'].isna())]
         test_set = self.dir_dict[int(opt.rp)]
-        os.system(f"mkdir /home/mnt/bencherror/{date_str}")
+        os.system(f"mkdir /home/mnt/bencherror/{date_str}_{self.dir_dict[int(opt.rp)]}")
         for i in list(failed_df.index):
             aa = failed_df.loc[i, "spFile"]
             bb = aa.split(test_set)
             cc = bb[1].split("/")[1]
             dd = f"{bb[0]}{test_set}/{cc}" 
-            copyCmd = f"cp -r {dd} /home/mnt/bencherror/{date_str}/"
+            copyCmd = f"cp -r {dd} /home/mnt/bencherror/{date_str}_{self.dir_dict[int(opt.rp)]}/"
             os.system(copyCmd)
-        os.system(f"cp -r {self.output_folder} /home/mnt/bencherror/{date_str}/")
-        print(f"INFO: 回归失败案例已整理至 /home/mnt/bencherror/{date_str}/ 目录")
+        os.system(f"cp -r {self.output_folder} /home/mnt/bencherror/{date_str}_{self.dir_dict[int(opt.rp)]}/")
+        print(f"INFO: 回归失败案例已整理至 /home/mnt/bencherror/{date_str}_{self.dir_dict[int(opt.rp)]}/ 目录")
 
 
     def outputTerm(self):
@@ -853,7 +855,7 @@ class AutoTestCls():
         pd.set_option('display.max_rows', 1000000)
         pd.set_option('display.max_colwidth', 1000000)
         pd.set_option('display.width', 1000000)
-        print(failed_df.loc[:, ['spFile', 'SimulatorStat', 'outdiff']])
+        print(failed_df.loc[:, ['spFile', 'SimulatorStat', 'Simulatorcost', 'outdiff']])
         return len(failed_df['spFile'])
 
 

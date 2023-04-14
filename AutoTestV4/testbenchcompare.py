@@ -24,7 +24,7 @@ class AutoTestCls():
         self.time_list = []
         self.str_list = []
         self.sh = opt.sh
-        self.si = opt.exsign
+        self.si = opt.si
         self.version = opt.bv
         self.dir_dict = {
             0: "All_regress_Cases",
@@ -108,9 +108,9 @@ class AutoTestCls():
                         ret = self.not_check_file_list(netfile)
                         if(ret == 1):
                             continue
-                        if self.exsign == 1 and caseindex >=1000:
+                        if self.si == 1 and caseindex >=1000:
                             continue
-                        elif self.exsign == 2 and caseindex <=1000:
+                        elif self.si == 2 and caseindex <=1000:
                             continue
                         if 'model' in netfile or 'gpdk' in netfile or 'INCLUDE' in netfile:
                             continue
@@ -457,10 +457,22 @@ class AutoTestCls():
                 caseindex = self.getCaseIndex(id)
                 stand_cost = self.check_time_dict[caseindex]
                 diff_cost = (stand_cost - simulator_cost)/ stand_cost *100
-                if abs(diff_cost)<=15:
-                    self.data_df_diff.loc[id,"time_div"] = 1
+                tag = self.case_limit[caseindex]                
+                if diff_cost>0 or abs(diff_cost)<15:
+                    self.data_df_diff.loc[id,"time_div"] = 1                  
                 elif abs(diff_cost)>15:
-                    self.data_df_diff.loc[id, "time_div"] = 0
+                    if self.version == "base":
+                        if tag == "base" or tag == "plus":
+                            continue
+                        else:
+                            self.data_df_diff.loc[id, "time_div"] = 0
+                    elif self.version == "plus":
+                        if tag == "plus":
+                            continue
+                        else:
+                            self.data_df_diff.loc[id, "time_div"] = 0
+                    else:
+                        self.data_df_diff.loc[id, "time_div"] = 0
 
     def calc_error(self, index, original_results_dict, new_results_dict):
 
@@ -826,14 +838,14 @@ class AutoTestCls():
 
     def outputTerm(self):
         df = self.data_df_diff
-        failed_df = df[(df['SimulatorStat'] == 0) | (df['outdiff'] == False) | (df['outdiff'].isna())]
+        failed_df = df[(df['SimulatorStat'] == 0) | (df['outdiff'] == False) |  (df['time_div'] == 0) | (df['outdiff'].isna())]
         # 可以在大数据量下，没有省略号
         print("总计失败：" + str(len(failed_df)) + "个用例" + "\n")
         pd.set_option('display.max_columns', 1000000)
         pd.set_option('display.max_rows', 1000000)
         pd.set_option('display.max_colwidth', 1000000)
         pd.set_option('display.width', 1000000)
-        print(failed_df.loc[:, ['spFile', 'SimulatorStat', 'outdiff']])
+        print(failed_df.loc[:, ['spFile', 'SimulatorStat','time_div', 'outdiff']])
         return len(failed_df['spFile'])
 
 

@@ -27,6 +27,7 @@ class AutoTestCls():
         self.str_list = []
         self.sh = opt.sh
         self.si = opt.si
+        self.simulation_cost = opt.ccost
         self.version = opt.bv
         self.dir_dict = {
             0: "All_regress_Cases",
@@ -90,14 +91,15 @@ class AutoTestCls():
         for row in list(nodes_df.index):
             row_value = nodes_df.loc[row, 'nodes'].split(", ")
             self.check_nodes_dict[row] = row_value
-            # time_value = nodes_df.loc[row, 'times']
-            # self.check_time_dict[row] = time_value
             limit_value = nodes_df.loc[row, 'limits']
             self.case_limit[row] = limit_value
-            # if pd.isna(limit_value):
-            #     pass
-            # else:
-            #     self.case_limit[row] = limit_value
+            if self.simulation_cost == 1:
+                time_value = nodes_df.loc[row, 'times']
+                self.check_time_dict[row] = time_value
+            if pd.isna(limit_value):
+                pass
+            else:
+                self.case_limit[row] = limit_value
 
         self.InitCaseForm()
 
@@ -469,9 +471,9 @@ class AutoTestCls():
                 stand_cost = self.check_time_dict[caseindex]
                 diff_cost = (stand_cost - simulator_cost)/ stand_cost *100
                 tag = self.case_limit[caseindex]                
-                if diff_cost>0 or abs(diff_cost)<15:
+                if diff_cost>=0 or abs(diff_cost)<=15:
                     self.data_df_diff.loc[id,"time_div"] = 1                  
-                elif abs(diff_cost)>15:
+                elif diff_cost<0 and abs(diff_cost)>15:
                     if self.version == "base":
                         if tag == "base" or tag == "plus":
                             continue
@@ -829,14 +831,14 @@ class AutoTestCls():
         r = open(f"{self.test_dir}/result_statistics.txt", "w")
         r.write(f"本次回归测试共执行{t+f}条case, 其中:\n")
         r.write(f"    仿真成功: {t} 条\n")
-        # r.write(f"    仿真成功 中对比时间超过golden15%的： {c}条\n")
+        r.write(f"    仿真成功 中对比时间超过golden15%的： {c}条\n")
         r.write(f"    仿真失败: {f} 条\n")
         r.write(f"    结果对比成功: {dt} 条\n")
         r.write(f"    结果对比失败: {df} 条\n")
         r.close()
         print(f"本次回归测试共执行 {t+f} 条case, 其中:\n")
         print(f"    仿真成功: {t} 条\n")
-        # print(f"    仿真成功 中对比时间超过golden15%的： {c}条\n")
+        print(f"    仿真成功 中对比时间超过golden15%的： {c}条\n")
         print(f"    仿真失败: {f} 条\n")
         print(f"    结果对比成功: {dt} 条\n")
         print(f"    结果对比失败: {df} 条\n")
@@ -855,7 +857,8 @@ class AutoTestCls():
             copyCmd = f"cp -r {dd} /home/mnt/bencherror/{date_str}_{self.dir_dict[int(opt.rp)]}/"
             os.system(copyCmd)
         os.system(f"cp -r {self.output_folder} /home/mnt/bencherror/{date_str}_{self.dir_dict[int(opt.rp)]}/")
-        print(f"INFO: 回归失败案例已整理至 /home/mnt/bencherror/{date_str}_{self.dir_dict[int(opt.rp)]}/ 目录")
+        if len(failed_df>0):
+            print(f"INFO: 回归失败案例已整理至 /home/mnt/bencherror/{date_str}_{self.dir_dict[int(opt.rp)]}/ 目录")
 
 
     def outputTerm(self):
@@ -886,6 +889,7 @@ if __name__ == '__main__':
     parser.add_argument("--cn", type=str, default="", help="case name")
     parser.add_argument("--si", type=str, default="all", help="execute case selector, all、hisi、huali")
     parser.add_argument("--bv", type=str, default="rf", help="btdsim version: base, plus, rf")
+    parser.add_argument("--ccost", type=str, default=1, help="Simulatorcost Compare")
     opt = parser.parse_args()
     print(opt)
 
@@ -919,8 +923,9 @@ if __name__ == '__main__':
     # atc.global_out_check()
 
     # 时间对比(TODO)
-    # atc.time_divcheck()
-
+    if self.simulation_cost == 1:
+        print("start check out simulator cost...")
+        atc.time_divcheck()
     date_str = time.strftime("%m%d%H%M%S", time.localtime())
     if opt.savesimcsv:
         # 将仿真结果写入excel

@@ -30,7 +30,7 @@ class AutoTestCls():
         self.version = opt.bv
         self.dir_dict = {
             "all": "All_regress_Cases",
-            "Hisi": "hisiCaseAll",
+            "hisi": "hisiCaseAll",
             "huali": "regress_Cases_all-cmg-bulk_20230307-1400",
             "3": "RegressCasesCircuitLimit5K_20230330-1000",
             "4": "cmg_regress_Cases_version-107_20220909",

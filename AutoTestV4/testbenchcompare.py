@@ -27,26 +27,25 @@ class AutoTestCls():
         self.str_list = []
         self.sh = opt.sh
         self.si = opt.si
-        self.simulation_cost = opt.ccost
         self.version = opt.bv
         self.dir_dict = {
-            0: "All_regress_Cases",
-            1: "hisiCaseAll",
-            2: "regress_Cases_all-cmg-bulk_20230307-1400",
-            3: "RegressCasesCircuitLimit5K_20230330-1000",
-            4: "cmg_regress_Cases_version-107_20220909",
-            5: "cmg_regress_Cases_version-110.0_20220705",
-            6: "bulk_regress_Cases_version-106.2_20220824",
-            7: "regress_Cases_bulk107_2022-11-30",
-            8: "haisiRegre",
-            9: "radioCircuit", 
-            10: "huali_Case_regress_20221015",
-            11: "regress_Cases_all-cmg-bulk_20221202-1600",
-            12: "cmg_regress_Cases_version-106.1_20230201",
-            13: "hisiCaseAll_part2",
-            14: "regress_Cases_all-cmg-bulk_20230307-1400_part2"
+            "all": "All_regress_Cases",
+            "Hisi": "hisiCaseAll",
+            "huali": "regress_Cases_all-cmg-bulk_20230307-1400",
+            "3": "RegressCasesCircuitLimit5K_20230330-1000",
+            "4": "cmg_regress_Cases_version-107_20220909",
+            "5": "cmg_regress_Cases_version-110.0_20220705",
+            "6": "bulk_regress_Cases_version-106.2_20220824",
+            "7": "regress_Cases_bulk107_2022-11-30",
+            "8": "haisiRegre",
+            "9": "radioCircuit", 
+            "10": "huali_Case_regress_20221015",
+            "11": "regress_Cases_all-cmg-bulk_20221202-1600",
+            "12": "cmg_regress_Cases_version-106.1_20230201",
+            "13": "hisiCaseAll_part2",
+            "14": "regress_Cases_all-cmg-bulk_20230307-1400_part2"
         }
-        self.test_dir = os.path.join(opt.tp, self.dir_dict[int(opt.rp)])
+        self.test_dir = os.path.join(opt.tp, self.dir_dict[opt.rp])
         self.ref_filename = 'bench'
         self.cases_nodes_path = os.path.join(self.test_dir, "cases_nodes.xlsx")
         self.output_folder = os.path.join(self.test_dir, "output")
@@ -56,8 +55,13 @@ class AutoTestCls():
         self.not_check_case = ["case999"]
 
         # 回归测试集初始化
-        initCmd = f"cp -r /home/mnt/BTD/{self.dir_dict[int(opt.rp)]}  {opt.tp}"
-        print("CMD: "+initCmd)
+        # 删除tp目录下的测试集
+        if opt.isdelold == 1:
+            self.del_case_dir()
+        else:
+            pass
+        initCmd = f"cp -r /home/mnt/BTD/{self.dir_dict[opt.rp]}  {opt.tp}"
+        print("INFO COPY CMD: "+initCmd)
         os.system(initCmd)
 
         # def logfile
@@ -73,10 +77,10 @@ class AutoTestCls():
         self.data_df_simulator = self.data_df_simulator.set_index(['index'])
 
         # def dataform2
-        data_df_diff = np.arange(1, 12).reshape((1, 11))
+        data_df_diff = np.arange(1, 14).reshape((1, 13))
         self.data_df_diff = pd.DataFrame(data_df_diff)
         self.data_df_diff.columns = ['index', 'spFile', 'logFile', 'outFile', 'RefoutFile', 'AnalysisType',
-                                     'SimulatorStat', 'Simulatorcost', "time_div", "outdiff", "outdiffdetail"]
+                                     'SimulatorStat', 'Simulatorcost', "time_div", "cost_div","outdiff", "outdiffCost", "outdiffdetail"]
         self.data_df_diff = self.data_df_diff.set_index(['index'])
 
         # 判断是否为可执行网表文件
@@ -93,7 +97,7 @@ class AutoTestCls():
             self.check_nodes_dict[row] = row_value
             limit_value = nodes_df.loc[row, 'limits']
             self.case_limit[row] = limit_value
-            if self.simulation_cost == 1:
+            if opt.ccost == 1:
                 time_value = nodes_df.loc[row, 'times']
                 self.check_time_dict[row] = time_value
             if pd.isna(limit_value):
@@ -148,28 +152,26 @@ class AutoTestCls():
                         
                         # diff time_div
                         time_div = None
+                        cost_div = None
+
+                        outdiffCost = None
 
                         self.data_df_simulator.loc[self.spfile_Num] = [netfile, logFile, outFile, SimulatorStat,
                                                                        Simulatorcost]
 
                         self.data_df_diff.loc[self.spfile_Num] = [netfile, logFile, outFile, ref_file, AnalysisType,
-                                                                  SimulatorStat, Simulatorcost, time_div, Simulatordiff,
-                                                                  outdiffdetail]
-                        
-                        # 删除bench目录外的out文件
-                        if opt.isdelout == True:
-                            self.del_out(netfile)
-                        else:
-                            pass
-
+                                                                  SimulatorStat, Simulatorcost, time_div, cost_div, Simulatordiff,
+                                                                  outdiffCost,outdiffdetail]
         else:
             print("Please specify the test folder in string format.")
 
 
-    def del_out(self, netfile):
-        outFile = self.change_suffix(netfile, '.out')
-        if os.path.exists(outFile):
-            os.remove(outFile)
+    def del_case_dir(self):
+        case_dir = f"{opt.tp}/{self.dir_dict[opt.rp]}"
+        delCmd = f"rm -rf {case_dir}"
+        if os.path.exists(case_dir):
+            print("INFO DEL CMD: "+delCmd)
+            os.system(delCmd)
 
 
     def not_check_file_list(self, netfile):
@@ -191,37 +193,15 @@ class AutoTestCls():
             # changed 0904 >> to >为了每次重新仿真得到的log不会记录之前的结果，
             # 否则autoRun.log的自动判断会出错
             # 执行仿真并记录仿真时间
-            RunCmd = self.sh + " {} -f nutascii -m4 > {}".format(netfile, logfile)
+            if "case13/transient_analysis/hao_testx0_post2.sp" in netfile :
+                RunCmd = self.sh + " {} -f nutascii > {}".format(netfile, logfile)
+            else:
+                RunCmd = self.sh + " {} -f nutascii -m4 > {}".format(netfile, logfile)
             start = time.time()
             os.system(RunCmd)
             end = time.time()
-            # print("cmd: {}".format(RunCmd))
+            print("INFO RUN cmd: {}".format(RunCmd))
             cost = int((end - start) * 1000) / 1000
-
-            self.data_df_simulator.loc[netfileID, "Simulatorcost"] = cost
-            self.data_df_diff.loc[netfileID, "Simulatorcost"] = cost
-            # print("Simulatorcost: {}".format(self.data_df_simulator.loc[netfileID].Simulatorcost))
-            # print("rcmd:", RunCmd)
-
-    def run_simulation(self, netfileID):
-        netfile = self.data_df_simulator.loc[netfileID].netFile
-        print("Find %s \n" % (netfile))
-        if netfile:
-            # RunCmd = ['simulator',spfile]
-            logfile = self.data_df_simulator.loc[netfileID].logFile
-            # changed 0904 >> to >为了每次重新仿真得到的log不会记录之前的结果，
-            # 否则autoRun.log的自动判断会出错
-            # 执行仿真并记录仿真时间
-            RunCmd = self.sh + " {} -f nutascii > {}".format(netfile, logfile)
-            # os.system(' '.join(RunCmd))
-            start = time.time()
-            # print("start time: {}".format(start))
-            print("cmd: {}".format(RunCmd))
-            os.system(RunCmd)
-            end = time.time()
-            cost = int((end - start) * 1000) / 1000
-            # print("end time: {}".format(end))
-            # print("cost: {}".format(cost))
 
             self.data_df_simulator.loc[netfileID, "Simulatorcost"] = cost
             self.data_df_diff.loc[netfileID, "Simulatorcost"] = cost
@@ -365,13 +345,7 @@ class AutoTestCls():
             plotname_arr.append(plotname)
             # multi_plotname_result = list()
             if plotname not in nodelistsresult.keys():
-                #     mark = True
-                #     # print("aaaaa" + str(mark))
-                #     # print(nodelistsresult[plotname])
-                #     multi_plotname_result.append(nodelistsresult[plotname])
-                # else:
                 nodelistsresult[plotname] = list()
-                # print("bbbb")
 
             # read the names of the variables
             variable_name_unit = []
@@ -469,11 +443,12 @@ class AutoTestCls():
                 simulator_cost = self.data_df_diff.loc[id, "Simulatorcost"]
                 caseindex = self.getCaseIndex(id)
                 stand_cost = self.check_time_dict[caseindex]
-                diff_cost = (stand_cost - simulator_cost)/ stand_cost *100
-                tag = self.case_limit[caseindex]                
-                if diff_cost>=0 or abs(diff_cost)<=15:
+                diff_cost = (simulator_cost - stand_cost)/ stand_cost *100
+                tag = self.case_limit[caseindex]
+                self.data_df_diff.loc[id,"cost_div"] = '%.3f'%diff_cost+"%"
+                if diff_cost<= 15 :
                     self.data_df_diff.loc[id,"time_div"] = 1                  
-                elif diff_cost<0 and abs(diff_cost)>15:
+                elif diff_cost>15:
                     if self.version == "base":
                         if tag == "base" or tag == "plus":
                             continue
@@ -492,9 +467,6 @@ class AutoTestCls():
         plotname_nodes = []
         plotnames = set()
         # 获取所有的plotnames
-        # print("HEREHEREHEREHEREHEREHEREHEREHERE")
-        # print(original_results_dict)
-        # print(type(original_results_dict))
         for item in original_results_dict:
             # print(item)
             plotnames.add(item)
@@ -507,13 +479,7 @@ class AutoTestCls():
             # print(type(node_dict))
             # 获取所有的nodename
             if type(node_dict) == list:
-                # print("True")
-                # print(type(node_dict))
-                # print(type(node_dict[0]))
                 nodes = node_dict[0].keys()
-                # print('node_dict: {}'.format(node_dict))
-                # print("nodes: {}".format(nodes))
-                # print(len(nodes))
             else:
                 print("node_dict type error.")
             for node in nodes:
@@ -540,9 +506,6 @@ class AutoTestCls():
 
             for i in range(len(out_plot)):
                 # 同名plotname情况下，第i个plotname中的所有nodes
-                # print("aaa: {}".format(out_plot[i]))
-                # each out_plot[i] is an OrderedDict
-                # print(type(out_plot[i]))
                 copy_out_plot = out_plot[i]
                 # first one is x axis
                 first_out = next(iter(copy_out_plot.values()))
@@ -562,7 +525,7 @@ class AutoTestCls():
                         outdata = out_plot[i][nodename]
                         refdata = ref_plot[i][nodename]
 
-                            # 对齐数据
+                        # 对齐数据
                         if len(refdata) != len(outdata):
                             
                             x_value, outdata, refdata = AlignDataLen(outx, refx, outdata, refdata)
@@ -573,7 +536,6 @@ class AutoTestCls():
                         assert len(refdata) == len(outdata)
 
                         # 评估指标
-                                                    # 评估指标
                         if opt.metric == "RMSE":
                             metrix_value = get_rmse(outdata, refdata)
                         else:
@@ -763,6 +725,7 @@ class AutoTestCls():
 
     def diffout(self):
         for netId in range(1, self.spfile_Num + 1):
+            start = time.time()
             caseindex = self.getCaseIndex(netId)
             tag = self.case_limit[caseindex]
             if self.version == "base" and self.data_df_diff.loc[netId].SimulatorStat:
@@ -807,6 +770,10 @@ class AutoTestCls():
                     print(f"ERROR INFO: {self.data_df_diff.loc[netId]}")
                     print('ERROR MSG: ' + str(err))
             
+            end = time.time()
+            cost = end-start
+            self.data_df_diff.loc[netId, "outdiffCost"] = cost
+            print(f"""INFO: case{caseindex}: \n    startTime: {start}\n    endTime: {end}\n    diffCost: {cost}""")
 
     def result_statistics(self):
         t = 0
@@ -836,29 +803,36 @@ class AutoTestCls():
         r.write(f"    结果对比成功: {dt} 条\n")
         r.write(f"    结果对比失败: {df} 条\n")
         r.close()
-        print(f"本次回归测试共执行 {t+f} 条case, 其中:\n")
-        print(f"    仿真成功: {t} 条\n")
-        print(f"    仿真成功 中对比时间超过golden15%的： {c}条\n")
-        print(f"    仿真失败: {f} 条\n")
-        print(f"    结果对比成功: {dt} 条\n")
-        print(f"    结果对比失败: {df} 条\n")
+        print("\n")
+        print("*"*100+"\n")
+        print("*" + "      测试结果统计\n")
+        print("*"*100+"\n")
+        print(f"        本次回归测试共执行 {t+f} 条case, 其中:\n")
+        print(f"            仿真成功: {t} 条\n")
+        print(f"           仿真成功 中对比时间超过golden15%的： {c}条\n")
+        print(f"            仿真失败: {f} 条\n")
+        print(f"            结果对比成功: {dt} 条\n")
+        print(f"            结果对比失败: {df} 条\n")
+        print("\n")
+        print("*"*100+"\n")
         
     def bench_error_data(self):
         date_str = time.strftime("%m%d%H%M%S", time.localtime())
         df = self.data_df_diff
         failed_df = df[(df['SimulatorStat'] == 0) | (df['outdiff'] == False) | (df['outdiff'].isna())]
-        test_set = self.dir_dict[int(opt.rp)]
-        os.system(f"mkdir /home/mnt/bencherror/{date_str}_{self.dir_dict[int(opt.rp)]}")
-        for i in list(failed_df.index):
-            aa = failed_df.loc[i, "spFile"]
-            bb = aa.split(test_set)
-            cc = bb[1].split("/")[1]
-            dd = f"{bb[0]}{test_set}/{cc}" 
-            copyCmd = f"cp -r {dd} /home/mnt/bencherror/{date_str}_{self.dir_dict[int(opt.rp)]}/"
-            os.system(copyCmd)
-        os.system(f"cp -r {self.output_folder} /home/mnt/bencherror/{date_str}_{self.dir_dict[int(opt.rp)]}/")
-        if len(failed_df>0):
-            print(f"INFO: 回归失败案例已整理至 /home/mnt/bencherror/{date_str}_{self.dir_dict[int(opt.rp)]}/ 目录")
+        test_set = self.dir_dict[opt.rp]
+        if len(failed_df) > 0:
+            os.system(f"mkdir /home/mnt/bencherror/{date_str}_{self.dir_dict[opt.rp]}")
+            for i in list(failed_df.index):
+                aa = failed_df.loc[i, "spFile"]
+                bb = aa.split(test_set)
+                cc = bb[1].split("/")[1]
+                dd = f"{bb[0]}{test_set}/{cc}" 
+                copyCmd = f"cp -r {dd} /home/mnt/bencherror/{date_str}_{self.dir_dict[opt.rp]}/"
+                os.system(copyCmd)
+            os.system(f"cp -r {self.output_folder} /home/mnt/bencherror/{date_str}_{self.dir_dict[opt.rp]}/")
+            print(f"INFO: 回归失败案例存放 ip: 10.1.10.11 用户名 test 密码 testing")
+            print(f"INFO: 回归失败案例已整理至 /home/mnt/bencherror/{date_str}_{self.dir_dict[opt.rp]}/ 目录")
 
 
     def outputTerm(self):
@@ -870,7 +844,7 @@ class AutoTestCls():
         pd.set_option('display.max_rows', 1000000)
         pd.set_option('display.max_colwidth', 1000000)
         pd.set_option('display.width', 1000000)
-        print(failed_df.loc[:, ['spFile', 'SimulatorStat', 'Simulatorcost', 'time_div', 'outdiff']])
+        print(failed_df.loc[:, ['spFile', 'SimulatorStat', 'Simulatorcost', 'cost_div', 'outdiff']])
         return len(failed_df['spFile'])
 
 
@@ -884,8 +858,8 @@ if __name__ == '__main__':
     parser.add_argument("--savediffcsv", type=bool, default=True, help="save final diff csv file")
     parser.add_argument("--savefig", type=bool, default=False, help="save final plot")
     parser.add_argument("--metric", type=str, default="MAPE", help="select metrics for diff, i.e. RMSE or MAPE")
-    parser.add_argument("--isdelout", type=bool, default=True, help="Whether to delete the out file")
-    parser.add_argument("--rp", type=str, default=0, help="path to test case")
+    parser.add_argument("--isdelold", type=int, default=1, help="Whether to delete the old case dir")
+    parser.add_argument("--rp", type=str, default=0, help="""path to test case""")
     parser.add_argument("--cn", type=str, default="", help="case name")
     parser.add_argument("--si", type=str, default="all", help="execute case selector, all、hisi、huali")
     parser.add_argument("--bv", type=str, default="rf", help="btdsim version: base, plus, rf")
@@ -923,7 +897,7 @@ if __name__ == '__main__':
     # atc.global_out_check()
 
     # 时间对比(TODO)
-    if self.simulation_cost == 1:
+    if opt.ccost == 1:
         print("start check out simulator cost...")
         atc.time_divcheck()
     date_str = time.strftime("%m%d%H%M%S", time.localtime())

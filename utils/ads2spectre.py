@@ -332,5 +332,5 @@ if __name__=="__main__":
     #     ads2spectre(file_path)
 
     # 单个转换
-    ads2spectre(r"./utils/demo.ads", 
+    ads2spectre(r"F:\工作文件\ADS_files\A_netliat\Hisi_HBT\HBT_simple_1T\HBT_simple_1T_va.ads", 
                 output_name=r"./utils/demo.spec")

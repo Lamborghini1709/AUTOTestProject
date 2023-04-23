@@ -31,12 +31,15 @@
     ; base：器件数超过5000的例子会判定为正确
     ; plus：器件数超过100000的例子会判定为正确
     ; rf：不做任何判定
+; --ccost: 是否进行时间对比，默认对比（目前只有测试集 0 1 2 有golden时间，运行其余测试集请设置为0）
+    ;cost_div > 0 代表新版本时间比golden时间长的百分比
+    ;cost_div < 0 代表新版本时间比golden时间短，仿真时间变快
 
 
 ; rp: 
-; 0: "All_regress_Cases",
-; 1: "hisiCaseAll",
-; 2: "regress_Cases_all-cmg-bulk_20230307-1400",
+; all: "All_regress_Cases",
+; hisi: "hisiCaseAll",
+; huali: "regress_Cases_all-cmg-bulk_20230307-1400",
 ; 3: "RegressCasesCircuitLimit5K_20230330-1000",
 ; 4: "cmg_regress_Cases_version-107_20220909",
 ; 5: "cmg_regress_Cases_version-110.0_20220705",
@@ -53,20 +56,20 @@
 需要加上参数: --sh btdsim_name
 
 ; 自动化测试 所有测试集，包括 海思和华力 回归case
-python testbenchcompare.py --rp 0 
+python testbenchcompare.py --rp all 
 
 ; 自动化测试 海思测试集，包括所有的海思回归case
-python testbenchcompare.py --rp 1
-python testbenchcompare.py --rp 0 --si hisi
+python testbenchcompare.py --rp hisi
+python testbenchcompare.py --rp all --si hisi
 
 ; 自动化测试 华力测试集，包括所有的华力回归case
-python testbenchcompare.py --rp 2
-python testbenchcompare.py --rp 0 --si huali
+python testbenchcompare.py --rp huali
+python testbenchcompare.py --rp all --si huali
 注：
 base 版本仿真需要在命令后面加上: --bv base
 plus 版本仿真需要在命令后面加上: --bv plus 
 例: btdsim v3.7.3 plus: 
-  python testbenchcompare.py --rp 2 --bv plus --sh btdsimP
+  python testbenchcompare.py --rp huali --bv plus --sh btdsimP
 
 ; 自动化测试 5000器件数限制测试集
-python testbenchcompare.py --rp 3
+python testbenchcompare.py --rp 3 --ccost 0

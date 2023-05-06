@@ -32,6 +32,8 @@ class AutoTestCls():
             "all": "All_regress_Cases",
             "hisi": "hisiCaseAll",
             "huali": "regress_Cases_all-cmg-bulk_20230307-1400",
+            "hbt": "hbt_regression",
+            "K3": "K3_regression",
             "0": "All_regress_Cases",
             "1": "hisiCaseAll",
             "2": "regress_Cases_all-cmg-bulk_20230307-1400",
@@ -801,12 +803,12 @@ class AutoTestCls():
                 t+=1
                 if diff_time == 0:
                     c+=1
+                if diff_status==True or diff_status=="PASS":
+                    dt+=1
+                else:
+                    df+=1
             else:
                 f+=1
-            if diff_status==True or diff_status=="PASS":
-                dt+=1
-            else:
-                df+=1
         r = open(f"{self.test_dir}/result_statistics.txt", "w")
         r.write(f"本次回归测试共执行{t+f}条case, 其中:\n")
         r.write(f"    仿真成功: {t} 条\n")
@@ -851,7 +853,7 @@ class AutoTestCls():
         df = self.data_df_diff
         failed_df = df[(df['SimulatorStat'] == 0) | (df['outdiff'] == False) |  (df['time_div'] == 0) | (df['outdiff'].isna())]
         # 可以在大数据量下，没有省略号
-        print("总计失败：" + str(len(failed_df)) + "个用例" + "\n")
+        print("INFO: 总计失败：" + str(len(failed_df)) + "个用例" + "\n")
         pd.set_option('display.max_columns', 1000000)
         pd.set_option('display.max_rows', 1000000)
         pd.set_option('display.max_colwidth', 1000000)
@@ -859,15 +861,15 @@ class AutoTestCls():
         # print(failed_df.loc[:, ['spFile', 'SimulatorStat', 'Simulatorcost', 'cost_div', 'outdiff']])
     
         sim_fail_df = failed_df[failed_df['SimulatorStat'] == 0]
-        print("WARNING 仿真失败: ")
+        print(f"\nWARNING 仿真失败: {len(sim_fail_df)}条")
         print(sim_fail_df.loc[:, ['spFile', 'SimulatorStat', 'Simulatorcost', 'cost_div', 'outdiff']])
 
         diff_fail_df = failed_df[(failed_df['SimulatorStat'] == 1) & ((failed_df['outdiff'] == False) | (failed_df['outdiff'].isna()))]
-        print("WARNING 结果对比失败: ")
+        print(f"\nWARNING 结果对比失败: {len(diff_fail_df)}条")
         print(diff_fail_df.loc[:, ['spFile', 'SimulatorStat', 'Simulatorcost', 'cost_div', 'outdiff']])
 
-        time_out_df = failed_df[(failed_df['SimulatorStat'] == 1) & (failed_df['time_div'] == 0)]
-        print("WARNING 对比时间超过 golden 15%: ")
+        time_out_df = failed_df[(failed_df['SimulatorStat'] == 1) & (failed_df['time_div'] == 0) & (failed_df['outdiff'] == True)]
+        print(f"\nWARNING 对比时间超过 golden 15%: {len(time_out_df)}条")
         print(time_out_df.loc[:, ['spFile', 'SimulatorStat', 'Simulatorcost', 'cost_div', 'outdiff']])
 
         return len(failed_df['spFile'])

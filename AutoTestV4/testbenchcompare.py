@@ -85,10 +85,11 @@ class AutoTestCls():
         self.data_df_simulator = self.data_df_simulator.set_index(['index'])
 
         # def dataform2
-        data_df_diff = np.arange(1, 14).reshape((1, 13))
+        data_df_diff = np.arange(1, 17).reshape((1, 16))
         self.data_df_diff = pd.DataFrame(data_df_diff)
-        self.data_df_diff.columns = ['index', 'spFile', 'logFile', 'outFile', 'RefoutFile', 'AnalysisType',
-                                     'SimulatorStat', 'Simulatorcost', "time_div", "cost_div","outdiff", "outdiffCost", "outdiffdetail"]
+        self.data_df_diff.columns = ['index', 'spFile', 'logFile', 'outFile', 'RefoutFile', 'ReflogFile','AnalysisType',
+                                     'SimulatorStat', 'Simulatorcost', "time_div", "cost_div","cputime_rate","walltime_rate",
+                                     "outdiff", "outdiffCost", "outdiffdetail"]
         self.data_df_diff = self.data_df_diff.set_index(['index'])
 
         # 判断是否为可执行网表文件
@@ -151,6 +152,7 @@ class AutoTestCls():
                         # 需要对比的out文件
                         ref_path = os.path.join(os.path.dirname(outFile), self.ref_filename)
                         ref_file = os.path.join(ref_path, os.path.basename(outFile))
+                        ref_log = os.path.join(ref_path,os.path.basename(logFile))
 
                         # diff result
                         Simulatordiff = None
@@ -161,15 +163,16 @@ class AutoTestCls():
                         # diff time_div
                         time_div = None
                         cost_div = None
-
                         outdiffCost = None
+                        cputime_rate = None
+                        walltime_rate =None
 
                         self.data_df_simulator.loc[self.spfile_Num] = [netfile, logFile, outFile, SimulatorStat,
                                                                        Simulatorcost]
 
-                        self.data_df_diff.loc[self.spfile_Num] = [netfile, logFile, outFile, ref_file, AnalysisType,
-                                                                  SimulatorStat, Simulatorcost, time_div, cost_div, Simulatordiff,
-                                                                  outdiffCost, outdiffdetail]
+                        self.data_df_diff.loc[self.spfile_Num] = [netfile, logFile, outFile, ref_file, ref_log, AnalysisType,
+                                                                  SimulatorStat, Simulatorcost, time_div, cost_div, cputime_rate,
+                                                                  walltime_rate, Simulatordiff,outdiffCost,outdiffdetail]
         else:
             print("Please specify the test folder in string format.")
 
@@ -445,31 +448,68 @@ class AutoTestCls():
         caseindex = netfile.split('case')[1].split('/')[0]
         # print(caseindex)
         return int(caseindex)
-    
+
+    # cost 获得的time的比较 只对仿真时间大于 100S 的进行比较
     def time_divcheck(self):
         for id in range(1,self.spfile_Num+1):
             if self.data_df_diff.loc[id].SimulatorStat:
                 simulator_cost = self.data_df_diff.loc[id, "Simulatorcost"]
                 caseindex = self.getCaseIndex(id)
                 stand_cost = self.check_time_dict[caseindex]
-                diff_cost = (simulator_cost - stand_cost)/ stand_cost *100
-                tag = self.case_limit[caseindex]
-                self.data_df_diff.loc[id,"cost_div"] = '%.3f'%diff_cost+"%"
-                if diff_cost<= 15 :
-                    self.data_df_diff.loc[id,"time_div"] = 1                  
-                elif diff_cost>15:
-                    if self.version == "base":
-                        if tag == "base" or tag == "plus":
-                            continue
+                if simulator_cost > 100:
+                    diff_cost = (simulator_cost - stand_cost)/ stand_cost *100
+                    tag = self.case_limit[caseindex]
+                    self.data_df_diff.loc[id,"cost_div"] = '%.3f'%diff_cost+"%"
+                    if diff_cost<= 20 :
+                        self.data_df_diff.loc[id,"time_div"] = 1                  
+                    elif diff_cost>20:
+                        if self.version == "base":
+                            if tag == "base" or tag == "plus":
+                                continue
+                            else:
+                                self.data_df_diff.loc[id, "time_div"] = 0
+                        elif self.version == "plus":
+                            if tag == "plus":
+                                continue
+                            else:
+                                self.data_df_diff.loc[id, "time_div"] = 0
                         else:
                             self.data_df_diff.loc[id, "time_div"] = 0
-                    elif self.version == "plus":
-                        if tag == "plus":
-                            continue
-                        else:
-                            self.data_df_diff.loc[id, "time_div"] = 0
-                    else:
-                        self.data_df_diff.loc[id, "time_div"] = 0
+                else:
+                    self.data_df_diff.loc[id,"time_div"] = 1
+
+    # 从 log 里获取 CPU_time 和 Wall_time
+    def get_logtime(self,fp):
+        log_time = {}
+        with open(fp, "r", encoding='latin-1') as f:
+            content = f.readlines()
+            for line in range(0,len(content)):
+                if content[line].startswith("Total CPU time(s):"):
+                    CPU_time = content[line].split(":")[-1]
+                    log_time["CPU_time"] = CPU_time
+                elif content[line].startswith("Total Wall time(s):"):
+                    Wall_time = content[line].split(":")[-1]
+                    log_time["Wall_time"] = Wall_time
+            return log_time
+
+    # 当前log 文件 CPU_time / Wall_time 和 bench 文件夹中 log 文件 CPU_time / Wall_time 的比率
+    # （只对仿真时间超过 100s 的进行比较）
+    def diff_logtime(self):
+        for id in range(1,self.spfile_Num+1):            
+            fp1 = self.data_df_diff.loc[id, "logFile"]
+            fp2 = self.data_df_diff.loc[id, "ReflogFile"]
+            logtime = self.get_logtime(fp1)
+            golden_logtime = self.get_logtime(fp2)
+            log_cputime = float(logtime["CPU_time"])
+            log_walltime = float(logtime["Wall_time"])
+            golden_cputime = float(golden_logtime["CPU_time"])
+            golden_walltime = float(golden_logtime["Wall_time"])
+            if log_cputime > 100 or log_walltime > 100:
+                cputime_rate = (log_cputime - golden_cputime) / golden_cputime *100
+                walltime_rate = (log_walltime - golden_walltime) / golden_walltime *100
+                self.data_df_diff.loc[id,"cputime_rate"] = '%.3f'%cputime_rate+"%"
+                self.data_df_diff.loc[id,"walltime_rate"] = '%.3f'%walltime_rate+"%"
+
 
     def calc_error(self, index, original_results_dict, new_results_dict):
 
@@ -839,7 +879,7 @@ class AutoTestCls():
         r = open(f"{self.test_dir}/result_statistics.txt", "w")
         r.write(f"本次回归测试共执行{t+f}条case, 其中:\n")
         r.write(f"    仿真成功: {t} 条\n")
-        r.write(f"    仿真成功 中对比时间超过golden15%的： {c}条\n")
+        r.write(f"    仿真成功case中对比时间超过golden 20%的： {c}条\n")
         r.write(f"    仿真失败: {f} 条\n")
         r.write(f"    结果对比成功: {dt} 条\n")
         r.write(f"    结果对比失败: {df} 条\n")
@@ -850,7 +890,7 @@ class AutoTestCls():
         print("*"*100+"\n")
         print(f"        本次回归测试共执行 {t+f} 条case, 其中:\n")
         print(f"            仿真成功: {t} 条\n")
-        print(f"            仿真成功 中对比时间超过golden15%的： {c}条\n")
+        print(f"           仿真成功case中对比时间超过golden 20%的： {c}条\n")
         print(f"            仿真失败: {f} 条\n")
         print(f"            结果对比成功: {dt} 条\n")
         print(f"            结果对比失败: {df} 条\n")
@@ -913,11 +953,12 @@ if __name__ == '__main__':
     parser.add_argument("--savefig", type=bool, default=False, help="save final plot")
     parser.add_argument("--metric", type=str, default="MAPE", help="select metrics for diff, i.e. RMSE or MAPE")
     parser.add_argument("--isdelold", type=int, default=1, help="Whether to delete the old case dir")
-    parser.add_argument("--rp", type=str, default=0, help="""path to test case""")
+    parser.add_argument("--rp", type=str, default="all", help="""path to test case""")
     parser.add_argument("--cn", type=str, default="", help="case name")
     parser.add_argument("--si", type=str, default="all", help="execute case selector, all、hisi、huali")
     parser.add_argument("--bv", type=str, default="rf", help="btdsim version: base, plus, rf")
     parser.add_argument("--ccost", type=str, default=1, help="Simulatorcost Compare")
+    parser.add_argument("--logtime", type=int, default=0, help="Whether to compare the cputime and walltime")
     opt = parser.parse_args()
     print(opt)
 
@@ -942,7 +983,6 @@ if __name__ == '__main__':
     for t in thread_list:
         t.join()  # 子线程全部加入，主线程等所有子线程运行完毕
 
-
     # 仿真状态统计
     print("start check out simulator stat...")
     atc.global_log_check()
@@ -951,18 +991,6 @@ if __name__ == '__main__':
     # print("start check out Analysis Type...")
     # atc.global_out_check()
 
-    # 时间对比(TODO)
-    if opt.ccost == 1:
-        print("start check out simulator cost...")
-        atc.time_divcheck()
-    date_str = time.strftime("%m%d%H%M%S", time.localtime())
-    if opt.savesimcsv:
-        # 将仿真结果写入excel
-        writer1 = pd.ExcelWriter(f'{atc.output_folder}/data_df_simulator_{date_str}.xlsx')
-        atc.data_df_simulator.to_excel(writer1)
-        writer1.save()
-
-    # 仿真结果对比，并写入excel
     print("start diff out file...")
 
     # 结果对比线程池
@@ -981,6 +1009,22 @@ if __name__ == '__main__':
     # 同步父线程和子线程的数据
     atc.update_df_data()
 
+    # 时间对比(DONE)
+    if opt.ccost == 1:
+        print("start check out simulator cost...")
+        atc.time_divcheck()
+    if opt.logtime == 1:
+        print("start check out log CPU time and Wall time...")
+        atc.diff_logtime()
+
+    # 将仿真结果写入excel
+    date_str = time.strftime("%m%d%H%M%S", time.localtime())
+    if opt.savesimcsv:
+        writer1 = pd.ExcelWriter(f'{atc.output_folder}/data_df_simulator_{date_str}.xlsx')
+        atc.data_df_simulator.to_excel(writer1)
+        writer1.save()
+
+    # 将对比结果写入excel
     if opt.savediffcsv:  
         writer2 = pd.ExcelWriter(f'{atc.output_folder}/data_df_diff_{date_str}.xlsx')
         atc.data_df_diff.to_excel(writer2)

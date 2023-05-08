@@ -116,16 +116,3 @@ if __name__ == '__main__':
     # print(data)
     # print(atc.data_df_simulator[:])
 
-
-
-
-
-
-
-        
-    
-
-
-
-
-

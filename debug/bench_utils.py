@@ -82,6 +82,10 @@ def max_diff(outdata, refdata):
     l = sorted(error, key=lambda x:x)
     return l[-1]
 
+def cos_sim(data_out_new, data_bench):
+    cos_sim = np.array(data_bench).dot(data_out_new) / (np.linalg.norm(data_bench) * np.linalg.norm(data_out_new))
+    return 1-cos_sim
+
 def AlignDataLen(outx, refx, outdata, refdata):
     """
     三次样条插值
@@ -108,4 +112,3 @@ if __name__ == '__main__':
     #print(get_mape(a, b))
     #print(get_rmse(a, b))
     # print(int(1.9))
-

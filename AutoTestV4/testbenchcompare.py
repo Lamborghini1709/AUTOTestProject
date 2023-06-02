@@ -22,9 +22,6 @@ class AutoTestCls():
         # 最小阈值
         self.min_threshold = 1e-14
         self.spfile_Num = 0
-        self.line_list = []
-        self.time_list = []
-        self.str_list = []
         self.sh = opt.sh
         self.exsign = opt.si
         self.version = opt.bv
@@ -34,6 +31,7 @@ class AutoTestCls():
             "huali": "regress_Cases_all-cmg-bulk_20230307-1400",
             "hbt": "hbt_regression",
             "K3": "K3_regression",
+            "XVA": "XVA_pin_current_regression",
             "0": "All_regress_Cases",
             "1": "hisiCaseAll",
             "2": "regress_Cases_all-cmg-bulk_20230307-1400",
@@ -76,7 +74,7 @@ class AutoTestCls():
         os.makedirs(self.output_folder, exist_ok=True)
         self.autoRunlogfile = open(f"{self.output_folder}/autoRun.log", "a")
         now = datetime.datetime.now()
-        self.autoRunlogfile.write(now.strftime("%Y-%m-%d %H:%M:%S \n"))
+        self.autoRunlogfile.write(now.strftime("AutoTest Start %Y-%m-%d %H:%M:%S \n"))
 
         # def dataform1
         data_simulator = np.arange(1, 7).reshape((1, 6))
@@ -124,7 +122,7 @@ class AutoTestCls():
                     if self.is_netlist(filename):
                         # sp文件
                         netfile = os.path.join(filepath, filename)
-                        if 'model' in netfile or 'gpdk' in netfile or 'INCLUDE' in netfile:
+                        if 'model' in netfile or 'gpdk' in netfile or 'INCLUDE' in netfile or 'SpectreModels' in netfile:
                             continue
                         ret = self.not_check_file_list(netfile)
                         caseindex = netfile.split('case')[1].split('/')[0]
@@ -268,12 +266,12 @@ class AutoTestCls():
                 if stat:
                     SimulatorStat = 1
                     # self.get_time(id)
-                    self.autoRunlogfile.write(' '.join([spfile, 'YES']))
+                    self.autoRunlogfile.write(' '.join([spfile, 'YES\n']))
                 else:
                     SimulatorStat = 0
                     self.data_df_simulator.loc[id, "Simulatorcost"] = None
                     self.data_df_diff.loc[id, "Simulatorcost"] = None
-                    self.autoRunlogfile.write(' '.join([spfile, 'NO']))
+                    self.autoRunlogfile.write(' '.join([spfile, 'NO\n']))
                 self.data_df_simulator.loc[id, "SimulatorStat"] = SimulatorStat
                 self.data_df_diff.loc[id, "SimulatorStat"] = SimulatorStat
             # print out_file;
@@ -353,7 +351,7 @@ class AutoTestCls():
         # read the number of variables and number of points
         for titles in nodelists:
             number_of_variables = int(titles[4].split(':', 1)[1])
-            plotname = titles[2].split(': ')[-1].split('\n')[0]
+            plotname = titles[2].split(': ', 1)[-1].split('\n')[0]
             plotname_arr.append(plotname)
             # multi_plotname_result = list()
             if plotname not in nodelistsresult.keys():
@@ -456,7 +454,7 @@ class AutoTestCls():
                 simulator_cost = self.data_df_diff.loc[id, "Simulatorcost"]
                 caseindex = self.getCaseIndex(id)
                 stand_cost = self.check_time_dict[caseindex]
-                if simulator_cost > 100:
+                if float(simulator_cost) >= 100:
                     diff_cost = (simulator_cost - stand_cost)/ stand_cost *100
                     tag = self.case_limit[caseindex]
                     self.data_df_diff.loc[id,"cost_div"] = '%.3f'%diff_cost+"%"
@@ -789,6 +787,10 @@ class AutoTestCls():
         start = time.time()
         caseindex = self.getCaseIndex(netId)
         tag = self.case_limit[caseindex]
+        self.diff_data[netId]["outdiffCost"]=None
+        self.diff_data[netId]["AnalysisType"]=None
+        self.diff_data[netId]["outdiffdetail"]=None
+        self.diff_data[netId]["outdiff"]=None
         if self.version == "base" and self.data_df_diff.loc[netId].SimulatorStat:
             if tag == "base" or tag == "plus":
                 # self.data_df_diff.loc[netId, "outdiff"] = "PASS"
@@ -838,12 +840,12 @@ class AutoTestCls():
                 print(f"ERROR INFO: {self.data_df_diff.loc[netId]}")
                 print('ERROR MSG: ' + str(err))
         
-        end = time.time()
-        cost = end-start
-        self.diff_data[netId]["outdiffCost"] = cost
-        # self.data_df_diff.loc[netId, "outdiffCost"] = cost
-        # print(f"\nINFO: Start calculating the deviation:")
-        print(f"\nINFO: {outfile} 误差计算耗时: \n    diffCost: {cost}")
+            end = time.time()
+            cost = end-start
+            self.diff_data[netId]["outdiffCost"] = cost
+            # self.data_df_diff.loc[netId, "outdiffCost"] = cost
+            # print(f"\nINFO: Start calculating the deviation:")
+            print(f"INFO: {outfile} 误差计算耗时: \n    diffCost: {cost}\n")
 
     def update_df_data(self):
         for netId in self.sim_data.keys():
@@ -917,27 +919,32 @@ class AutoTestCls():
 
 
     def outputTerm(self):
+        now = datetime.datetime.now()
+        self.autoRunlogfile.write(now.strftime("AutoTest End %Y-%m-%d %H:%M:%S \n"))
         df = self.data_df_diff
         failed_df = df[(df['SimulatorStat'] == 0) | (df['outdiff'] == False) |  (df['time_div'] == 0) | (df['outdiff'].isna())]
         # 可以在大数据量下，没有省略号
-        print("INFO: 总计失败：" + str(len(failed_df)) + "个用例" + "\n")
-        pd.set_option('display.max_columns', 1000000)
-        pd.set_option('display.max_rows', 1000000)
-        pd.set_option('display.max_colwidth', 1000000)
-        pd.set_option('display.width', 1000000)
-        # print(failed_df.loc[:, ['spFile', 'SimulatorStat', 'Simulatorcost', 'cost_div', 'outdiff']])
-    
-        sim_fail_df = failed_df[failed_df['SimulatorStat'] == 0]
-        print(f"\nWARNING 仿真失败: {len(sim_fail_df)}条")
-        print(sim_fail_df.loc[:, ['spFile', 'SimulatorStat', 'Simulatorcost', 'cost_div', 'outdiff']])
+        if len(failed_df) > 0:
+            print("INFO: 总计失败：" + str(len(failed_df)) + "个用例" + "\n")
+            pd.set_option('display.max_columns', 1000000)
+            pd.set_option('display.max_rows', 1000000)
+            pd.set_option('display.max_colwidth', 1000000)
+            pd.set_option('display.width', 1000000)
+            # print(failed_df.loc[:, ['spFile', 'SimulatorStat', 'Simulatorcost', 'cost_div', 'outdiff']])
+        
+            sim_fail_df = failed_df[failed_df['SimulatorStat'] == 0]
+            print(f"\nWARNING 仿真失败: {len(sim_fail_df)}条")
+            print(sim_fail_df.loc[:, ['spFile', 'SimulatorStat', 'Simulatorcost', 'cost_div', 'outdiff']])
 
-        diff_fail_df = failed_df[(failed_df['SimulatorStat'] == 1) & ((failed_df['outdiff'] == False) | (failed_df['outdiff'].isna()))]
-        print(f"\nWARNING 结果对比失败: {len(diff_fail_df)}条")
-        print(diff_fail_df.loc[:, ['spFile', 'SimulatorStat', 'Simulatorcost', 'cost_div', 'outdiff']])
+            diff_fail_df = failed_df[(failed_df['SimulatorStat'] == 1) & ((failed_df['outdiff'] == False) | (failed_df['outdiff'].isna()))]
+            print(f"\nWARNING 结果对比失败: {len(diff_fail_df)}条")
+            print(diff_fail_df.loc[:, ['spFile', 'SimulatorStat', 'Simulatorcost', 'cost_div', 'outdiff']])
 
-        time_out_df = failed_df[(failed_df['SimulatorStat'] == 1) & (failed_df['time_div'] == 0) & (failed_df['outdiff'] == True)]
-        print(f"\nWARNING 对比时间超过 golden 15%: {len(time_out_df)}条")
-        print(time_out_df.loc[:, ['spFile', 'SimulatorStat', 'Simulatorcost', 'cost_div', 'outdiff']])
+            time_out_df = failed_df[(failed_df['SimulatorStat'] == 1) & (failed_df['time_div'] == 0) & (failed_df['outdiff'] == True)]
+            print(f"\nWARNING 对比时间超过 golden 20%: {len(time_out_df)}条")
+            print(time_out_df.loc[:, ['spFile', 'SimulatorStat', 'Simulatorcost', 'cost_div', 'outdiff']])
+        else:
+            print(f"INFO: 无失败案例,测试集case全部仿真成功,对比成功,仿真时间未超20%,回归测试通过")
 
         return len(failed_df['spFile'])
 
@@ -957,7 +964,7 @@ if __name__ == '__main__':
     parser.add_argument("--cn", type=str, default="", help="case name")
     parser.add_argument("--si", type=str, default="all", help="execute case selector, all、hisi、huali")
     parser.add_argument("--bv", type=str, default="rf", help="btdsim version: base, plus, rf")
-    parser.add_argument("--ccost", type=str, default=1, help="Simulatorcost Compare")
+    parser.add_argument("--ccost", type=str, default=0, help="Simulatorcost Compare")
     parser.add_argument("--logtime", type=int, default=0, help="Whether to compare the cputime and walltime")
     opt = parser.parse_args()
     print(opt)

@@ -2,7 +2,7 @@
 
 ; 执行命令: python testbenchcompare.py --tp ./ --sh btdsim-3512-r41 --rp 1 
 ; 说明: 
-; 将 All_regress_Cases（rp=1）\
+; 将 hisiCaseAll（rp=1）\
 ; 拷贝到 执行命令 所在的目录（tp=./），
 ; 使用btdsim-3512-r41（sh=btdsim-3512-r41）仿真测试集中的case，并对比结果
 
@@ -31,25 +31,34 @@
     ; base：器件数超过5000的例子会判定为正确
     ; plus：器件数超过100000的例子会判定为正确
     ; rf：不做任何判定
-; --ccost: 是否进行时间对比，默认对比（目前只有测试集 0 1 2 有golden时间，运行其余测试集请设置为0）
+; --ccost: 是否进行时间对比，默认不对比（目前只有测试集 0 1 2 有golden时间，运行其余测试集请设置为0）
     ;cost_div > 0 代表新版本时间比golden时间长的百分比
     ;cost_div < 0 代表新版本时间比golden时间短，仿真时间变快
+; --logtime: 是否进行时间对比，默认不对比，使用log文件中的时间进行对比
 
 
 ; rp: 
-; all: "All_regress_Cases",
-; hisi: "hisiCaseAll",
-; huali: "regress_Cases_all-cmg-bulk_20230307-1400",
-; 3: "RegressCasesCircuitLimit5K_20230330-1000",
-; 4: "cmg_regress_Cases_version-107_20220909",
-; 5: "cmg_regress_Cases_version-110.0_20220705",
-; 6: "bulk_regress_Cases_version-106.2_20220824",
-; 7: "regress_Cases_bulk107_2022-11-30",
-; 8: "haisiRegre",
-; 9: "radioCircuit", 
-; 10: "huali_Case_regress_20221015",
-; 11: "regress_Cases_all-cmg-bulk_20221202-1600",
-; 12: "cmg_regress_Cases_version-106.1_20230201"
+"all": "All_regress_Cases",
+"hisi": "hisiCaseAll",
+"huali": "regress_Cases_all-cmg-bulk_20230307-1400",
+"hbt": "hbt_regression",
+"K3": "K3_regression",
+"XVA": "XVA_pin_current_regression",
+"0": "All_regress_Cases",
+"1": "hisiCaseAll",
+"2": "regress_Cases_all-cmg-bulk_20230307-1400",
+"3": "RegressCasesCircuitLimit5K_20230330-1000",
+"4": "cmg_regress_Cases_version-107_20220909",
+"5": "cmg_regress_Cases_version-110.0_20220705",
+"6": "bulk_regress_Cases_version-106.2_20220824",
+"7": "regress_Cases_bulk107_2022-11-30",
+"8": "haisiRegre",
+"9": "radioCircuit", 
+"10": "huali_Case_regress_20221015",
+"11": "regress_Cases_all-cmg-bulk_20221202-1600",
+"12": "cmg_regress_Cases_version-106.1_20230201",
+"13": "hisiCaseAll_part2",
+"14": "regress_Cases_all-cmg-bulk_20230307-1400_part2"
 
 
 若btdsim的执行文件名字不是'btdsim'

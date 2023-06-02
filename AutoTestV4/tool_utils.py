@@ -83,8 +83,11 @@ def max_diff(outdata, refdata):
     return l[-1]
 
 def cos_sim(data_out_new, data_bench):
-    cos_sim = np.array(data_bench).dot(data_out_new) / (np.linalg.norm(data_bench) * np.linalg.norm(data_out_new))
-    return 1-cos_sim
+    try:
+        cos_sim = np.array(data_bench).dot(data_out_new) / (np.linalg.norm(data_bench) * np.linalg.norm(data_out_new))
+        return 1-cos_sim
+    except:
+        return 1
 
 def AlignDataLen(outx, refx, outdata, refdata):
     """

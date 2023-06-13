@@ -81,7 +81,9 @@ class AutoTestCls():
         # def result_statistics
         self.rs = open(os.path.join(opt.tp, "result_statistics.log"), "a+")
         self.rs.write(f"""\n---------------------------------------------------------分隔符---------------------------------------------------------
+# Test Set: {self.dir_dict[opt.rp]}
 # AutoTest V5 result statistics {now.strftime("%Y-%m-%d %H:%M:%S")}""")
+        self.rs.flush()
 
         # def dataform1
         data_simulator = np.arange(1, 7).reshape((1, 6))
@@ -90,10 +92,10 @@ class AutoTestCls():
         self.data_df_simulator = self.data_df_simulator.set_index(['index'])
 
         # def dataform2
-        data_df_diff = np.arange(1, 16).reshape((1, 15))
+        data_df_diff = np.arange(1, 17).reshape((1, 16))
         self.data_df_diff = pd.DataFrame(data_df_diff)
         self.data_df_diff.columns = ['index', 'spFile', 'logFile', 'outFile', 'RefoutFile', 'ReflogFile','AnalysisType',
-                                     'SimulatorStat', 'Simulatorcost', "time_div","cputime_rate","walltime_rate",
+                                     'SimulatorStat', 'BenchCost', 'Simulatorcost', "time_div","cputime_rate","walltime_rate",
                                      "outdiff", "outdiffCost", "outdiffdetail"]
         self.data_df_diff = self.data_df_diff.set_index(['index'])
 
@@ -170,12 +172,13 @@ class AutoTestCls():
                         outdiffCost = None
                         cputime_rate = None
                         walltime_rate =None
+                        BenchCost = None
 
                         self.data_df_simulator.loc[self.spfile_Num] = [netfile, logFile, outFile, SimulatorStat,
                                                                        Simulatorcost]
 
                         self.data_df_diff.loc[self.spfile_Num] = [netfile, logFile, outFile, ref_file, ref_log, AnalysisType,
-                                                                  SimulatorStat, Simulatorcost, time_div, cputime_rate,
+                                                                  SimulatorStat, BenchCost, Simulatorcost, time_div, cputime_rate,
                                                                   walltime_rate, Simulatordiff,outdiffCost,outdiffdetail]
         else:
             print("Please specify the test folder in string format.")
@@ -221,6 +224,17 @@ class AutoTestCls():
             self.sim_data[netfileID]["Simulatorcost"] = cost
             # self.data_df_simulator.loc[netfileID, "Simulatorcost"] = cost
             # self.data_df_diff.loc[netfileID, "Simulatorcost"] = cost
+            
+            k_l = []
+            for k in self.sim_data.keys():
+                ci = self.getCaseIndex(k)
+                if self.sim_data[k].keys()==[]:
+                    k_l.append(ci)
+            if len(k_l)>0:
+                print(f"case{k_l} 正在仿真")
+            else:
+                print("INFO: 仿真结束")
+
 
 
     # 执行仿真
@@ -505,42 +519,50 @@ class AutoTestCls():
     # （只对仿真时间超过 100s 的进行比较）
     def diff_logtime(self):
         for id in range(1,self.spfile_Num+1):
-            caseN = self.data_df_diff.loc[id, "spFile"]
-            fp1 = self.data_df_diff.loc[id, "logFile"]
-            fp2 = self.data_df_diff.loc[id, "ReflogFile"]
-            logtime = self.get_logtime(fp1)
-            golden_logtime = self.get_logtime(fp2)
-            log_cputime = float(logtime["CPU_time"])
-            log_walltime = float(logtime["Wall_time"])
-            if golden_logtime=="NOTBENCH":
-                print(f"{caseN}: 缺少bench log文件, 跳过时间对比")
-                self.data_df_diff.loc[id,"time_div"] = "NOTDIFF"
-            else:
-                golden_cputime = float(golden_logtime["CPU_time"])
-                golden_walltime = float(golden_logtime["Wall_time"])
-                if log_walltime > 100:
-                    cputime_rate = (log_cputime - golden_cputime) / golden_cputime *100
-                    walltime_rate = (log_walltime - golden_walltime) / golden_walltime *100
-                    self.data_df_diff.loc[id,"cputime_rate"] = '%.3f'%cputime_rate+"%"
-                    self.data_df_diff.loc[id,"walltime_rate"] = '%.3f'%walltime_rate+"%"
-                    tag = self.case_limit[id]
-                    if walltime_rate<= 20 :
-                        self.data_df_diff.loc[id,"time_div"] = 1                  
-                    elif walltime_rate>20:
-                        if self.version == "base":
-                            if tag == "base" or tag == "plus":
-                                continue
-                            else:
-                                self.data_df_diff.loc[id, "time_div"] = 0
-                        elif self.version == "plus":
-                            if tag == "plus":
-                                continue
-                            else:
-                                self.data_df_diff.loc[id, "time_div"] = 0
-                        else:
-                            self.data_df_diff.loc[id, "time_div"] = 0
+            if self.data_df_diff.loc[id, "SimulatorStat"]==1:
+                caseN = self.data_df_diff.loc[id, "spFile"]
+                fp1 = self.data_df_diff.loc[id, "logFile"]
+                fp2 = self.data_df_diff.loc[id, "ReflogFile"]
+                logtime = self.get_logtime(fp1)
+                golden_logtime = self.get_logtime(fp2)
+                if logtime=="NOTBENCH" or logtime=={}:
+                    log_cputime = self.sim_data[id]["Simulatorcost"]
+                    log_walltime = self.sim_data[id]["Simulatorcost"]
                 else:
+                    log_cputime = float(logtime["CPU_time"])
+                    log_walltime = float(logtime["Wall_time"])
+                if golden_logtime=="NOTBENCH":
+                    print(f"{caseN}: 缺少bench log文件, 跳过时间对比")
                     self.data_df_diff.loc[id,"time_div"] = "NOTDIFF"
+                else:
+                    golden_cputime = float(golden_logtime["CPU_time"])
+                    golden_walltime = float(golden_logtime["Wall_time"])
+                    self.data_df_diff.loc[id,"BenchCost"] = golden_walltime
+                    if log_walltime > 100:
+                        cputime_rate = (log_cputime - golden_cputime) / golden_cputime *100
+                        walltime_rate = (log_walltime - golden_walltime) / golden_walltime *100
+                        self.data_df_diff.loc[id,"cputime_rate"] = '%.3f'%cputime_rate+"%"
+                        self.data_df_diff.loc[id,"walltime_rate"] = '%.3f'%walltime_rate+"%"
+                        tag = self.case_limit[id]
+                        if walltime_rate<= 20 :
+                            self.data_df_diff.loc[id,"time_div"] = 1                  
+                        elif walltime_rate>20:
+                            if self.version == "base":
+                                if tag == "base" or tag == "plus":
+                                    continue
+                                else:
+                                    self.data_df_diff.loc[id, "time_div"] = 0
+                            elif self.version == "plus":
+                                if tag == "plus":
+                                    continue
+                                else:
+                                    self.data_df_diff.loc[id, "time_div"] = 0
+                            else:
+                                self.data_df_diff.loc[id, "time_div"] = 0
+                    else:
+                        self.data_df_diff.loc[id,"time_div"] = "NOTDIFF"            
+            else:
+                self.data_df_diff.loc[id,"time_div"] = "NOTDIFF"
 
 
     def calc_error(self, index, original_results_dict, new_results_dict):
@@ -879,7 +901,16 @@ class AutoTestCls():
             self.diff_data[netId]["outdiffCost"] = cost
             # self.data_df_diff.loc[netId, "outdiffCost"] = cost
             # print(f"\nINFO: Start calculating the deviation:")
-            print(f"INFO: {outfile} 误差计算耗时: \n    diffCost: {cost}\n")
+            print(f"INFO: {outfile} 误差计算耗时: \n    diffCost: {cost}")
+        k_l = []
+        for k in self.diff_data.keys():
+            ci = self.getCaseIndex(k)
+            if len(self.diff_data[k].keys())<4:
+                k_l.append(ci)
+        if len(k_l)>0:
+            print(f"case{k_l} 正在对比结果\n")
+        else:
+            print("INFO: 对比结果结束\n")
 
     def update_df_data(self):
         for netId in self.sim_data.keys():
@@ -914,13 +945,12 @@ class AutoTestCls():
                 f+=1
         
         self.rs.write(f"""
-# Test Set: {self.dir_dict[opt.rp]}
 *********************************************************
 *                     测试结果统计                      *
 *********************************************************
     本次回归测试共执行{t+f}条case, 其中:
         仿真成功: {t} 条
-        仿真成功case中对比时间超过golden 20%的： {c}条
+        仿真成功case中对比时间超过golden 20%的： {c} 条
         仿真失败: {f} 条
         结果对比成功: {dt} 条
         结果对比失败: {df} 条
@@ -932,10 +962,10 @@ class AutoTestCls():
         print("*"*100+"\n")
         print(f"        本次回归测试共执行 {t+f} 条case, 其中:\n")
         print(f"            仿真成功: {t} 条\n")
-        print(f"           仿真成功case中对比时间超过golden 20%的： {c}条\n")
+        print(f"                结果对比成功: {dt} 条\n")
+        print(f"                    时间超出bench 20%: {c} 条\n")
+        print(f"                结果对比失败: {df} 条\n")
         print(f"            仿真失败: {f} 条\n")
-        print(f"            结果对比成功: {dt} 条\n")
-        print(f"            结果对比失败: {df} 条\n")
         print("\n")
         print("*"*100+"\n")
         
@@ -1008,15 +1038,15 @@ class AutoTestCls():
 
             diff_fail_df = failed_df[(failed_df['SimulatorStat'] == 1) & ((failed_df['outdiff'] == False) | (failed_df['outdiff'].isna()))]
             print(f"\nWARNING 结果对比失败: {len(diff_fail_df)}条")
-            print(diff_fail_df.loc[:, ['spFile', 'SimulatorStat', 'Simulatorcost', 'walltime_rate', 'outdiff']])
+            print(diff_fail_df.loc[:, ['spFile', 'SimulatorStat', 'BenchCost', 'Simulatorcost', 'walltime_rate', 'outdiff']])
             self.rs.write(f"\nWARNING 结果对比失败: {len(diff_fail_df)}条:\n")
-            self.dataframe_to_log(diff_fail_df.loc[:, ["spFile", "SimulatorStat", "Simulatorcost", 'walltime_rate', 'outdiff', 'outdiffdetail']] ,file_object=self.rs, isclose=False)
+            self.dataframe_to_log(diff_fail_df.loc[:, ["spFile", "SimulatorStat", 'BenchCost', "Simulatorcost", 'walltime_rate', 'outdiff', 'outdiffdetail']] ,file_object=self.rs, isclose=False)
 
             time_out_df = failed_df[(failed_df['SimulatorStat'] == 1) & (failed_df['time_div'] == 0) & (failed_df['outdiff'] == True)]
             print(f"\nWARNING 对比时间超过 golden 20%: {len(time_out_df)}条")
-            print(time_out_df.loc[:, ['spFile', 'SimulatorStat', 'Simulatorcost', 'walltime_rate', 'outdiff']])
+            print(time_out_df.loc[:, ['spFile', 'SimulatorStat', 'BenchCost', 'Simulatorcost', 'walltime_rate', 'outdiff']])
             self.rs.write(f"\nWARNING 对比时间超过 golden 20%: {len(time_out_df)}条:\n")
-            self.dataframe_to_log(time_out_df.loc[:, ["spFile", "SimulatorStat", "Simulatorcost", 'walltime_rate', 'outdiff', 'outdiffdetail']] ,file_object=self.rs, isclose=False)
+            self.dataframe_to_log(time_out_df.loc[:, ["spFile", "SimulatorStat", 'BenchCost', "Simulatorcost", 'walltime_rate', 'outdiff', 'outdiffdetail']] ,file_object=self.rs, isclose=False)
             self.rs.write(datetime.datetime.now().strftime("AutoTest End %Y-%m-%d %H:%M:%S \n"))
             self.rs.close()
         else:
@@ -1069,7 +1099,9 @@ if __name__ == '__main__':
     for t in thread_list:
         t.join()  # 子线程全部加入，主线程等所有子线程运行完毕
 
+
     # 仿真状态统计
+    print("\n"+"*"*50+"SIMULATOR FINISH"+"*"*50+"\n")
     print("start check out simulator stat...")
     atc.global_log_check()
 

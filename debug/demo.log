@@ -1,0 +1,108 @@
+spFile,SimulatorStat,Simulatorcost,walltime_rate,outdiff,outdiffdetail
+./hisiCaseAll/case3/LNA/LNA_hb_hbpnoise_btd.scs,0,6.64,,,
+./hisiCaseAll/case9/LNA_Mixer/LNA_MIXER_hb_hbpnoise_btd.scs,0,6.34,,,
+./hisiCaseAll/case10/maxim/test5.scs,0,19.607,,,
+./hisiCaseAll/case19/motorola/motorola.scs,0,1.858,,,
+./hisiCaseAll/case21/Lab2_hbnoise_case1/input.scs,0,3.61,,,
+./hisiCaseAll/case13/transient_analysis/hao_testx0_post2.sp,0,17.288,,,
+./hisiCaseAll/case53/case_11.sp,0,5.279,,,
+./hisiCaseAll/case12/DIV_by_2_Dynamic_PMOS_sim/input.scs,0,10.305,,,
+./hisiCaseAll/case65/HB2Tone_Test3Stage_HarImp_vbic1.2.sp,0,7.191,,,
+
+---------------------------------------------------------分隔符---------------------------------------------------------
+# AutoTest V5 result statistics 2023-06-08 13:44:49
+# Test Set: hisiCasesAll
+*********************************************************
+*                     测试结果统计                      *
+*********************************************************
+    本次回归测试共执行31条case, 其中:
+        仿真成功: 22 条
+        仿真成功case中对比时间超过golden 20%的： 4条
+        仿真失败: 9 条
+        结果对比成功: 17 条
+        结果对比失败: 5 条
+
+*********************************************************
+
+WARNING 仿真失败: 9条:
+
+WARNING 结果对比失败: 1条:
+spFile                                      SimulatorStat  Simulatorcost  walltime_rate  outdiff  outdiffdetail  
+./hisiCaseAll/case22/Lab6_PNOISE/input.scs  1              17.401         nan            nan      nan            
+
+WARNING 对比时间超过 golden 20%: 1条:
+spFile                          SimulatorStat  Simulatorcost  walltime_rate  outdiff  outdiffdetail                                                                                                                                                                     
+./hisiCaseAll/case57/case_3.sp  1              107.857        66.007%        1.0      {'Harmonic Balance Steady State Analysis--Voutp': '(7.413305735769237e-08, 0.03, True)', 'Harmonic Balance Steady State Analysis--Voutn': '(3.896667426482772e-07, 0.03, True)'}  
+AutoTest End 2023-06-08 13:44:50 
+
+---------------------------------------------------------分隔符---------------------------------------------------------
+# AutoTest V5 result statistics 2023-06-08 13:45:30
+# Test Set: hisiCasesAll
+*********************************************************
+*                     测试结果统计                      *
+*********************************************************
+    本次回归测试共执行31条case, 其中:
+        仿真成功: 22 条
+        仿真成功case中对比时间超过golden 20%的： 4条
+        仿真失败: 9 条
+        结果对比成功: 17 条
+        结果对比失败: 5 条
+
+*********************************************************
+
+WARNING 仿真失败: 9条:
+spFile                                                       SimulatorStat  Simulatorcost  walltime_rate  outdiff  outdiffdetail  
+./hisiCaseAll/case3/LNA/LNA_hb_hbpnoise_btd.scs              0              6.64           nan            nan      nan            
+./hisiCaseAll/case9/LNA_Mixer/LNA_MIXER_hb_hbpnoise_btd.scs  0              6.34           nan            nan      nan            
+./hisiCaseAll/case10/maxim/test5.scs                         0              19.607         nan            nan      nan            
+./hisiCaseAll/case19/motorola/motorola.scs                   0              1.858          nan            nan      nan            
+./hisiCaseAll/case21/Lab2_hbnoise_case1/input.scs            0              3.61           nan            nan      nan            
+./hisiCaseAll/case13/transient_analysis/hao_testx0_post2.sp  0              17.288         nan            nan      nan            
+./hisiCaseAll/case53/case_11.sp                              0              5.279          nan            nan      nan            
+./hisiCaseAll/case12/DIV_by_2_Dynamic_PMOS_sim/input.scs     0              10.305         nan            nan      nan            
+./hisiCaseAll/case65/HB2Tone_Test3Stage_HarImp_vbic1.2.sp    0              7.191          nan            nan      nan            
+
+WARNING 结果对比失败: 1条:
+spFile                                      SimulatorStat  Simulatorcost  walltime_rate  outdiff  outdiffdetail  
+./hisiCaseAll/case22/Lab6_PNOISE/input.scs  1              17.401         nan            nan      nan            
+
+WARNING 对比时间超过 golden 20%: 1条:
+spFile                          SimulatorStat  Simulatorcost  walltime_rate  outdiff  outdiffdetail                                                                                                                                                                     
+./hisiCaseAll/case57/case_3.sp  1              107.857        66.007%        1.0      {'Harmonic Balance Steady State Analysis--Voutp': '(7.413305735769237e-08, 0.03, True)', 'Harmonic Balance Steady State Analysis--Voutn': '(3.896667426482772e-07, 0.03, True)'}  
+AutoTest End 2023-06-08 13:45:31 
+
+---------------------------------------------------------分隔符---------------------------------------------------------
+# AutoTest V5 result statistics 2023-06-08 13:46:32
+# Test Set: hisiCasesAll
+*********************************************************
+*                     测试结果统计                      *
+*********************************************************
+    本次回归测试共执行31条case, 其中:
+        仿真成功: 22 条
+            结果对比成功: 17 条
+                仿真成功case中对比时间超过golden 20%的： 4条
+            结果对比失败: 5 条
+        仿真失败: 9 条
+
+*********************************************************
+
+WARNING 仿真失败: 9条:
+spFile                                                       SimulatorStat  Simulatorcost  walltime_rate  outdiff  outdiffdetail  
+./hisiCaseAll/case3/LNA/LNA_hb_hbpnoise_btd.scs              0              6.64           nan            nan      nan            
+./hisiCaseAll/case9/LNA_Mixer/LNA_MIXER_hb_hbpnoise_btd.scs  0              6.34           nan            nan      nan            
+./hisiCaseAll/case10/maxim/test5.scs                         0              19.607         nan            nan      nan            
+./hisiCaseAll/case19/motorola/motorola.scs                   0              1.858          nan            nan      nan            
+./hisiCaseAll/case21/Lab2_hbnoise_case1/input.scs            0              3.61           nan            nan      nan            
+./hisiCaseAll/case13/transient_analysis/hao_testx0_post2.sp  0              17.288         nan            nan      nan            
+./hisiCaseAll/case53/case_11.sp                              0              5.279          nan            nan      nan            
+./hisiCaseAll/case12/DIV_by_2_Dynamic_PMOS_sim/input.scs     0              10.305         nan            nan      nan            
+./hisiCaseAll/case65/HB2Tone_Test3Stage_HarImp_vbic1.2.sp    0              7.191          nan            nan      nan            
+
+WARNING 结果对比失败: 1条:
+spFile                                      SimulatorStat  Simulatorcost  walltime_rate  outdiff  outdiffdetail  
+./hisiCaseAll/case22/Lab6_PNOISE/input.scs  1              17.401         nan            nan      nan            
+
+WARNING 对比时间超过 golden 20%: 1条:
+spFile                          SimulatorStat  Simulatorcost  walltime_rate  outdiff  outdiffdetail                                                                                                                                                                     
+./hisiCaseAll/case57/case_3.sp  1              107.857        66.007%        1.0      {'Harmonic Balance Steady State Analysis--Voutp': '(7.413305735769237e-08, 0.03, True)', 'Harmonic Balance Steady State Analysis--Voutn': '(3.896667426482772e-07, 0.03, True)'}  
+AutoTest End 2023-06-08 13:46:32 

@@ -1,50 +1,811 @@
-2023-04-13 14:17:30,848 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\Hisi_HBT\HBT_simple_1T\HBT_simple_1T_va.ads********************
-2023-04-13 14:17:30,858 - Arc - WARNING - line: , 未做转换
-2023-04-13 14:17:30,858 - Arc - WARNING - line: , 未做转换
-2023-04-13 14:17:30,858 - Arc - WARNING - line: , 未做转换
-2023-04-13 14:17:30,859 - Arc - WARNING - line: simulator lang=spectre, 未做转换
-2023-04-13 14:17:30,859 - Arc - WARNING - line: global 0, 未做转换
-2023-04-13 14:17:30,859 - Arc - WARNING - line: include "../model/btd_hbt.1.modelcard", 未做转换
-2023-04-13 14:17:30,859 - Arc - WARNING - line: simulator lang=ads, 未做转换
-2023-04-13 14:17:30,859 - Arc - WARNING - line: , 未做转换
-2023-04-13 14:17:30,859 - Arc - WARNING - line: , 未做转换
-2023-04-13 14:17:30,860 - Arc - WARNING - line: "HBTM1":HBT1, 暂未支持该语法转换：Mode=1
-2023-04-13 14:17:30,860 - Arc - WARNING - line: "HBTM1":HBT1, 暂未支持该语法转换：SelfTmod=0
-2023-04-13 14:17:30,860 - Arc - WARNING - line: , 未做转换
-2023-04-13 14:17:30,860 - Arc - WARNING - line: Port:PORT1, 暂未支持该语法转换：Ohm Noise=yes P[1]=dbmtow(Pavs) Freq[1]=Rfreq GHz
-2023-04-13 14:17:30,860 - Arc - WARNING - line: Port:Term2, 暂未支持该语法转换：Ohm
-2023-04-13 14:17:30,860 - Arc - WARNING - line: , 未做转换
-2023-04-13 14:17:30,861 - Arc - WARNING - line: V_Source:SRC2, 暂未支持该语法转换：V
-2023-04-13 14:17:30,861 - Arc - WARNING - line: V_Source:SRC2, 暂未支持该语法转换：SaveCurrent=1
-2023-04-13 14:17:30,861 - Arc - WARNING - line: V_Source:SRC3, 暂未支持该语法转换：V
-2023-04-13 14:17:30,861 - Arc - WARNING - line: V_Source:SRC3, 暂未支持该语法转换：SaveCurrent=1
-2023-04-13 14:17:30,861 - Arc - WARNING - line: , 未做转换
-2023-04-13 14:17:30,862 - Arc - WARNING - line: CAPQ:C2, 暂未支持该语法转换：opt{
-2023-04-13 14:17:30,862 - Arc - WARNING - line: CAPQ:C2, 暂未支持该语法转换：0.1
-2023-04-13 14:17:30,862 - Arc - WARNING - line: CAPQ:C2, 暂未支持该语法转换：pF
-2023-04-13 14:17:30,862 - Arc - WARNING - line: CAPQ:C2, 暂未支持该语法转换：to
-2023-04-13 14:17:30,862 - Arc - WARNING - line: CAPQ:C2, 暂未支持该语法转换：10
-2023-04-13 14:17:30,862 - Arc - WARNING - line: CAPQ:C2, 暂未支持该语法转换：pF
-2023-04-13 14:17:30,862 - Arc - WARNING - line: CAPQ:C2, 暂未支持该语法转换：}
-2023-04-13 14:17:30,863 - Arc - WARNING - line: CAPQ:C2, 暂未支持该语法转换：MHz
-2023-04-13 14:17:30,863 - Arc - WARNING - line: , 未做转换
-2023-04-13 14:17:30,863 - Arc - WARNING - line: #uselib "ckt" , "INDQ_Z", 未做转换
-2023-04-13 14:17:30,863 - Arc - WARNING - line: INDQ_Z:L2, 暂未支持该语法转换：opt{
-2023-04-13 14:17:30,863 - Arc - WARNING - line: INDQ_Z:L2, 暂未支持该语法转换：0.01
-2023-04-13 14:17:30,863 - Arc - WARNING - line: INDQ_Z:L2, 暂未支持该语法转换：nH
-2023-04-13 14:17:30,864 - Arc - WARNING - line: INDQ_Z:L2, 暂未支持该语法转换：to
-2023-04-13 14:17:30,864 - Arc - WARNING - line: INDQ_Z:L2, 暂未支持该语法转换：10
-2023-04-13 14:17:30,864 - Arc - WARNING - line: INDQ_Z:L2, 暂未支持该语法转换：nH
-2023-04-13 14:17:30,864 - Arc - WARNING - line: INDQ_Z:L2, 暂未支持该语法转换：}
-2023-04-13 14:17:30,864 - Arc - WARNING - line: INDQ_Z:L2, 暂未支持该语法转换：MHz
-2023-04-13 14:17:30,864 - Arc - WARNING - line: INDQ_Z:L2, 暂未支持该语法转换：Ohm
-2023-04-13 14:17:30,864 - Arc - WARNING - line: , 未做转换
-2023-04-13 14:17:30,865 - Arc - WARNING - line: Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2, 未做转换
-2023-04-13 14:17:30,865 - Arc - WARNING - line: , 未做转换
-2023-04-13 14:17:30,865 - Arc - WARNING - line: S_Param:SP1  CalcS=yes CalcY=no CalcZ=no  GroupDelayAperture=1e-4 FreqConversion=no  FreqConversionPort=1 StatusLevel=2  CalcNoise=no SortNoise=0  BandwidthForNoise=1.0 Hz , 未做转换
-2023-04-13 14:17:30,865 - Arc - WARNING - line:  DevOpPtLevel=0  SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output", 未做转换
-2023-04-13 14:17:30,865 - Arc - WARNING - line: , 未做转换
-2023-04-13 14:17:30,865 - Arc - WARNING - line: , 未做转换
-2023-04-13 14:17:30,866 - Arc - WARNING - line: , 未做转换
-2023-04-13 14:17:30,866 - Arc - WARNING - line: , 未做转换
-2023-04-13 14:17:30,866 - Arc - WARNING - line: , 未做转换
+2023-06-13 11:31:18,383 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\tc01t_pa_sp_dc_ac\tc01t_pa_sp_dc_ac.ads********************
+2023-06-13 11:31:18,385 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options
+2023-06-13 11:31:18,385 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC1
+2023-06-13 11:31:18,385 - Arc - WARNING - line(Vsource): V_Source:SRC2, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 11:31:18,386 - Arc - WARNING - line(Vsource): V_Source:SRC1, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 11:31:18,386 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC4
+2023-06-13 11:31:18,386 - Arc - WARNING - line: S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output", 未做转换
+2023-06-13 11:31:18,386 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: SP1_stim Start=0.1 GHz Stop=20 GHz Step=0.1 GHz
+2023-06-13 11:31:18,386 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:SP1_Output
+2023-06-13 11:31:18,387 - Arc - WARNING - line: Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2, 未做转换
+2023-06-13 11:31:18,387 - Arc - WARNING - line: P_Probe:P_Load  N__30 N__31, 未做转换
+2023-06-13 11:31:18,387 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options:
+2023-06-13 11:31:18,387 - Arc - WARNING - line: EnableAssertChecks=no EnableSpareRemoval=no, 未做转换
+2023-06-13 11:31:18,387 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:Term2
+2023-06-13 11:31:18,387 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC6
+2023-06-13 11:31:18,388 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC5
+2023-06-13 11:31:18,388 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:PORT1
+2023-06-13 11:31:18,388 - Arc - WARNING - line: PwrSplit2:PWR1 V_In N__19 N__17 SP21=0.707 SP31=0.707 SP11=0. SP22=0. Isolation=100. dB ZRef=50. Ohm CheckPassivity=1, 未做转换
+2023-06-13 11:31:18,388 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC3
+2023-06-13 11:31:18,388 - Arc - WARNING - line: TLIN:TL1  N__17 N__26 Z=50.0 Ohm E=90 F=RFfreq GHz, 未做转换
+2023-06-13 11:31:18,388 - Arc - WARNING - line: SRC:SRC10 N__30 N__25 R=0.1 Ohm C=Cpm1_2 pF, 未做转换
+2023-06-13 11:31:18,389 - Arc - WARNING - line: SRC:SRC8 N__10 0 R=0.1 Ohm C=Cpeak2_1 pF, 未做转换
+2023-06-13 11:31:18,389 - Arc - WARNING - line: SRC:SRC9 N__25 0 R=0.1 Ohm C=Cpm1_1 pF, 未做转换
+2023-06-13 11:31:18,389 - Arc - WARNING - line: SRC:SRC7 N__23 N__29 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 11:31:18,389 - Arc - WARNING - line: SRC:SRC4 N__24 N__11 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 11:31:18,389 - Arc - WARNING - line: SRC:SRC6 N__13 0 R=0.1 Ohm C=Cmain2_2 pF, 未做转换
+2023-06-13 11:31:18,389 - Arc - WARNING - line: SRC:SRC5 N__27 0 R=0.1 Ohm C=Cmain2_1 pF, 未做转换
+2023-06-13 11:31:18,390 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：AC:AC1 CalcNoise=no SortNoise=0 IncludePortNoise=yes BandwidthForNoise=1 Hz FreqConversion=no UseFiniteDiff=no StatusLevel=2 OutputBudgetIV=no DevOpPtLevel=0 SweepVar="freq" SweepPlan="AC1_stim" OutputPlan="AC1_Output"
+2023-06-13 11:31:18,390 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: AC1_stim Start=0.1 GHz Stop=10.0 GHz Step=0.1 GHz
+2023-06-13 11:31:18,390 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:AC1_Output
+2023-06-13 11:31:18,390 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC2
+2023-06-13 11:31:18,390 - Arc - WARNING - line: DC:DC1 StatusLevel=2 DevOpPtLevel=0 UseFiniteDiff=no PrintOpPoint=no Restart=1 OutputPlan="DC1_Output", 未做转换
+2023-06-13 11:31:18,390 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:DC1_Output
+2023-06-13 11:31:18,390 - Arc - WARNING - line(MODEL): VBIC, 暂未支持该语法转换：//model VBICM1 VBIC
+2023-06-13 11:38:39,744 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\HB2TonePswp\HB2TonePswp.ads********************
+2023-06-13 13:40:05,593 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\HB2TonePswp\HB2TonePswp.ads********************
+2023-06-13 13:42:17,400 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\HB2TonePswp\HB2TonePswp.ads********************
+2023-06-13 13:42:17,402 - Arc - WARNING - line: ;parameters
+, 未做转换
+2023-06-13 13:42:17,403 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options
+2023-06-13 13:42:17,403 - Arc - WARNING - line: define Sample_PA ( N__38 N__37 N__39 N__36 ), 未做转换
+2023-06-13 13:42:17,403 - Arc - WARNING - line(MODEL): MSUB, 暂未支持该语法转换：//model glasstef MSUB
+2023-06-13 13:42:17,404 - Arc - WARNING - line: w=59.6 mil, 未做转换
+2023-06-13 13:42:17,404 - Arc - WARNING - line: eps=4.3-0.0015*((abs(freq)) **0.014), 未做转换
+2023-06-13 13:42:17,404 - Arc - WARNING - line(MODEL): HP_MOSFET, 暂未支持该语法转换：//model hpmos HP_MOSFET
+2023-06-13 13:42:17,404 - Arc - WARNING - line(hpmos): 暂未支持该 model 的转换："hpmos":HPMOS1
+2023-06-13 13:42:17,404 - Arc - WARNING - line: VIA2:V5 N__11 0 D=80 mil H=32.5 mil T=2.3 mil Rho=1.0 W=100 mil Temp=27.0, 未做转换
+2023-06-13 13:42:17,405 - Arc - WARNING - line: CAPP2:C7 N__10 N__14 C=7.5 pF TanD=7.3e-4 Q=25.4 FreqQ=443 MHz FreqRes=1600 MHz Exp=0.12, 未做转换
+2023-06-13 13:42:17,405 - Arc - WARNING - line: VIA2:V3 N__18 0 D=80 mil H=32.5 mil T=2.3 mil Rho=1.0 W=100 mil Temp=27.0, 未做转换
+2023-06-13 13:42:17,405 - Arc - WARNING - line: CAPP2:C11 N__25 N__9 C=39 pF TanD=6.5e-4 Q=25 FreqQ=472.3 MHz FreqRes=820.1 MHz Exp=0.17, 未做转换
+2023-06-13 13:42:17,405 - Arc - WARNING - line: VIA2:V2 N__21 0 D=80 mil H=32.5 mil T=2.3 mil Rho=1.0 W=100 mil Temp=27.0, 未做转换
+2023-06-13 13:42:17,405 - Arc - WARNING - line: CAPP2:C9 N__20 N__39 C=39 pF TanD=6.5e-4 Q=25 FreqQ=472.3 MHz FreqRes=820.1 MHz Exp=0.17, 未做转换
+2023-06-13 13:42:17,406 - Arc - WARNING - line: VIA2:V1 N_12 0 D=80 mil H=32.5 mil T=2.3 mil Rho=1.0 W=100 mil Temp=27.0, 未做转换
+2023-06-13 13:42:17,406 - Arc - WARNING - line: CAPP2:C8 N__13 N__36 C=39 pF TanD=6.5e-4 Q=25 FreqQ=472.3 MHz FreqRes=820.1 MHz Exp=0.17, 未做转换
+2023-06-13 13:42:17,406 - Arc - WARNING - line: CAPP2:C14 N__17 N__8 C=39 pF TanD=6.5e-4 Q=25 FreqQ=472.3 MHz FreqRes=820.1 MHz Exp=0.17, 未做转换
+2023-06-13 13:42:17,406 - Arc - WARNING - line: MLIN2:TL3 N__14 N__4 Subst="glasstef"  W=w L=610 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 13:42:17,406 - Arc - WARNING - line: MLIN2:TL1 N__8 N__14 Subst="glasstef" W=w L=1425 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 13:42:17,407 - Arc - WARNING - line: MLIN2:TL6 N__9 N__37 Subst="glasstef" W=w L=154 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 13:42:17,407 - Arc - WARNING - line: MLIN2:TL4 N__1 N__24 Subst="glasstef" W=w L=540 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 13:42:17,407 - Arc - WARNING - line: MLIN2:TL2 N__38 N__17 Subst="glasstef" W=w L=261 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 13:42:17,407 - Arc - WARNING - line: CAPP2:C13 N__19 N__24 C=8 pF TanD=7.3e-4 Q=25.4 FreqQ=443 MHz FreqRes=1600 MHz Exp=0.12, 未做转换
+2023-06-13 13:42:17,408 - Arc - WARNING - line: MLIN2:TL5 N__24 N__25 Subst="glasstef" W=w L=1161 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 13:42:17,408 - Arc - WARNING - line: end Sample_PA, 未做转换
+2023-06-13 13:42:17,408 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB1 MaxOrder=Max_IMD_order Freq[1]=RFfreq-fspacing/2 Freq[2]=RFfreq+fspacing/2 Order[1]=7 Order[2]=7 StatusLevel=2 FundOversample=1 Restart=no UseAllSS_Freqs=yes UseOutFile=no HBSS_WSP=0 UseInFile=no SweepVar="RFpower" SweepPlan="Sweep1" OutputPlan="HB1_Output"
+2023-06-13 13:42:17,408 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:HB1_Output
+2023-06-13 13:42:17,408 - Arc - WARNING - line: EquationName[1]="Max_IMD_order" EquationName[2]="RFfreq" UseSavedEquationNestLevel=yes SavedEquationNestLevel=2 UseDeviceCurrentNestLevel=no DeviceCurrentNestLevel=0 DeviceCurrentDeviceType="All" DeviceCurrentSymSyntax=yes UseCurrentNestLevel=yes CurrentNestLevel=999 UseDeviceVoltageNestLevel=no DeviceVoltageNestLevel=0 DeviceVoltageDeviceType="All", 未做转换
+2023-06-13 13:42:17,409 - Arc - WARNING - line: Tran:HB1_tran HB_Sol=1 SteadyState=1 StatusLevel=3 Freq[1]=RFfreq-fspacing/2 Order[1]=7, 未做转换
+2023-06-13 13:42:17,409 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：Component:tahb_HB1 Module="ATAHB" Type="ModelExtractor"  Tran_Analysis="HB1_tran" HB_Analysis="HB1"
+2023-06-13 13:42:17,409 - Arc - WARNING - line: Sample_PA:X1  N__3 N__1 N__2 N__0, 未做转换
+2023-06-13 13:42:17,409 - Arc - WARNING - line: global f_bb=0.5*RFfreq, 未做转换
+2023-06-13 13:42:17,409 - Arc - WARNING - line: global f_1 = 1.5*RFfreq, 未做转换
+2023-06-13 13:42:17,410 - Arc - WARNING - line: global f_2 = 2.5*RFfreq, 未做转换
+2023-06-13 13:42:17,410 - Arc - WARNING - line: global f_3 = 3.5*RFfreq, 未做转换
+2023-06-13 13:42:17,410 - Arc - WARNING - line: global f_4 = 4.5*RFfreq, 未做转换
+2023-06-13 13:42:17,410 - Arc - WARNING - line: global Z_load = if freq <= f_bb then Z_l_bb elseif freq <= f_1 then Z_l_fund elseif freq <= f_2 then Z_l_2 elseif freq <= f_3 then Z_l_3 elseif freq <= f_4 then Z_l_4 else Z_l_5 endif, 未做转换
+2023-06-13 13:42:17,410 - Arc - WARNING - line: Z_l_bb = Z0 + j*0, 未做转换
+2023-06-13 13:42:17,410 - Arc - WARNING - line: Z_l_fund = Z0 + j*0, 未做转换
+2023-06-13 13:42:17,410 - Arc - WARNING - line: Z_l_2 = Z0 + j*0, 未做转换
+2023-06-13 13:42:17,411 - Arc - WARNING - line: Z_l_3 = Z0 + j*0, 未做转换
+2023-06-13 13:42:17,411 - Arc - WARNING - line: Z_l_4 = Z0 + j*0, 未做转换
+2023-06-13 13:42:17,411 - Arc - WARNING - line: Z_l_5 = Z0 + j*0, 未做转换
+2023-06-13 13:42:17,411 - Arc - WARNING - line: Z_s =if freq <= f_bb then Z_s_bb elseif freq <= f_1 then Z_s_fund elseif freq <= f_2 then Z_s_2 elseif freq <= f_3 then Z_s_3 elseif freq <= f_4 then Z_s_4 else Z_s_5 endif, 未做转换
+2023-06-13 13:42:17,411 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:Term1
+2023-06-13 13:42:17,411 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:PORT1
+2023-06-13 13:42:17,412 - Arc - WARNING - line: RFfreq=850 MHz, 未做转换
+2023-06-13 13:42:17,412 - Arc - WARNING - line: fspacing=10 kHz, 未做转换
+2023-06-13 13:42:17,412 - Arc - WARNING - line: RFpower=10 _dBm, 未做转换
+2023-06-13 13:42:17,412 - Arc - WARNING - line(Vsource): V_Source:SRC2, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:42:17,412 - Arc - WARNING - line(Vsource): V_Source:SRC1, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:42:17,412 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan:Sweep1 SweepPlan[1]="Sweep1_seg1" SweepPlan[2]="Sweep1_seg2"
+2023-06-13 13:42:17,412 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan:Sweep1_seg1 Start=0 Stop=10 Step=2.5
+2023-06-13 13:42:17,413 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan:Sweep1_seg2 Start=11 Stop=16 Step=1
+2023-06-13 13:42:17,413 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\tc01t_pa_sp_dc_ac\tc01t_pa_sp_dc_ac.ads********************
+2023-06-13 13:42:17,419 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options
+2023-06-13 13:42:17,419 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC1
+2023-06-13 13:42:17,420 - Arc - WARNING - line(Vsource): V_Source:SRC2, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:42:17,420 - Arc - WARNING - line(Vsource): V_Source:SRC1, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:42:17,420 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC4
+2023-06-13 13:42:17,420 - Arc - WARNING - line: S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output", 未做转换
+2023-06-13 13:42:17,420 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: SP1_stim Start=0.1 GHz Stop=20 GHz Step=0.1 GHz
+2023-06-13 13:42:17,421 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:SP1_Output
+2023-06-13 13:42:17,421 - Arc - WARNING - line: Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2, 未做转换
+2023-06-13 13:42:17,421 - Arc - WARNING - line: P_Probe:P_Load  N__30 N__31, 未做转换
+2023-06-13 13:42:17,421 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options:
+2023-06-13 13:42:17,421 - Arc - WARNING - line: EnableAssertChecks=no EnableSpareRemoval=no, 未做转换
+2023-06-13 13:42:17,422 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:Term2
+2023-06-13 13:42:17,422 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC6
+2023-06-13 13:42:17,422 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC5
+2023-06-13 13:42:17,422 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:PORT1
+2023-06-13 13:42:17,422 - Arc - WARNING - line: PwrSplit2:PWR1 V_In N__19 N__17 SP21=0.707 SP31=0.707 SP11=0. SP22=0. Isolation=100. dB ZRef=50. Ohm CheckPassivity=1, 未做转换
+2023-06-13 13:42:17,422 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC3
+2023-06-13 13:42:17,422 - Arc - WARNING - line: TLIN:TL1  N__17 N__26 Z=50.0 Ohm E=90 F=RFfreq GHz, 未做转换
+2023-06-13 13:42:17,422 - Arc - WARNING - line: SRC:SRC10 N__30 N__25 R=0.1 Ohm C=Cpm1_2 pF, 未做转换
+2023-06-13 13:42:17,422 - Arc - WARNING - line: SRC:SRC8 N__10 0 R=0.1 Ohm C=Cpeak2_1 pF, 未做转换
+2023-06-13 13:42:17,422 - Arc - WARNING - line: SRC:SRC9 N__25 0 R=0.1 Ohm C=Cpm1_1 pF, 未做转换
+2023-06-13 13:42:17,423 - Arc - WARNING - line: SRC:SRC7 N__23 N__29 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 13:42:17,423 - Arc - WARNING - line: SRC:SRC4 N__24 N__11 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 13:42:17,423 - Arc - WARNING - line: SRC:SRC6 N__13 0 R=0.1 Ohm C=Cmain2_2 pF, 未做转换
+2023-06-13 13:42:17,423 - Arc - WARNING - line: SRC:SRC5 N__27 0 R=0.1 Ohm C=Cmain2_1 pF, 未做转换
+2023-06-13 13:42:17,423 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：AC:AC1 CalcNoise=no SortNoise=0 IncludePortNoise=yes BandwidthForNoise=1 Hz FreqConversion=no UseFiniteDiff=no StatusLevel=2 OutputBudgetIV=no DevOpPtLevel=0 SweepVar="freq" SweepPlan="AC1_stim" OutputPlan="AC1_Output"
+2023-06-13 13:42:17,424 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: AC1_stim Start=0.1 GHz Stop=10.0 GHz Step=0.1 GHz
+2023-06-13 13:42:17,424 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:AC1_Output
+2023-06-13 13:42:17,424 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC2
+2023-06-13 13:42:17,424 - Arc - WARNING - line: DC:DC1 StatusLevel=2 DevOpPtLevel=0 UseFiniteDiff=no PrintOpPoint=no Restart=1 OutputPlan="DC1_Output", 未做转换
+2023-06-13 13:42:17,424 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:DC1_Output
+2023-06-13 13:42:17,424 - Arc - WARNING - line(MODEL): VBIC, 暂未支持该语法转换：//model VBICM1 VBIC
+2023-06-13 13:42:17,425 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\tc02t_pa_hb_lssp\tc02t_pa_hb_lssp.ads********************
+2023-06-13 13:42:17,434 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options
+2023-06-13 13:42:17,434 - Arc - WARNING - line(MODEL): VBIC, 暂未支持该语法转换：//model VBICM1 VBIC
+2023-06-13 13:42:17,435 - Arc - WARNING - line(Vsource): V_Source:SRC1, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:42:17,435 - Arc - WARNING - line(Vsource): V_Source:SRC2, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:42:17,435 - Arc - WARNING - line: SRC:SRC10  N__30 N__25 R=0.1 Ohm C=Cpm1_2 pF, 未做转换
+2023-06-13 13:42:17,435 - Arc - WARNING - line: SRC:SRC8  N__10 0 R=0.1 Ohm C=Cpeak2_1 pF, 未做转换
+2023-06-13 13:42:17,435 - Arc - WARNING - line: SRC:SRC9  N__25 0 R=0.1 Ohm C=Cpm1_1 pF, 未做转换
+2023-06-13 13:42:17,436 - Arc - WARNING - line: SRC:SRC7  N__23 N__29 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 13:42:17,436 - Arc - WARNING - line: SRC:SRC4  N__24 N__11 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 13:42:17,436 - Arc - WARNING - line: SRC:SRC6  N__13 0 R=0.1 Ohm C=Cmain2_2 pF, 未做转换
+2023-06-13 13:42:17,436 - Arc - WARNING - line: SRC:SRC5 N__27 0 R=0.1 Ohm C=Cmain2_1 pF, 未做转换
+2023-06-13 13:42:17,436 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC1
+2023-06-13 13:42:17,436 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC2
+2023-06-13 13:42:17,437 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC3
+2023-06-13 13:42:17,437 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC4
+2023-06-13 13:42:17,437 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC5
+2023-06-13 13:42:17,437 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC6
+2023-06-13 13:42:17,437 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:PORT1
+2023-06-13 13:42:17,437 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:Term2
+2023-06-13 13:42:17,437 - Arc - WARNING - line: TLIN:TL1  N__17 N__26 Z=50.0 Ohm E=90 F=RFfreq GHz, 未做转换
+2023-06-13 13:42:17,438 - Arc - WARNING - line: PwrSplit2:PWR1  V_In N__19 N__17 SP21=0.707 SP31=0.707 SP11=0.  SP22=0.  Isolation=100. dB  ZRef=50. Ohm CheckPassivity=1, 未做转换
+2023-06-13 13:42:17,438 - Arc - WARNING - line: P_Probe:P_Load N__30 N__31, 未做转换
+2023-06-13 13:42:17,438 - Arc - WARNING - line: Tran:HB1_tran HB_Sol=1 SteadyState=1 StatusLevel=3 Freq[1]=RFfreq GHz Order[1]=5, 未做转换
+2023-06-13 13:42:17,438 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：Component:tahb_HB1 Module="ATAHB" Type="ModelExtractor"  Tran_Analysis="HB1_tran" HB_Analysis="HB1"
+2023-06-13 13:42:17,438 - Arc - WARNING - line: ParamSweep:Sweep1 SimInstanceName[1]="HB1" StatusLevel=2 SweepVar="Pavs" SweepPlan="Sweep1_stim", 未做转换
+2023-06-13 13:42:17,439 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: Sweep1_stim Start=-10 Stop=0 Step=1
+2023-06-13 13:42:17,439 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB1 MaxOrder=4 Freq[1]=RFfreq GHz Order[1]=5 StatusLevel=2 HBSS_WSP=0 OutputPlan="HB1_Output"
+2023-06-13 13:42:17,439 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB2 MaxOrder=4 Freq[1]=RFfreq GHz Order[1]=5 StatusLevel=2 CalcS_Params=yes LSSP_FreqAtPort[1]=RFfreq GHz LSSP_FreqAtPort[2]=RFfreq GHz SweepVar="RFfreq" SweepPlan="HB2_stim" OutputPlan="HB2_Output"
+2023-06-13 13:42:17,439 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: HB2_stim Start=2.1 Stop=2.5 Step=0.1
+2023-06-13 13:42:17,439 - Arc - WARNING - line: S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output", 未做转换
+2023-06-13 13:42:17,440 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: SP1_stim  Start=0.1 GHz Stop=20 GHz Step=0.1 GHz
+2023-06-13 13:42:17,440 - Arc - WARNING - line: Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2, 未做转换
+2023-06-13 13:42:17,441 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\tc02t_pa_hb_lssp_Harlmp\tc02t_pa_hb_lssp_Harlmp.ads********************
+2023-06-13 13:42:17,450 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options
+2023-06-13 13:42:17,450 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB1 MaxOrder=4 Freq[1]=RFfreq GHz Order[1]=5 StatusLevel=2 HBSS_WSP=0 OutputPlan="HB1_Output"
+2023-06-13 13:42:17,450 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:HB1_Output
+2023-06-13 13:42:17,451 - Arc - WARNING - line: Tran:HB1_tran HB_Sol=1 SteadyState=1 StatusLevel=3 Freq[1]=RFfreq GHz Order[1]=5, 未做转换
+2023-06-13 13:42:17,451 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：Component:tahb_HB1 Module="ATAHB" Type="ModelExtractor"  Tran_Analysis="HB1_tran" HB_Analysis="HB1"
+2023-06-13 13:42:17,451 - Arc - WARNING - line(Vsource): V_Source:SRC2, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:42:17,451 - Arc - WARNING - line(Vsource): V_Source:SRC1, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:42:17,451 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC2
+2023-06-13 13:42:17,451 - Arc - WARNING - line: S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output", 未做转换
+2023-06-13 13:42:17,452 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: SP1_stim Start=0.1 GHz Stop=20 GHz Step=0.1 GHz
+2023-06-13 13:42:17,452 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:SP1_Output
+2023-06-13 13:42:17,452 - Arc - WARNING - line: Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2, 未做转换
+2023-06-13 13:42:17,452 - Arc - WARNING - line: Z_l_2=10*Z0 + j*0, 未做转换
+2023-06-13 13:42:17,452 - Arc - WARNING - line: Z_l_fund=10 + j*0, 未做转换
+2023-06-13 13:42:17,453 - Arc - WARNING - line: Z_l_3 =10*Z0 + j*0, 未做转换
+2023-06-13 13:42:17,453 - Arc - WARNING - line: Z_l_4 =10* Z0 + j*0, 未做转换
+2023-06-13 13:42:17,453 - Arc - WARNING - line: Z_l_5 =10* Z0 + j*0, 未做转换
+2023-06-13 13:42:17,453 - Arc - WARNING - line: Z_s_fund =10 + j*0, 未做转换
+2023-06-13 13:42:17,453 - Arc - WARNING - line: Z_s_2 = 10* Z0 +j*0, 未做转换
+2023-06-13 13:42:17,453 - Arc - WARNING - line: Z_s_3 = 10* Z0 +j*0, 未做转换
+2023-06-13 13:42:17,454 - Arc - WARNING - line: Z_s_4 = 10* Z0 +j*0, 未做转换
+2023-06-13 13:42:17,454 - Arc - WARNING - line: Z_s_5 = 10* Z0 +j*0, 未做转换
+2023-06-13 13:42:17,454 - Arc - WARNING - line: P_Probe:P_Load N__30 N__31, 未做转换
+2023-06-13 13:42:17,454 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options:OPtions1
+2023-06-13 13:42:17,454 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:Term2
+2023-06-13 13:42:17,454 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC4
+2023-06-13 13:42:17,455 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC3
+2023-06-13 13:42:17,455 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:PORT1
+2023-06-13 13:42:17,455 - Arc - WARNING - line: PwrSplit2:PwR1 V_In N__19 N__17 SP21=0.707 SP31=0.707 SP11=0. SP22=0. Isolation=100. dB ZRef=50. Ohm CheckPassivity=1, 未做转换
+2023-06-13 13:42:17,455 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC6
+2023-06-13 13:42:17,455 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC1
+2023-06-13 13:42:17,456 - Arc - WARNING - line(R): R:R2, 暂未支持该语法转换：E=90
+2023-06-13 13:42:17,456 - Arc - WARNING - line(R): R:R2, 暂未支持该语法转换：F=RFfreq
+2023-06-13 13:42:17,456 - Arc - WARNING - line(R): R:R2, 暂未支持该语法转换：GHz
+2023-06-13 13:42:17,456 - Arc - WARNING - line: TLIN:TL1 N__17 N__26 Z=50.0 Ohm E=90 F=RFfreq GHz, 未做转换
+2023-06-13 13:42:17,456 - Arc - WARNING - line: SRC:SRC10 N__30 N__25 R=0.1 Ohm C=Cpm1_2 pF, 未做转换
+2023-06-13 13:42:17,456 - Arc - WARNING - line: SRC:SRC8 N__10 0 R=0.1 Ohm C=Cpeak2_1 pF, 未做转换
+2023-06-13 13:42:17,457 - Arc - WARNING - line: SRC:SRC9 N__25 0 R=0.1 Ohm C=Cpm1_1 pF, 未做转换
+2023-06-13 13:42:17,457 - Arc - WARNING - line: SRC:SRC7 N__23 N__29 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 13:42:17,457 - Arc - WARNING - line: SRC:SRC4 N__24 N__11 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 13:42:17,457 - Arc - WARNING - line: SRC:SRC6 N__13 0 R=0.1 Ohm C=Cmain2_2 pF, 未做转换
+2023-06-13 13:42:17,457 - Arc - WARNING - line: SRC:SRC5 N__27 0 R=0.1 Ohm C=Cmain2_1 pF, 未做转换
+2023-06-13 13:42:17,457 - Arc - WARNING - line: ParamSweep:Sweep1 SimInstanceName[1]="HB1" StatusLevel=2 SweepVar="Pavs" SweepPlan="Sweep1_stim", 未做转换
+2023-06-13 13:42:17,457 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: Sweep1_stim Start=-10 Stop=0 Step=1
+2023-06-13 13:42:17,458 - Arc - WARNING - line(MODEL): VBIC, 暂未支持该语法转换：//model VBICM1 VBIC
+2023-06-13 13:42:17,458 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC5
+2023-06-13 13:42:17,458 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB2 MaxOrder=4 Freq[1]=RFfreq GHz Order[1]=5 StatusLevel=2 CalcS_Params=yes LSSP_FreqAtPort[1]=RFfreq GHz LSSP_FreqAtPort[2]=RFfreq GHz SweepVar="RFfreq" SweepPlan="HB2_stim" OutputPlan="HB2_Output"
+2023-06-13 13:42:17,458 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: HB2_stim Start=2.1 Stop=2.5 Step=0.1
+2023-06-13 13:42:17,458 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:HB2_Output
+2023-06-13 13:42:17,459 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\tc02t_pa_hb_twotone\tc02t_pa_hb_twotone.ads********************
+2023-06-13 13:42:17,487 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options
+2023-06-13 13:42:17,487 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB1 MaxOrder=5 Freq[1]=(RFfreq-0.01) GHz Freq[2]=(RFfreq+0.01) GHz Order[1]=9 Order[2]=9 StatusLevel=2 HBSS_WSP=0 OutputPlan="HB1_Output"
+2023-06-13 13:42:17,488 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:HB1_Output
+2023-06-13 13:42:17,488 - Arc - WARNING - line: Tran:HB1_tran HB_Sol=1 StendyState=1 StatusLevel=3 Freq[1]=(RFfreq-0.01) GHz Order[1]=9, 未做转换
+2023-06-13 13:42:17,488 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：Component:tahb_HB1 Module="ATAHB" Type="ModelExtractor"  Tran_Analysis="HB1_tran" HB_Analysis="HB1"
+2023-06-13 13:42:17,488 - Arc - WARNING - line(Vsource): V_Source:SRC2, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:42:17,488 - Arc - WARNING - line(Vsource): V_Source:SRC1, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:42:17,489 - Arc - WARNING - line: S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output", 未做转换
+2023-06-13 13:42:17,489 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: SP1_stim Start=0.1 GHz Stop=20 GHz Step=0.1 GHz
+2023-06-13 13:42:17,489 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:SP1_Output
+2023-06-13 13:42:17,489 - Arc - WARNING - line: Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2, 未做转换
+2023-06-13 13:42:17,489 - Arc - WARNING - line: P_Probe:P_Load  N__30 N__31, 未做转换
+2023-06-13 13:42:17,490 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options:Options1
+2023-06-13 13:42:17,490 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:Term2
+2023-06-13 13:42:17,490 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC6
+2023-06-13 13:42:17,490 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC7
+2023-06-13 13:42:55,055 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\HB2TonePswp\HB2TonePswp.ads********************
+2023-06-13 13:42:55,057 - Arc - WARNING - line: ;parameters
+, 未做转换
+2023-06-13 13:45:36,836 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\HB2TonePswp\HB2TonePswp.ads********************
+2023-06-13 13:45:49,699 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\HB2TonePswp\HB2TonePswp.ads********************
+2023-06-13 13:45:49,701 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options
+2023-06-13 13:45:49,701 - Arc - WARNING - line: define Sample_PA ( N__38 N__37 N__39 N__36 ), 未做转换
+2023-06-13 13:45:49,701 - Arc - WARNING - line(MODEL): MSUB, 暂未支持该语法转换：//model glasstef MSUB
+2023-06-13 13:45:49,702 - Arc - WARNING - line: w=59.6 mil, 未做转换
+2023-06-13 13:45:49,702 - Arc - WARNING - line: eps=4.3-0.0015*((abs(freq)) **0.014), 未做转换
+2023-06-13 13:45:49,702 - Arc - WARNING - line(MODEL): HP_MOSFET, 暂未支持该语法转换：//model hpmos HP_MOSFET
+2023-06-13 13:45:49,702 - Arc - WARNING - line(hpmos): 暂未支持该 model 的转换："hpmos":HPMOS1
+2023-06-13 13:45:49,702 - Arc - WARNING - line: VIA2:V5 N__11 0 D=80 mil H=32.5 mil T=2.3 mil Rho=1.0 W=100 mil Temp=27.0, 未做转换
+2023-06-13 13:45:49,703 - Arc - WARNING - line: CAPP2:C7 N__10 N__14 C=7.5 pF TanD=7.3e-4 Q=25.4 FreqQ=443 MHz FreqRes=1600 MHz Exp=0.12, 未做转换
+2023-06-13 13:45:49,703 - Arc - WARNING - line: VIA2:V3 N__18 0 D=80 mil H=32.5 mil T=2.3 mil Rho=1.0 W=100 mil Temp=27.0, 未做转换
+2023-06-13 13:45:49,703 - Arc - WARNING - line: CAPP2:C11 N__25 N__9 C=39 pF TanD=6.5e-4 Q=25 FreqQ=472.3 MHz FreqRes=820.1 MHz Exp=0.17, 未做转换
+2023-06-13 13:45:49,703 - Arc - WARNING - line: VIA2:V2 N__21 0 D=80 mil H=32.5 mil T=2.3 mil Rho=1.0 W=100 mil Temp=27.0, 未做转换
+2023-06-13 13:45:49,703 - Arc - WARNING - line: CAPP2:C9 N__20 N__39 C=39 pF TanD=6.5e-4 Q=25 FreqQ=472.3 MHz FreqRes=820.1 MHz Exp=0.17, 未做转换
+2023-06-13 13:45:49,704 - Arc - WARNING - line: VIA2:V1 N_12 0 D=80 mil H=32.5 mil T=2.3 mil Rho=1.0 W=100 mil Temp=27.0, 未做转换
+2023-06-13 13:45:49,704 - Arc - WARNING - line: CAPP2:C8 N__13 N__36 C=39 pF TanD=6.5e-4 Q=25 FreqQ=472.3 MHz FreqRes=820.1 MHz Exp=0.17, 未做转换
+2023-06-13 13:45:49,704 - Arc - WARNING - line: CAPP2:C14 N__17 N__8 C=39 pF TanD=6.5e-4 Q=25 FreqQ=472.3 MHz FreqRes=820.1 MHz Exp=0.17, 未做转换
+2023-06-13 13:45:49,704 - Arc - WARNING - line: MLIN2:TL3 N__14 N__4 Subst="glasstef"  W=w L=610 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 13:45:49,705 - Arc - WARNING - line: MLIN2:TL1 N__8 N__14 Subst="glasstef" W=w L=1425 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 13:45:49,705 - Arc - WARNING - line: MLIN2:TL6 N__9 N__37 Subst="glasstef" W=w L=154 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 13:45:49,705 - Arc - WARNING - line: MLIN2:TL4 N__1 N__24 Subst="glasstef" W=w L=540 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 13:45:49,705 - Arc - WARNING - line: MLIN2:TL2 N__38 N__17 Subst="glasstef" W=w L=261 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 13:45:49,706 - Arc - WARNING - line: CAPP2:C13 N__19 N__24 C=8 pF TanD=7.3e-4 Q=25.4 FreqQ=443 MHz FreqRes=1600 MHz Exp=0.12, 未做转换
+2023-06-13 13:45:49,706 - Arc - WARNING - line: MLIN2:TL5 N__24 N__25 Subst="glasstef" W=w L=1161 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 13:45:49,706 - Arc - WARNING - line: end Sample_PA, 未做转换
+2023-06-13 13:45:49,706 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB1 MaxOrder=Max_IMD_order Freq[1]=RFfreq-fspacing/2 Freq[2]=RFfreq+fspacing/2 Order[1]=7 Order[2]=7 StatusLevel=2 FundOversample=1 Restart=no UseAllSS_Freqs=yes UseOutFile=no HBSS_WSP=0 UseInFile=no SweepVar="RFpower" SweepPlan="Sweep1" OutputPlan="HB1_Output"
+2023-06-13 13:45:49,707 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:HB1_Output
+2023-06-13 13:45:49,707 - Arc - WARNING - line: EquationName[1]="Max_IMD_order" EquationName[2]="RFfreq" UseSavedEquationNestLevel=yes SavedEquationNestLevel=2 UseDeviceCurrentNestLevel=no DeviceCurrentNestLevel=0 DeviceCurrentDeviceType="All" DeviceCurrentSymSyntax=yes UseCurrentNestLevel=yes CurrentNestLevel=999 UseDeviceVoltageNestLevel=no DeviceVoltageNestLevel=0 DeviceVoltageDeviceType="All", 未做转换
+2023-06-13 13:45:49,707 - Arc - WARNING - line: Tran:HB1_tran HB_Sol=1 SteadyState=1 StatusLevel=3 Freq[1]=RFfreq-fspacing/2 Order[1]=7, 未做转换
+2023-06-13 13:45:49,708 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：Component:tahb_HB1 Module="ATAHB" Type="ModelExtractor"  Tran_Analysis="HB1_tran" HB_Analysis="HB1"
+2023-06-13 13:45:49,708 - Arc - WARNING - line: Sample_PA:X1  N__3 N__1 N__2 N__0, 未做转换
+2023-06-13 13:45:49,708 - Arc - WARNING - line: global f_bb=0.5*RFfreq, 未做转换
+2023-06-13 13:45:49,708 - Arc - WARNING - line: global f_1 = 1.5*RFfreq, 未做转换
+2023-06-13 13:45:49,708 - Arc - WARNING - line: global f_2 = 2.5*RFfreq, 未做转换
+2023-06-13 13:45:49,708 - Arc - WARNING - line: global f_3 = 3.5*RFfreq, 未做转换
+2023-06-13 13:45:49,709 - Arc - WARNING - line: global f_4 = 4.5*RFfreq, 未做转换
+2023-06-13 13:45:49,709 - Arc - WARNING - line: global Z_load = if freq <= f_bb then Z_l_bb elseif freq <= f_1 then Z_l_fund elseif freq <= f_2 then Z_l_2 elseif freq <= f_3 then Z_l_3 elseif freq <= f_4 then Z_l_4 else Z_l_5 endif, 未做转换
+2023-06-13 13:45:49,709 - Arc - WARNING - line: Z_l_bb = Z0 + j*0, 未做转换
+2023-06-13 13:45:49,709 - Arc - WARNING - line: Z_l_fund = Z0 + j*0, 未做转换
+2023-06-13 13:45:49,709 - Arc - WARNING - line: Z_l_2 = Z0 + j*0, 未做转换
+2023-06-13 13:45:49,709 - Arc - WARNING - line: Z_l_3 = Z0 + j*0, 未做转换
+2023-06-13 13:45:49,710 - Arc - WARNING - line: Z_l_4 = Z0 + j*0, 未做转换
+2023-06-13 13:45:49,710 - Arc - WARNING - line: Z_l_5 = Z0 + j*0, 未做转换
+2023-06-13 13:45:49,710 - Arc - WARNING - line: Z_s =if freq <= f_bb then Z_s_bb elseif freq <= f_1 then Z_s_fund elseif freq <= f_2 then Z_s_2 elseif freq <= f_3 then Z_s_3 elseif freq <= f_4 then Z_s_4 else Z_s_5 endif, 未做转换
+2023-06-13 13:45:49,710 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:Term1
+2023-06-13 13:45:49,711 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:PORT1
+2023-06-13 13:45:49,711 - Arc - WARNING - line: RFfreq=850 MHz, 未做转换
+2023-06-13 13:45:49,711 - Arc - WARNING - line: fspacing=10 kHz, 未做转换
+2023-06-13 13:45:49,711 - Arc - WARNING - line: RFpower=10 _dBm, 未做转换
+2023-06-13 13:45:49,711 - Arc - WARNING - line(Vsource): V_Source:SRC2, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:45:49,711 - Arc - WARNING - line(Vsource): V_Source:SRC1, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:45:49,712 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan:Sweep1 SweepPlan[1]="Sweep1_seg1" SweepPlan[2]="Sweep1_seg2"
+2023-06-13 13:45:49,712 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan:Sweep1_seg1 Start=0 Stop=10 Step=2.5
+2023-06-13 13:45:49,712 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan:Sweep1_seg2 Start=11 Stop=16 Step=1
+2023-06-13 13:45:49,713 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\tc01t_pa_sp_dc_ac\tc01t_pa_sp_dc_ac.ads********************
+2023-06-13 13:45:49,715 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options
+2023-06-13 13:45:49,715 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC1
+2023-06-13 13:45:49,715 - Arc - WARNING - line(Vsource): V_Source:SRC2, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:45:49,715 - Arc - WARNING - line(Vsource): V_Source:SRC1, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:45:49,715 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC4
+2023-06-13 13:45:49,716 - Arc - WARNING - line: S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output", 未做转换
+2023-06-13 13:45:49,716 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: SP1_stim Start=0.1 GHz Stop=20 GHz Step=0.1 GHz
+2023-06-13 13:45:49,716 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:SP1_Output
+2023-06-13 13:45:49,716 - Arc - WARNING - line: Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2, 未做转换
+2023-06-13 13:45:49,717 - Arc - WARNING - line: P_Probe:P_Load  N__30 N__31, 未做转换
+2023-06-13 13:45:49,717 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options:
+2023-06-13 13:45:49,717 - Arc - WARNING - line: EnableAssertChecks=no EnableSpareRemoval=no, 未做转换
+2023-06-13 13:45:49,717 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:Term2
+2023-06-13 13:45:49,717 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC6
+2023-06-13 13:45:49,717 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC5
+2023-06-13 13:45:49,718 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:PORT1
+2023-06-13 13:45:49,718 - Arc - WARNING - line: PwrSplit2:PWR1 V_In N__19 N__17 SP21=0.707 SP31=0.707 SP11=0. SP22=0. Isolation=100. dB ZRef=50. Ohm CheckPassivity=1, 未做转换
+2023-06-13 13:45:49,718 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC3
+2023-06-13 13:45:49,718 - Arc - WARNING - line: TLIN:TL1  N__17 N__26 Z=50.0 Ohm E=90 F=RFfreq GHz, 未做转换
+2023-06-13 13:45:49,719 - Arc - WARNING - line: SRC:SRC10 N__30 N__25 R=0.1 Ohm C=Cpm1_2 pF, 未做转换
+2023-06-13 13:45:49,719 - Arc - WARNING - line: SRC:SRC8 N__10 0 R=0.1 Ohm C=Cpeak2_1 pF, 未做转换
+2023-06-13 13:45:49,719 - Arc - WARNING - line: SRC:SRC9 N__25 0 R=0.1 Ohm C=Cpm1_1 pF, 未做转换
+2023-06-13 13:45:49,719 - Arc - WARNING - line: SRC:SRC7 N__23 N__29 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 13:45:49,719 - Arc - WARNING - line: SRC:SRC4 N__24 N__11 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 13:45:49,719 - Arc - WARNING - line: SRC:SRC6 N__13 0 R=0.1 Ohm C=Cmain2_2 pF, 未做转换
+2023-06-13 13:45:49,719 - Arc - WARNING - line: SRC:SRC5 N__27 0 R=0.1 Ohm C=Cmain2_1 pF, 未做转换
+2023-06-13 13:45:49,720 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：AC:AC1 CalcNoise=no SortNoise=0 IncludePortNoise=yes BandwidthForNoise=1 Hz FreqConversion=no UseFiniteDiff=no StatusLevel=2 OutputBudgetIV=no DevOpPtLevel=0 SweepVar="freq" SweepPlan="AC1_stim" OutputPlan="AC1_Output"
+2023-06-13 13:45:49,720 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: AC1_stim Start=0.1 GHz Stop=10.0 GHz Step=0.1 GHz
+2023-06-13 13:45:49,720 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:AC1_Output
+2023-06-13 13:45:49,720 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC2
+2023-06-13 13:45:49,721 - Arc - WARNING - line: DC:DC1 StatusLevel=2 DevOpPtLevel=0 UseFiniteDiff=no PrintOpPoint=no Restart=1 OutputPlan="DC1_Output", 未做转换
+2023-06-13 13:45:49,721 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:DC1_Output
+2023-06-13 13:45:49,721 - Arc - WARNING - line(MODEL): VBIC, 暂未支持该语法转换：//model VBICM1 VBIC
+2023-06-13 13:45:49,722 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\tc02t_pa_hb_lssp\tc02t_pa_hb_lssp.ads********************
+2023-06-13 13:45:49,724 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options
+2023-06-13 13:45:49,724 - Arc - WARNING - line(MODEL): VBIC, 暂未支持该语法转换：//model VBICM1 VBIC
+2023-06-13 13:45:49,725 - Arc - WARNING - line(Vsource): V_Source:SRC1, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:45:49,725 - Arc - WARNING - line(Vsource): V_Source:SRC2, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:45:49,725 - Arc - WARNING - line: SRC:SRC10  N__30 N__25 R=0.1 Ohm C=Cpm1_2 pF, 未做转换
+2023-06-13 13:45:49,726 - Arc - WARNING - line: SRC:SRC8  N__10 0 R=0.1 Ohm C=Cpeak2_1 pF, 未做转换
+2023-06-13 13:45:49,726 - Arc - WARNING - line: SRC:SRC9  N__25 0 R=0.1 Ohm C=Cpm1_1 pF, 未做转换
+2023-06-13 13:45:49,726 - Arc - WARNING - line: SRC:SRC7  N__23 N__29 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 13:45:49,726 - Arc - WARNING - line: SRC:SRC4  N__24 N__11 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 13:45:49,726 - Arc - WARNING - line: SRC:SRC6  N__13 0 R=0.1 Ohm C=Cmain2_2 pF, 未做转换
+2023-06-13 13:45:49,726 - Arc - WARNING - line: SRC:SRC5 N__27 0 R=0.1 Ohm C=Cmain2_1 pF, 未做转换
+2023-06-13 13:45:49,727 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC1
+2023-06-13 13:45:49,727 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC2
+2023-06-13 13:45:49,727 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC3
+2023-06-13 13:45:49,727 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC4
+2023-06-13 13:45:49,728 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC5
+2023-06-13 13:45:49,728 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC6
+2023-06-13 13:45:49,728 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:PORT1
+2023-06-13 13:45:49,728 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:Term2
+2023-06-13 13:45:49,728 - Arc - WARNING - line: TLIN:TL1  N__17 N__26 Z=50.0 Ohm E=90 F=RFfreq GHz, 未做转换
+2023-06-13 13:45:49,729 - Arc - WARNING - line: PwrSplit2:PWR1  V_In N__19 N__17 SP21=0.707 SP31=0.707 SP11=0.  SP22=0.  Isolation=100. dB  ZRef=50. Ohm CheckPassivity=1, 未做转换
+2023-06-13 13:45:49,729 - Arc - WARNING - line: P_Probe:P_Load N__30 N__31, 未做转换
+2023-06-13 13:45:49,729 - Arc - WARNING - line: Tran:HB1_tran HB_Sol=1 SteadyState=1 StatusLevel=3 Freq[1]=RFfreq GHz Order[1]=5, 未做转换
+2023-06-13 13:45:49,730 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：Component:tahb_HB1 Module="ATAHB" Type="ModelExtractor"  Tran_Analysis="HB1_tran" HB_Analysis="HB1"
+2023-06-13 13:45:49,730 - Arc - WARNING - line: ParamSweep:Sweep1 SimInstanceName[1]="HB1" StatusLevel=2 SweepVar="Pavs" SweepPlan="Sweep1_stim", 未做转换
+2023-06-13 13:45:49,730 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: Sweep1_stim Start=-10 Stop=0 Step=1
+2023-06-13 13:45:49,731 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB1 MaxOrder=4 Freq[1]=RFfreq GHz Order[1]=5 StatusLevel=2 HBSS_WSP=0 OutputPlan="HB1_Output"
+2023-06-13 13:45:49,731 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB2 MaxOrder=4 Freq[1]=RFfreq GHz Order[1]=5 StatusLevel=2 CalcS_Params=yes LSSP_FreqAtPort[1]=RFfreq GHz LSSP_FreqAtPort[2]=RFfreq GHz SweepVar="RFfreq" SweepPlan="HB2_stim" OutputPlan="HB2_Output"
+2023-06-13 13:45:49,731 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: HB2_stim Start=2.1 Stop=2.5 Step=0.1
+2023-06-13 13:45:49,732 - Arc - WARNING - line: S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output", 未做转换
+2023-06-13 13:45:49,732 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: SP1_stim  Start=0.1 GHz Stop=20 GHz Step=0.1 GHz
+2023-06-13 13:45:49,733 - Arc - WARNING - line: Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2, 未做转换
+2023-06-13 13:45:49,733 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\tc02t_pa_hb_lssp_Harlmp\tc02t_pa_hb_lssp_Harlmp.ads********************
+2023-06-13 13:45:49,735 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options
+2023-06-13 13:45:49,735 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB1 MaxOrder=4 Freq[1]=RFfreq GHz Order[1]=5 StatusLevel=2 HBSS_WSP=0 OutputPlan="HB1_Output"
+2023-06-13 13:45:49,735 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:HB1_Output
+2023-06-13 13:45:49,735 - Arc - WARNING - line: Tran:HB1_tran HB_Sol=1 SteadyState=1 StatusLevel=3 Freq[1]=RFfreq GHz Order[1]=5, 未做转换
+2023-06-13 13:45:49,735 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：Component:tahb_HB1 Module="ATAHB" Type="ModelExtractor"  Tran_Analysis="HB1_tran" HB_Analysis="HB1"
+2023-06-13 13:45:49,735 - Arc - WARNING - line(Vsource): V_Source:SRC2, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:45:49,736 - Arc - WARNING - line(Vsource): V_Source:SRC1, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:45:49,736 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC2
+2023-06-13 13:45:49,736 - Arc - WARNING - line: S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output", 未做转换
+2023-06-13 13:45:49,737 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: SP1_stim Start=0.1 GHz Stop=20 GHz Step=0.1 GHz
+2023-06-13 13:45:49,737 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:SP1_Output
+2023-06-13 13:45:49,737 - Arc - WARNING - line: Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2, 未做转换
+2023-06-13 13:45:49,737 - Arc - WARNING - line: Z_l_2=10*Z0 + j*0, 未做转换
+2023-06-13 13:45:49,738 - Arc - WARNING - line: Z_l_fund=10 + j*0, 未做转换
+2023-06-13 13:45:49,738 - Arc - WARNING - line: Z_l_3 =10*Z0 + j*0, 未做转换
+2023-06-13 13:45:49,738 - Arc - WARNING - line: Z_l_4 =10* Z0 + j*0, 未做转换
+2023-06-13 13:45:49,738 - Arc - WARNING - line: Z_l_5 =10* Z0 + j*0, 未做转换
+2023-06-13 13:45:49,738 - Arc - WARNING - line: Z_s_fund =10 + j*0, 未做转换
+2023-06-13 13:45:49,738 - Arc - WARNING - line: Z_s_2 = 10* Z0 +j*0, 未做转换
+2023-06-13 13:45:49,739 - Arc - WARNING - line: Z_s_3 = 10* Z0 +j*0, 未做转换
+2023-06-13 13:45:49,739 - Arc - WARNING - line: Z_s_4 = 10* Z0 +j*0, 未做转换
+2023-06-13 13:45:49,739 - Arc - WARNING - line: Z_s_5 = 10* Z0 +j*0, 未做转换
+2023-06-13 13:45:49,739 - Arc - WARNING - line: P_Probe:P_Load N__30 N__31, 未做转换
+2023-06-13 13:45:49,740 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options:OPtions1
+2023-06-13 13:45:49,740 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:Term2
+2023-06-13 13:45:49,740 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC4
+2023-06-13 13:45:49,740 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC3
+2023-06-13 13:45:49,741 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:PORT1
+2023-06-13 13:45:49,741 - Arc - WARNING - line: PwrSplit2:PwR1 V_In N__19 N__17 SP21=0.707 SP31=0.707 SP11=0. SP22=0. Isolation=100. dB ZRef=50. Ohm CheckPassivity=1, 未做转换
+2023-06-13 13:45:49,741 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC6
+2023-06-13 13:45:49,741 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC1
+2023-06-13 13:45:49,742 - Arc - WARNING - line(R): R:R2, 暂未支持该语法转换：E=90
+2023-06-13 13:45:49,742 - Arc - WARNING - line(R): R:R2, 暂未支持该语法转换：F=RFfreq
+2023-06-13 13:45:49,742 - Arc - WARNING - line(R): R:R2, 暂未支持该语法转换：GHz
+2023-06-13 13:45:49,742 - Arc - WARNING - line: TLIN:TL1 N__17 N__26 Z=50.0 Ohm E=90 F=RFfreq GHz, 未做转换
+2023-06-13 13:45:49,743 - Arc - WARNING - line: SRC:SRC10 N__30 N__25 R=0.1 Ohm C=Cpm1_2 pF, 未做转换
+2023-06-13 13:45:49,743 - Arc - WARNING - line: SRC:SRC8 N__10 0 R=0.1 Ohm C=Cpeak2_1 pF, 未做转换
+2023-06-13 13:45:49,743 - Arc - WARNING - line: SRC:SRC9 N__25 0 R=0.1 Ohm C=Cpm1_1 pF, 未做转换
+2023-06-13 13:45:49,743 - Arc - WARNING - line: SRC:SRC7 N__23 N__29 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 13:45:49,743 - Arc - WARNING - line: SRC:SRC4 N__24 N__11 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 13:45:49,744 - Arc - WARNING - line: SRC:SRC6 N__13 0 R=0.1 Ohm C=Cmain2_2 pF, 未做转换
+2023-06-13 13:45:49,744 - Arc - WARNING - line: SRC:SRC5 N__27 0 R=0.1 Ohm C=Cmain2_1 pF, 未做转换
+2023-06-13 13:45:49,744 - Arc - WARNING - line: ParamSweep:Sweep1 SimInstanceName[1]="HB1" StatusLevel=2 SweepVar="Pavs" SweepPlan="Sweep1_stim", 未做转换
+2023-06-13 13:45:49,744 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: Sweep1_stim Start=-10 Stop=0 Step=1
+2023-06-13 13:45:49,745 - Arc - WARNING - line(MODEL): VBIC, 暂未支持该语法转换：//model VBICM1 VBIC
+2023-06-13 13:45:49,745 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC5
+2023-06-13 13:45:49,745 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB2 MaxOrder=4 Freq[1]=RFfreq GHz Order[1]=5 StatusLevel=2 CalcS_Params=yes LSSP_FreqAtPort[1]=RFfreq GHz LSSP_FreqAtPort[2]=RFfreq GHz SweepVar="RFfreq" SweepPlan="HB2_stim" OutputPlan="HB2_Output"
+2023-06-13 13:45:49,745 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: HB2_stim Start=2.1 Stop=2.5 Step=0.1
+2023-06-13 13:45:49,745 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:HB2_Output
+2023-06-13 13:45:49,746 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\tc02t_pa_hb_twotone\tc02t_pa_hb_twotone.ads********************
+2023-06-13 13:45:49,748 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options
+2023-06-13 13:45:49,748 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB1 MaxOrder=5 Freq[1]=(RFfreq-0.01) GHz Freq[2]=(RFfreq+0.01) GHz Order[1]=9 Order[2]=9 StatusLevel=2 HBSS_WSP=0 OutputPlan="HB1_Output"
+2023-06-13 13:45:49,749 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:HB1_Output
+2023-06-13 13:45:49,749 - Arc - WARNING - line: Tran:HB1_tran HB_Sol=1 StendyState=1 StatusLevel=3 Freq[1]=(RFfreq-0.01) GHz Order[1]=9, 未做转换
+2023-06-13 13:45:49,749 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：Component:tahb_HB1 Module="ATAHB" Type="ModelExtractor"  Tran_Analysis="HB1_tran" HB_Analysis="HB1"
+2023-06-13 13:45:49,749 - Arc - WARNING - line(Vsource): V_Source:SRC2, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:45:49,750 - Arc - WARNING - line(Vsource): V_Source:SRC1, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:45:49,750 - Arc - WARNING - line: S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output", 未做转换
+2023-06-13 13:45:49,750 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: SP1_stim Start=0.1 GHz Stop=20 GHz Step=0.1 GHz
+2023-06-13 13:45:49,750 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:SP1_Output
+2023-06-13 13:45:49,750 - Arc - WARNING - line: Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2, 未做转换
+2023-06-13 13:45:49,751 - Arc - WARNING - line: P_Probe:P_Load  N__30 N__31, 未做转换
+2023-06-13 13:45:49,751 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options:Options1
+2023-06-13 13:45:49,751 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:Term2
+2023-06-13 13:45:49,751 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC6
+2023-06-13 13:45:49,751 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC7
+2023-06-13 13:48:24,849 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\HB2TonePswp\HB2TonePswp.ads********************
+2023-06-13 13:48:24,851 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options
+2023-06-13 13:48:24,851 - Arc - WARNING - line: define Sample_PA ( N__38 N__37 N__39 N__36 ), 未做转换
+2023-06-13 13:48:24,851 - Arc - WARNING - line(MODEL): MSUB, 暂未支持该语法转换：//model glasstef MSUB
+2023-06-13 13:48:24,851 - Arc - WARNING - line: w=59.6 mil, 未做转换
+2023-06-13 13:48:24,851 - Arc - WARNING - line: eps=4.3-0.0015*((abs(freq)) **0.014), 未做转换
+2023-06-13 13:48:24,851 - Arc - WARNING - line(MODEL): HP_MOSFET, 暂未支持该语法转换：//model hpmos HP_MOSFET
+2023-06-13 13:48:24,852 - Arc - WARNING - line(hpmos): 暂未支持该 model 的转换："hpmos":HPMOS1
+2023-06-13 13:48:24,852 - Arc - WARNING - line: VIA2:V5 N__11 0 D=80 mil H=32.5 mil T=2.3 mil Rho=1.0 W=100 mil Temp=27.0, 未做转换
+2023-06-13 13:48:24,852 - Arc - WARNING - line: CAPP2:C7 N__10 N__14 C=7.5 pF TanD=7.3e-4 Q=25.4 FreqQ=443 MHz FreqRes=1600 MHz Exp=0.12, 未做转换
+2023-06-13 13:48:24,852 - Arc - WARNING - line: VIA2:V3 N__18 0 D=80 mil H=32.5 mil T=2.3 mil Rho=1.0 W=100 mil Temp=27.0, 未做转换
+2023-06-13 13:48:24,852 - Arc - WARNING - line: CAPP2:C11 N__25 N__9 C=39 pF TanD=6.5e-4 Q=25 FreqQ=472.3 MHz FreqRes=820.1 MHz Exp=0.17, 未做转换
+2023-06-13 13:48:24,853 - Arc - WARNING - line: VIA2:V2 N__21 0 D=80 mil H=32.5 mil T=2.3 mil Rho=1.0 W=100 mil Temp=27.0, 未做转换
+2023-06-13 13:48:24,853 - Arc - WARNING - line: CAPP2:C9 N__20 N__39 C=39 pF TanD=6.5e-4 Q=25 FreqQ=472.3 MHz FreqRes=820.1 MHz Exp=0.17, 未做转换
+2023-06-13 13:48:24,853 - Arc - WARNING - line: VIA2:V1 N_12 0 D=80 mil H=32.5 mil T=2.3 mil Rho=1.0 W=100 mil Temp=27.0, 未做转换
+2023-06-13 13:48:24,853 - Arc - WARNING - line: CAPP2:C8 N__13 N__36 C=39 pF TanD=6.5e-4 Q=25 FreqQ=472.3 MHz FreqRes=820.1 MHz Exp=0.17, 未做转换
+2023-06-13 13:48:24,853 - Arc - WARNING - line: CAPP2:C14 N__17 N__8 C=39 pF TanD=6.5e-4 Q=25 FreqQ=472.3 MHz FreqRes=820.1 MHz Exp=0.17, 未做转换
+2023-06-13 13:48:24,853 - Arc - WARNING - line: MLIN2:TL3 N__14 N__4 Subst="glasstef"  W=w L=610 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 13:48:24,854 - Arc - WARNING - line: MLIN2:TL1 N__8 N__14 Subst="glasstef" W=w L=1425 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 13:48:24,854 - Arc - WARNING - line: MLIN2:TL6 N__9 N__37 Subst="glasstef" W=w L=154 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 13:48:24,854 - Arc - WARNING - line: MLIN2:TL4 N__1 N__24 Subst="glasstef" W=w L=540 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 13:48:24,854 - Arc - WARNING - line: MLIN2:TL2 N__38 N__17 Subst="glasstef" W=w L=261 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 13:48:24,854 - Arc - WARNING - line: CAPP2:C13 N__19 N__24 C=8 pF TanD=7.3e-4 Q=25.4 FreqQ=443 MHz FreqRes=1600 MHz Exp=0.12, 未做转换
+2023-06-13 13:48:24,855 - Arc - WARNING - line: MLIN2:TL5 N__24 N__25 Subst="glasstef" W=w L=1161 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 13:48:24,855 - Arc - WARNING - line: end Sample_PA, 未做转换
+2023-06-13 13:48:24,855 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB1 MaxOrder=Max_IMD_order Freq[1]=RFfreq-fspacing/2 Freq[2]=RFfreq+fspacing/2 Order[1]=7 Order[2]=7 StatusLevel=2 FundOversample=1 Restart=no UseAllSS_Freqs=yes UseOutFile=no HBSS_WSP=0 UseInFile=no SweepVar="RFpower" SweepPlan="Sweep1" OutputPlan="HB1_Output"
+2023-06-13 13:48:24,855 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:HB1_Output
+2023-06-13 13:48:24,856 - Arc - WARNING - line: EquationName[1]="Max_IMD_order" EquationName[2]="RFfreq" UseSavedEquationNestLevel=yes SavedEquationNestLevel=2 UseDeviceCurrentNestLevel=no DeviceCurrentNestLevel=0 DeviceCurrentDeviceType="All" DeviceCurrentSymSyntax=yes UseCurrentNestLevel=yes CurrentNestLevel=999 UseDeviceVoltageNestLevel=no DeviceVoltageNestLevel=0 DeviceVoltageDeviceType="All", 未做转换
+2023-06-13 13:48:24,856 - Arc - WARNING - line: Tran:HB1_tran HB_Sol=1 SteadyState=1 StatusLevel=3 Freq[1]=RFfreq-fspacing/2 Order[1]=7, 未做转换
+2023-06-13 13:48:24,856 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：Component:tahb_HB1 Module="ATAHB" Type="ModelExtractor"  Tran_Analysis="HB1_tran" HB_Analysis="HB1"
+2023-06-13 13:48:24,856 - Arc - WARNING - line: Sample_PA:X1  N__3 N__1 N__2 N__0, 未做转换
+2023-06-13 13:48:24,857 - Arc - WARNING - line: global f_bb=0.5*RFfreq, 未做转换
+2023-06-13 13:48:24,857 - Arc - WARNING - line: global f_1 = 1.5*RFfreq, 未做转换
+2023-06-13 13:48:24,857 - Arc - WARNING - line: global f_2 = 2.5*RFfreq, 未做转换
+2023-06-13 13:48:24,857 - Arc - WARNING - line: global f_3 = 3.5*RFfreq, 未做转换
+2023-06-13 13:48:24,857 - Arc - WARNING - line: global f_4 = 4.5*RFfreq, 未做转换
+2023-06-13 13:48:24,857 - Arc - WARNING - line: global Z_load = if freq <= f_bb then Z_l_bb elseif freq <= f_1 then Z_l_fund elseif freq <= f_2 then Z_l_2 elseif freq <= f_3 then Z_l_3 elseif freq <= f_4 then Z_l_4 else Z_l_5 endif, 未做转换
+2023-06-13 13:48:24,858 - Arc - WARNING - line: Z_l_bb = Z0 + j*0, 未做转换
+2023-06-13 13:48:24,858 - Arc - WARNING - line: Z_l_fund = Z0 + j*0, 未做转换
+2023-06-13 13:48:24,858 - Arc - WARNING - line: Z_l_2 = Z0 + j*0, 未做转换
+2023-06-13 13:48:24,858 - Arc - WARNING - line: Z_l_3 = Z0 + j*0, 未做转换
+2023-06-13 13:48:24,858 - Arc - WARNING - line: Z_l_4 = Z0 + j*0, 未做转换
+2023-06-13 13:48:24,858 - Arc - WARNING - line: Z_l_5 = Z0 + j*0, 未做转换
+2023-06-13 13:48:24,858 - Arc - WARNING - line: Z_s =if freq <= f_bb then Z_s_bb elseif freq <= f_1 then Z_s_fund elseif freq <= f_2 then Z_s_2 elseif freq <= f_3 then Z_s_3 elseif freq <= f_4 then Z_s_4 else Z_s_5 endif, 未做转换
+2023-06-13 13:48:24,859 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:Term1
+2023-06-13 13:48:24,859 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:PORT1
+2023-06-13 13:48:24,859 - Arc - WARNING - line: RFfreq=850 MHz, 未做转换
+2023-06-13 13:48:24,859 - Arc - WARNING - line: fspacing=10 kHz, 未做转换
+2023-06-13 13:48:24,859 - Arc - WARNING - line: RFpower=10 _dBm, 未做转换
+2023-06-13 13:48:24,859 - Arc - WARNING - line(Vsource): V_Source:SRC2, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:48:24,859 - Arc - WARNING - line(Vsource): V_Source:SRC1, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:48:24,860 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan:Sweep1 SweepPlan[1]="Sweep1_seg1" SweepPlan[2]="Sweep1_seg2"
+2023-06-13 13:48:24,860 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan:Sweep1_seg1 Start=0 Stop=10 Step=2.5
+2023-06-13 13:48:24,860 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan:Sweep1_seg2 Start=11 Stop=16 Step=1
+2023-06-13 13:48:24,860 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\tc01t_pa_sp_dc_ac\tc01t_pa_sp_dc_ac.ads********************
+2023-06-13 13:48:24,862 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options
+2023-06-13 13:48:24,862 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC1
+2023-06-13 13:48:24,862 - Arc - WARNING - line(Vsource): V_Source:SRC2, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:48:24,863 - Arc - WARNING - line(Vsource): V_Source:SRC1, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:48:24,863 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC4
+2023-06-13 13:48:24,863 - Arc - WARNING - line: S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output", 未做转换
+2023-06-13 13:48:24,863 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: SP1_stim Start=0.1 GHz Stop=20 GHz Step=0.1 GHz
+2023-06-13 13:48:24,864 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:SP1_Output
+2023-06-13 13:48:24,864 - Arc - WARNING - line: Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2, 未做转换
+2023-06-13 13:48:24,864 - Arc - WARNING - line: P_Probe:P_Load  N__30 N__31, 未做转换
+2023-06-13 13:48:24,864 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options:
+2023-06-13 13:48:24,864 - Arc - WARNING - line: EnableAssertChecks=no EnableSpareRemoval=no, 未做转换
+2023-06-13 13:48:24,864 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:Term2
+2023-06-13 13:48:24,864 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC6
+2023-06-13 13:48:24,865 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC5
+2023-06-13 13:48:24,865 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:PORT1
+2023-06-13 13:48:24,865 - Arc - WARNING - line: PwrSplit2:PWR1 V_In N__19 N__17 SP21=0.707 SP31=0.707 SP11=0. SP22=0. Isolation=100. dB ZRef=50. Ohm CheckPassivity=1, 未做转换
+2023-06-13 13:48:24,865 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC3
+2023-06-13 13:48:24,865 - Arc - WARNING - line: TLIN:TL1  N__17 N__26 Z=50.0 Ohm E=90 F=RFfreq GHz, 未做转换
+2023-06-13 13:48:24,866 - Arc - WARNING - line: SRC:SRC10 N__30 N__25 R=0.1 Ohm C=Cpm1_2 pF, 未做转换
+2023-06-13 13:48:24,866 - Arc - WARNING - line: SRC:SRC8 N__10 0 R=0.1 Ohm C=Cpeak2_1 pF, 未做转换
+2023-06-13 13:48:24,866 - Arc - WARNING - line: SRC:SRC9 N__25 0 R=0.1 Ohm C=Cpm1_1 pF, 未做转换
+2023-06-13 13:48:24,866 - Arc - WARNING - line: SRC:SRC7 N__23 N__29 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 13:48:24,866 - Arc - WARNING - line: SRC:SRC4 N__24 N__11 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 13:48:24,866 - Arc - WARNING - line: SRC:SRC6 N__13 0 R=0.1 Ohm C=Cmain2_2 pF, 未做转换
+2023-06-13 13:48:24,867 - Arc - WARNING - line: SRC:SRC5 N__27 0 R=0.1 Ohm C=Cmain2_1 pF, 未做转换
+2023-06-13 13:48:24,867 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：AC:AC1 CalcNoise=no SortNoise=0 IncludePortNoise=yes BandwidthForNoise=1 Hz FreqConversion=no UseFiniteDiff=no StatusLevel=2 OutputBudgetIV=no DevOpPtLevel=0 SweepVar="freq" SweepPlan="AC1_stim" OutputPlan="AC1_Output"
+2023-06-13 13:48:24,867 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: AC1_stim Start=0.1 GHz Stop=10.0 GHz Step=0.1 GHz
+2023-06-13 13:48:24,867 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:AC1_Output
+2023-06-13 13:48:24,867 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC2
+2023-06-13 13:48:24,867 - Arc - WARNING - line: DC:DC1 StatusLevel=2 DevOpPtLevel=0 UseFiniteDiff=no PrintOpPoint=no Restart=1 OutputPlan="DC1_Output", 未做转换
+2023-06-13 13:48:24,868 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:DC1_Output
+2023-06-13 13:48:24,868 - Arc - WARNING - line(MODEL): VBIC, 暂未支持该语法转换：//model VBICM1 VBIC
+2023-06-13 13:48:24,868 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\tc02t_pa_hb_lssp\tc02t_pa_hb_lssp.ads********************
+2023-06-13 13:48:24,870 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options
+2023-06-13 13:48:24,870 - Arc - WARNING - line(MODEL): VBIC, 暂未支持该语法转换：//model VBICM1 VBIC
+2023-06-13 13:48:24,870 - Arc - WARNING - line(Vsource): V_Source:SRC1, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:48:24,871 - Arc - WARNING - line(Vsource): V_Source:SRC2, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:48:24,871 - Arc - WARNING - line: SRC:SRC10  N__30 N__25 R=0.1 Ohm C=Cpm1_2 pF, 未做转换
+2023-06-13 13:48:24,871 - Arc - WARNING - line: SRC:SRC8  N__10 0 R=0.1 Ohm C=Cpeak2_1 pF, 未做转换
+2023-06-13 13:48:24,871 - Arc - WARNING - line: SRC:SRC9  N__25 0 R=0.1 Ohm C=Cpm1_1 pF, 未做转换
+2023-06-13 13:48:24,871 - Arc - WARNING - line: SRC:SRC7  N__23 N__29 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 13:48:24,871 - Arc - WARNING - line: SRC:SRC4  N__24 N__11 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 13:48:24,871 - Arc - WARNING - line: SRC:SRC6  N__13 0 R=0.1 Ohm C=Cmain2_2 pF, 未做转换
+2023-06-13 13:48:24,872 - Arc - WARNING - line: SRC:SRC5 N__27 0 R=0.1 Ohm C=Cmain2_1 pF, 未做转换
+2023-06-13 13:48:24,872 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC1
+2023-06-13 13:48:24,872 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC2
+2023-06-13 13:48:24,872 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC3
+2023-06-13 13:48:24,872 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC4
+2023-06-13 13:48:24,872 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC5
+2023-06-13 13:48:24,873 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC6
+2023-06-13 13:48:24,873 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:PORT1
+2023-06-13 13:48:24,873 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:Term2
+2023-06-13 13:48:24,873 - Arc - WARNING - line: TLIN:TL1  N__17 N__26 Z=50.0 Ohm E=90 F=RFfreq GHz, 未做转换
+2023-06-13 13:48:24,873 - Arc - WARNING - line: PwrSplit2:PWR1  V_In N__19 N__17 SP21=0.707 SP31=0.707 SP11=0.  SP22=0.  Isolation=100. dB  ZRef=50. Ohm CheckPassivity=1, 未做转换
+2023-06-13 13:48:24,873 - Arc - WARNING - line: P_Probe:P_Load N__30 N__31, 未做转换
+2023-06-13 13:48:24,874 - Arc - WARNING - line: Tran:HB1_tran HB_Sol=1 SteadyState=1 StatusLevel=3 Freq[1]=RFfreq GHz Order[1]=5, 未做转换
+2023-06-13 13:48:24,874 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：Component:tahb_HB1 Module="ATAHB" Type="ModelExtractor"  Tran_Analysis="HB1_tran" HB_Analysis="HB1"
+2023-06-13 13:48:24,874 - Arc - WARNING - line: ParamSweep:Sweep1 SimInstanceName[1]="HB1" StatusLevel=2 SweepVar="Pavs" SweepPlan="Sweep1_stim", 未做转换
+2023-06-13 13:48:24,874 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: Sweep1_stim Start=-10 Stop=0 Step=1
+2023-06-13 13:48:24,875 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB1 MaxOrder=4 Freq[1]=RFfreq GHz Order[1]=5 StatusLevel=2 HBSS_WSP=0 OutputPlan="HB1_Output"
+2023-06-13 13:48:24,875 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB2 MaxOrder=4 Freq[1]=RFfreq GHz Order[1]=5 StatusLevel=2 CalcS_Params=yes LSSP_FreqAtPort[1]=RFfreq GHz LSSP_FreqAtPort[2]=RFfreq GHz SweepVar="RFfreq" SweepPlan="HB2_stim" OutputPlan="HB2_Output"
+2023-06-13 13:48:24,875 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: HB2_stim Start=2.1 Stop=2.5 Step=0.1
+2023-06-13 13:48:24,875 - Arc - WARNING - line: S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output", 未做转换
+2023-06-13 13:48:24,876 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: SP1_stim  Start=0.1 GHz Stop=20 GHz Step=0.1 GHz
+2023-06-13 13:48:24,876 - Arc - WARNING - line: Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2, 未做转换
+2023-06-13 13:48:24,877 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\tc02t_pa_hb_lssp_Harlmp\tc02t_pa_hb_lssp_Harlmp.ads********************
+2023-06-13 13:48:24,878 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options
+2023-06-13 13:48:24,878 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB1 MaxOrder=4 Freq[1]=RFfreq GHz Order[1]=5 StatusLevel=2 HBSS_WSP=0 OutputPlan="HB1_Output"
+2023-06-13 13:48:24,879 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:HB1_Output
+2023-06-13 13:48:24,879 - Arc - WARNING - line: Tran:HB1_tran HB_Sol=1 SteadyState=1 StatusLevel=3 Freq[1]=RFfreq GHz Order[1]=5, 未做转换
+2023-06-13 13:48:24,879 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：Component:tahb_HB1 Module="ATAHB" Type="ModelExtractor"  Tran_Analysis="HB1_tran" HB_Analysis="HB1"
+2023-06-13 13:48:24,879 - Arc - WARNING - line(Vsource): V_Source:SRC2, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:48:24,880 - Arc - WARNING - line(Vsource): V_Source:SRC1, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:48:24,880 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC2
+2023-06-13 13:48:24,880 - Arc - WARNING - line: S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output", 未做转换
+2023-06-13 13:48:24,880 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: SP1_stim Start=0.1 GHz Stop=20 GHz Step=0.1 GHz
+2023-06-13 13:48:24,880 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:SP1_Output
+2023-06-13 13:48:24,880 - Arc - WARNING - line: Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2, 未做转换
+2023-06-13 13:48:24,881 - Arc - WARNING - line: Z_l_2=10*Z0 + j*0, 未做转换
+2023-06-13 13:48:24,881 - Arc - WARNING - line: Z_l_fund=10 + j*0, 未做转换
+2023-06-13 13:48:24,881 - Arc - WARNING - line: Z_l_3 =10*Z0 + j*0, 未做转换
+2023-06-13 13:48:24,881 - Arc - WARNING - line: Z_l_4 =10* Z0 + j*0, 未做转换
+2023-06-13 13:48:24,881 - Arc - WARNING - line: Z_l_5 =10* Z0 + j*0, 未做转换
+2023-06-13 13:48:24,881 - Arc - WARNING - line: Z_s_fund =10 + j*0, 未做转换
+2023-06-13 13:48:24,881 - Arc - WARNING - line: Z_s_2 = 10* Z0 +j*0, 未做转换
+2023-06-13 13:48:24,882 - Arc - WARNING - line: Z_s_3 = 10* Z0 +j*0, 未做转换
+2023-06-13 13:48:24,882 - Arc - WARNING - line: Z_s_4 = 10* Z0 +j*0, 未做转换
+2023-06-13 13:48:24,882 - Arc - WARNING - line: Z_s_5 = 10* Z0 +j*0, 未做转换
+2023-06-13 13:48:24,882 - Arc - WARNING - line: P_Probe:P_Load N__30 N__31, 未做转换
+2023-06-13 13:48:24,882 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options:OPtions1
+2023-06-13 13:48:24,882 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:Term2
+2023-06-13 13:48:24,883 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC4
+2023-06-13 13:48:24,883 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC3
+2023-06-13 13:48:24,883 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:PORT1
+2023-06-13 13:48:24,883 - Arc - WARNING - line: PwrSplit2:PwR1 V_In N__19 N__17 SP21=0.707 SP31=0.707 SP11=0. SP22=0. Isolation=100. dB ZRef=50. Ohm CheckPassivity=1, 未做转换
+2023-06-13 13:48:24,883 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC6
+2023-06-13 13:48:24,883 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC1
+2023-06-13 13:48:24,884 - Arc - WARNING - line(R): R:R2, 暂未支持该语法转换：E=90
+2023-06-13 13:48:24,884 - Arc - WARNING - line(R): R:R2, 暂未支持该语法转换：F=RFfreq
+2023-06-13 13:48:24,884 - Arc - WARNING - line(R): R:R2, 暂未支持该语法转换：GHz
+2023-06-13 13:48:24,884 - Arc - WARNING - line: TLIN:TL1 N__17 N__26 Z=50.0 Ohm E=90 F=RFfreq GHz, 未做转换
+2023-06-13 13:48:24,884 - Arc - WARNING - line: SRC:SRC10 N__30 N__25 R=0.1 Ohm C=Cpm1_2 pF, 未做转换
+2023-06-13 13:48:24,884 - Arc - WARNING - line: SRC:SRC8 N__10 0 R=0.1 Ohm C=Cpeak2_1 pF, 未做转换
+2023-06-13 13:48:24,884 - Arc - WARNING - line: SRC:SRC9 N__25 0 R=0.1 Ohm C=Cpm1_1 pF, 未做转换
+2023-06-13 13:48:24,885 - Arc - WARNING - line: SRC:SRC7 N__23 N__29 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 13:48:24,885 - Arc - WARNING - line: SRC:SRC4 N__24 N__11 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 13:48:24,885 - Arc - WARNING - line: SRC:SRC6 N__13 0 R=0.1 Ohm C=Cmain2_2 pF, 未做转换
+2023-06-13 13:48:24,885 - Arc - WARNING - line: SRC:SRC5 N__27 0 R=0.1 Ohm C=Cmain2_1 pF, 未做转换
+2023-06-13 13:48:24,885 - Arc - WARNING - line: ParamSweep:Sweep1 SimInstanceName[1]="HB1" StatusLevel=2 SweepVar="Pavs" SweepPlan="Sweep1_stim", 未做转换
+2023-06-13 13:48:24,885 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: Sweep1_stim Start=-10 Stop=0 Step=1
+2023-06-13 13:48:24,886 - Arc - WARNING - line(MODEL): VBIC, 暂未支持该语法转换：//model VBICM1 VBIC
+2023-06-13 13:48:24,886 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC5
+2023-06-13 13:48:24,886 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB2 MaxOrder=4 Freq[1]=RFfreq GHz Order[1]=5 StatusLevel=2 CalcS_Params=yes LSSP_FreqAtPort[1]=RFfreq GHz LSSP_FreqAtPort[2]=RFfreq GHz SweepVar="RFfreq" SweepPlan="HB2_stim" OutputPlan="HB2_Output"
+2023-06-13 13:48:24,886 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: HB2_stim Start=2.1 Stop=2.5 Step=0.1
+2023-06-13 13:48:24,886 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:HB2_Output
+2023-06-13 13:48:24,887 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\tc02t_pa_hb_twotone\tc02t_pa_hb_twotone.ads********************
+2023-06-13 13:48:24,892 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options
+2023-06-13 13:48:24,893 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB1 MaxOrder=5 Freq[1]=(RFfreq-0.01) GHz Freq[2]=(RFfreq+0.01) GHz Order[1]=9 Order[2]=9 StatusLevel=2 HBSS_WSP=0 OutputPlan="HB1_Output"
+2023-06-13 13:48:24,893 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:HB1_Output
+2023-06-13 13:48:24,893 - Arc - WARNING - line: Tran:HB1_tran HB_Sol=1 StendyState=1 StatusLevel=3 Freq[1]=(RFfreq-0.01) GHz Order[1]=9, 未做转换
+2023-06-13 13:48:24,893 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：Component:tahb_HB1 Module="ATAHB" Type="ModelExtractor"  Tran_Analysis="HB1_tran" HB_Analysis="HB1"
+2023-06-13 13:48:24,893 - Arc - WARNING - line(Vsource): V_Source:SRC2, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:48:24,894 - Arc - WARNING - line(Vsource): V_Source:SRC1, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 13:48:24,894 - Arc - WARNING - line: S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output", 未做转换
+2023-06-13 13:48:24,894 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: SP1_stim Start=0.1 GHz Stop=20 GHz Step=0.1 GHz
+2023-06-13 13:48:24,894 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:SP1_Output
+2023-06-13 13:48:24,894 - Arc - WARNING - line: Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2, 未做转换
+2023-06-13 13:48:24,894 - Arc - WARNING - line: P_Probe:P_Load  N__30 N__31, 未做转换
+2023-06-13 13:48:24,895 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options:Options1
+2023-06-13 13:48:24,895 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:Term2
+2023-06-13 13:48:24,895 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC6
+2023-06-13 13:48:24,895 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC7
+2023-06-13 14:04:16,070 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\HB2TonePswp\HB2TonePswp.ads********************
+2023-06-13 14:04:16,076 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options
+2023-06-13 14:04:16,076 - Arc - WARNING - line: define Sample_PA ( N__38 N__37 N__39 N__36 ), 未做转换
+2023-06-13 14:04:16,076 - Arc - WARNING - line(MODEL): MSUB, 暂未支持该语法转换：//model glasstef MSUB
+2023-06-13 14:04:16,076 - Arc - WARNING - line: w=59.6 mil, 未做转换
+2023-06-13 14:04:16,077 - Arc - WARNING - line: eps=4.3-0.0015*((abs(freq)) **0.014), 未做转换
+2023-06-13 14:04:16,077 - Arc - WARNING - line(MODEL): HP_MOSFET, 暂未支持该语法转换：//model hpmos HP_MOSFET
+2023-06-13 14:04:16,077 - Arc - WARNING - line(hpmos): 暂未支持该 model 的转换："hpmos":HPMOS1
+2023-06-13 14:04:16,077 - Arc - WARNING - line: VIA2:V5 N__11 0 D=80 mil H=32.5 mil T=2.3 mil Rho=1.0 W=100 mil Temp=27.0, 未做转换
+2023-06-13 14:04:16,077 - Arc - WARNING - line: CAPP2:C7 N__10 N__14 C=7.5 pF TanD=7.3e-4 Q=25.4 FreqQ=443 MHz FreqRes=1600 MHz Exp=0.12, 未做转换
+2023-06-13 14:04:16,078 - Arc - WARNING - line: VIA2:V3 N__18 0 D=80 mil H=32.5 mil T=2.3 mil Rho=1.0 W=100 mil Temp=27.0, 未做转换
+2023-06-13 14:04:16,078 - Arc - WARNING - line: CAPP2:C11 N__25 N__9 C=39 pF TanD=6.5e-4 Q=25 FreqQ=472.3 MHz FreqRes=820.1 MHz Exp=0.17, 未做转换
+2023-06-13 14:04:16,078 - Arc - WARNING - line: VIA2:V2 N__21 0 D=80 mil H=32.5 mil T=2.3 mil Rho=1.0 W=100 mil Temp=27.0, 未做转换
+2023-06-13 14:04:16,078 - Arc - WARNING - line: CAPP2:C9 N__20 N__39 C=39 pF TanD=6.5e-4 Q=25 FreqQ=472.3 MHz FreqRes=820.1 MHz Exp=0.17, 未做转换
+2023-06-13 14:04:16,079 - Arc - WARNING - line: VIA2:V1 N_12 0 D=80 mil H=32.5 mil T=2.3 mil Rho=1.0 W=100 mil Temp=27.0, 未做转换
+2023-06-13 14:04:16,079 - Arc - WARNING - line: CAPP2:C8 N__13 N__36 C=39 pF TanD=6.5e-4 Q=25 FreqQ=472.3 MHz FreqRes=820.1 MHz Exp=0.17, 未做转换
+2023-06-13 14:04:16,079 - Arc - WARNING - line: CAPP2:C14 N__17 N__8 C=39 pF TanD=6.5e-4 Q=25 FreqQ=472.3 MHz FreqRes=820.1 MHz Exp=0.17, 未做转换
+2023-06-13 14:04:16,079 - Arc - WARNING - line: MLIN2:TL3 N__14 N__4 Subst="glasstef"  W=w L=610 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 14:04:16,079 - Arc - WARNING - line: MLIN2:TL1 N__8 N__14 Subst="glasstef" W=w L=1425 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 14:04:16,080 - Arc - WARNING - line: MLIN2:TL6 N__9 N__37 Subst="glasstef" W=w L=154 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 14:04:16,080 - Arc - WARNING - line: MLIN2:TL4 N__1 N__24 Subst="glasstef" W=w L=540 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 14:04:16,080 - Arc - WARNING - line: MLIN2:TL2 N__38 N__17 Subst="glasstef" W=w L=261 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 14:04:16,080 - Arc - WARNING - line: CAPP2:C13 N__19 N__24 C=8 pF TanD=7.3e-4 Q=25.4 FreqQ=443 MHz FreqRes=1600 MHz Exp=0.12, 未做转换
+2023-06-13 14:04:16,081 - Arc - WARNING - line: MLIN2:TL5 N__24 N__25 Subst="glasstef" W=w L=1161 mil Temp=27.0 Mod=1, 未做转换
+2023-06-13 14:04:16,081 - Arc - WARNING - line: end Sample_PA, 未做转换
+2023-06-13 14:04:16,081 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB1 MaxOrder=Max_IMD_order Freq[1]=RFfreq-fspacing/2 Freq[2]=RFfreq+fspacing/2 Order[1]=7 Order[2]=7 StatusLevel=2 FundOversample=1 Restart=no UseAllSS_Freqs=yes UseOutFile=no HBSS_WSP=0 UseInFile=no SweepVar="RFpower" SweepPlan="Sweep1" OutputPlan="HB1_Output"
+2023-06-13 14:04:16,081 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:HB1_Output
+2023-06-13 14:04:16,081 - Arc - WARNING - line: EquationName[1]="Max_IMD_order" EquationName[2]="RFfreq" UseSavedEquationNestLevel=yes SavedEquationNestLevel=2 UseDeviceCurrentNestLevel=no DeviceCurrentNestLevel=0 DeviceCurrentDeviceType="All" DeviceCurrentSymSyntax=yes UseCurrentNestLevel=yes CurrentNestLevel=999 UseDeviceVoltageNestLevel=no DeviceVoltageNestLevel=0 DeviceVoltageDeviceType="All", 未做转换
+2023-06-13 14:04:16,082 - Arc - WARNING - line: Tran:HB1_tran HB_Sol=1 SteadyState=1 StatusLevel=3 Freq[1]=RFfreq-fspacing/2 Order[1]=7, 未做转换
+2023-06-13 14:04:16,082 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：Component:tahb_HB1 Module="ATAHB" Type="ModelExtractor"  Tran_Analysis="HB1_tran" HB_Analysis="HB1"
+2023-06-13 14:04:16,082 - Arc - WARNING - line: Sample_PA:X1  N__3 N__1 N__2 N__0, 未做转换
+2023-06-13 14:04:16,082 - Arc - WARNING - line: global f_bb=0.5*RFfreq, 未做转换
+2023-06-13 14:04:16,082 - Arc - WARNING - line: global f_1 = 1.5*RFfreq, 未做转换
+2023-06-13 14:04:16,083 - Arc - WARNING - line: global f_2 = 2.5*RFfreq, 未做转换
+2023-06-13 14:04:16,083 - Arc - WARNING - line: global f_3 = 3.5*RFfreq, 未做转换
+2023-06-13 14:04:16,083 - Arc - WARNING - line: global f_4 = 4.5*RFfreq, 未做转换
+2023-06-13 14:04:16,083 - Arc - WARNING - line: global Z_load = if freq <= f_bb then Z_l_bb elseif freq <= f_1 then Z_l_fund elseif freq <= f_2 then Z_l_2 elseif freq <= f_3 then Z_l_3 elseif freq <= f_4 then Z_l_4 else Z_l_5 endif, 未做转换
+2023-06-13 14:04:16,083 - Arc - WARNING - line: Z_l_bb = Z0 + j*0, 未做转换
+2023-06-13 14:04:16,083 - Arc - WARNING - line: Z_l_fund = Z0 + j*0, 未做转换
+2023-06-13 14:04:16,084 - Arc - WARNING - line: Z_l_2 = Z0 + j*0, 未做转换
+2023-06-13 14:04:16,084 - Arc - WARNING - line: Z_l_3 = Z0 + j*0, 未做转换
+2023-06-13 14:04:16,084 - Arc - WARNING - line: Z_l_4 = Z0 + j*0, 未做转换
+2023-06-13 14:04:16,084 - Arc - WARNING - line: Z_l_5 = Z0 + j*0, 未做转换
+2023-06-13 14:04:16,084 - Arc - WARNING - line: Z_s =if freq <= f_bb then Z_s_bb elseif freq <= f_1 then Z_s_fund elseif freq <= f_2 then Z_s_2 elseif freq <= f_3 then Z_s_3 elseif freq <= f_4 then Z_s_4 else Z_s_5 endif, 未做转换
+2023-06-13 14:04:16,085 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:Term1
+2023-06-13 14:04:16,085 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:PORT1
+2023-06-13 14:04:16,085 - Arc - WARNING - line: RFfreq=850 MHz, 未做转换
+2023-06-13 14:04:16,085 - Arc - WARNING - line: fspacing=10 kHz, 未做转换
+2023-06-13 14:04:16,085 - Arc - WARNING - line: RFpower=10 _dBm, 未做转换
+2023-06-13 14:04:16,085 - Arc - WARNING - line(Vsource): V_Source:SRC2, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 14:04:16,086 - Arc - WARNING - line(Vsource): V_Source:SRC1, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 14:04:16,086 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan:Sweep1 SweepPlan[1]="Sweep1_seg1" SweepPlan[2]="Sweep1_seg2"
+2023-06-13 14:04:16,086 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan:Sweep1_seg1 Start=0 Stop=10 Step=2.5
+2023-06-13 14:04:16,086 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan:Sweep1_seg2 Start=11 Stop=16 Step=1
+2023-06-13 14:04:16,087 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\tc01t_pa_sp_dc_ac\tc01t_pa_sp_dc_ac.ads********************
+2023-06-13 14:04:16,089 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options
+2023-06-13 14:04:16,089 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC1
+2023-06-13 14:04:16,089 - Arc - WARNING - line(Vsource): V_Source:SRC2, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 14:04:16,089 - Arc - WARNING - line(Vsource): V_Source:SRC1, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 14:04:16,090 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC4
+2023-06-13 14:04:16,090 - Arc - WARNING - line: S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output", 未做转换
+2023-06-13 14:04:16,090 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: SP1_stim Start=0.1 GHz Stop=20 GHz Step=0.1 GHz
+2023-06-13 14:04:16,090 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:SP1_Output
+2023-06-13 14:04:16,090 - Arc - WARNING - line: Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2, 未做转换
+2023-06-13 14:04:16,091 - Arc - WARNING - line: P_Probe:P_Load  N__30 N__31, 未做转换
+2023-06-13 14:04:16,091 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options:
+2023-06-13 14:04:16,091 - Arc - WARNING - line: EnableAssertChecks=no EnableSpareRemoval=no, 未做转换
+2023-06-13 14:04:16,091 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:Term2
+2023-06-13 14:04:16,091 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC6
+2023-06-13 14:04:16,091 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC5
+2023-06-13 14:04:16,092 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:PORT1
+2023-06-13 14:04:16,092 - Arc - WARNING - line: PwrSplit2:PWR1 V_In N__19 N__17 SP21=0.707 SP31=0.707 SP11=0. SP22=0. Isolation=100. dB ZRef=50. Ohm CheckPassivity=1, 未做转换
+2023-06-13 14:04:16,092 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC3
+2023-06-13 14:04:16,092 - Arc - WARNING - line: TLIN:TL1  N__17 N__26 Z=50.0 Ohm E=90 F=RFfreq GHz, 未做转换
+2023-06-13 14:04:16,092 - Arc - WARNING - line: SRC:SRC10 N__30 N__25 R=0.1 Ohm C=Cpm1_2 pF, 未做转换
+2023-06-13 14:04:16,093 - Arc - WARNING - line: SRC:SRC8 N__10 0 R=0.1 Ohm C=Cpeak2_1 pF, 未做转换
+2023-06-13 14:04:16,093 - Arc - WARNING - line: SRC:SRC9 N__25 0 R=0.1 Ohm C=Cpm1_1 pF, 未做转换
+2023-06-13 14:04:16,093 - Arc - WARNING - line: SRC:SRC7 N__23 N__29 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 14:04:16,093 - Arc - WARNING - line: SRC:SRC4 N__24 N__11 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 14:04:16,093 - Arc - WARNING - line: SRC:SRC6 N__13 0 R=0.1 Ohm C=Cmain2_2 pF, 未做转换
+2023-06-13 14:04:16,093 - Arc - WARNING - line: SRC:SRC5 N__27 0 R=0.1 Ohm C=Cmain2_1 pF, 未做转换
+2023-06-13 14:04:16,093 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：AC:AC1 CalcNoise=no SortNoise=0 IncludePortNoise=yes BandwidthForNoise=1 Hz FreqConversion=no UseFiniteDiff=no StatusLevel=2 OutputBudgetIV=no DevOpPtLevel=0 SweepVar="freq" SweepPlan="AC1_stim" OutputPlan="AC1_Output"
+2023-06-13 14:04:16,094 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: AC1_stim Start=0.1 GHz Stop=10.0 GHz Step=0.1 GHz
+2023-06-13 14:04:16,094 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:AC1_Output
+2023-06-13 14:04:16,094 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC2
+2023-06-13 14:04:16,094 - Arc - WARNING - line: DC:DC1 StatusLevel=2 DevOpPtLevel=0 UseFiniteDiff=no PrintOpPoint=no Restart=1 OutputPlan="DC1_Output", 未做转换
+2023-06-13 14:04:16,095 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:DC1_Output
+2023-06-13 14:04:16,095 - Arc - WARNING - line(MODEL): VBIC, 暂未支持该语法转换：//model VBICM1 VBIC
+2023-06-13 14:04:16,095 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\tc02t_pa_hb_lssp\tc02t_pa_hb_lssp.ads********************
+2023-06-13 14:04:16,097 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options
+2023-06-13 14:04:16,097 - Arc - WARNING - line(MODEL): VBIC, 暂未支持该语法转换：//model VBICM1 VBIC
+2023-06-13 14:04:16,097 - Arc - WARNING - line(Vsource): V_Source:SRC1, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 14:04:16,097 - Arc - WARNING - line(Vsource): V_Source:SRC2, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 14:04:16,098 - Arc - WARNING - line: SRC:SRC10  N__30 N__25 R=0.1 Ohm C=Cpm1_2 pF, 未做转换
+2023-06-13 14:04:16,098 - Arc - WARNING - line: SRC:SRC8  N__10 0 R=0.1 Ohm C=Cpeak2_1 pF, 未做转换
+2023-06-13 14:04:16,098 - Arc - WARNING - line: SRC:SRC9  N__25 0 R=0.1 Ohm C=Cpm1_1 pF, 未做转换
+2023-06-13 14:04:16,098 - Arc - WARNING - line: SRC:SRC7  N__23 N__29 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 14:04:16,098 - Arc - WARNING - line: SRC:SRC4  N__24 N__11 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 14:04:16,098 - Arc - WARNING - line: SRC:SRC6  N__13 0 R=0.1 Ohm C=Cmain2_2 pF, 未做转换
+2023-06-13 14:04:16,099 - Arc - WARNING - line: SRC:SRC5 N__27 0 R=0.1 Ohm C=Cmain2_1 pF, 未做转换
+2023-06-13 14:04:16,099 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC1
+2023-06-13 14:04:16,099 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC2
+2023-06-13 14:04:16,099 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC3
+2023-06-13 14:04:16,099 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC4
+2023-06-13 14:04:16,100 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC5
+2023-06-13 14:04:16,100 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC6
+2023-06-13 14:04:16,100 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:PORT1
+2023-06-13 14:04:16,100 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:Term2
+2023-06-13 14:04:16,100 - Arc - WARNING - line: TLIN:TL1  N__17 N__26 Z=50.0 Ohm E=90 F=RFfreq GHz, 未做转换
+2023-06-13 14:04:16,101 - Arc - WARNING - line: PwrSplit2:PWR1  V_In N__19 N__17 SP21=0.707 SP31=0.707 SP11=0.  SP22=0.  Isolation=100. dB  ZRef=50. Ohm CheckPassivity=1, 未做转换
+2023-06-13 14:04:16,101 - Arc - WARNING - line: P_Probe:P_Load N__30 N__31, 未做转换
+2023-06-13 14:04:16,101 - Arc - WARNING - line: Tran:HB1_tran HB_Sol=1 SteadyState=1 StatusLevel=3 Freq[1]=RFfreq GHz Order[1]=5, 未做转换
+2023-06-13 14:04:16,101 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：Component:tahb_HB1 Module="ATAHB" Type="ModelExtractor"  Tran_Analysis="HB1_tran" HB_Analysis="HB1"
+2023-06-13 14:04:16,102 - Arc - WARNING - line: ParamSweep:Sweep1 SimInstanceName[1]="HB1" StatusLevel=2 SweepVar="Pavs" SweepPlan="Sweep1_stim", 未做转换
+2023-06-13 14:04:16,102 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: Sweep1_stim Start=-10 Stop=0 Step=1
+2023-06-13 14:04:16,102 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB1 MaxOrder=4 Freq[1]=RFfreq GHz Order[1]=5 StatusLevel=2 HBSS_WSP=0 OutputPlan="HB1_Output"
+2023-06-13 14:04:16,102 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB2 MaxOrder=4 Freq[1]=RFfreq GHz Order[1]=5 StatusLevel=2 CalcS_Params=yes LSSP_FreqAtPort[1]=RFfreq GHz LSSP_FreqAtPort[2]=RFfreq GHz SweepVar="RFfreq" SweepPlan="HB2_stim" OutputPlan="HB2_Output"
+2023-06-13 14:04:16,103 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: HB2_stim Start=2.1 Stop=2.5 Step=0.1
+2023-06-13 14:04:16,103 - Arc - WARNING - line: S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output", 未做转换
+2023-06-13 14:04:16,104 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: SP1_stim  Start=0.1 GHz Stop=20 GHz Step=0.1 GHz
+2023-06-13 14:04:16,104 - Arc - WARNING - line: Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2, 未做转换
+2023-06-13 14:04:16,105 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\tc02t_pa_hb_lssp_Harlmp\tc02t_pa_hb_lssp_Harlmp.ads********************
+2023-06-13 14:04:16,107 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options
+2023-06-13 14:04:16,107 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB1 MaxOrder=4 Freq[1]=RFfreq GHz Order[1]=5 StatusLevel=2 HBSS_WSP=0 OutputPlan="HB1_Output"
+2023-06-13 14:04:16,107 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:HB1_Output
+2023-06-13 14:04:16,108 - Arc - WARNING - line: Tran:HB1_tran HB_Sol=1 SteadyState=1 StatusLevel=3 Freq[1]=RFfreq GHz Order[1]=5, 未做转换
+2023-06-13 14:04:16,108 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：Component:tahb_HB1 Module="ATAHB" Type="ModelExtractor"  Tran_Analysis="HB1_tran" HB_Analysis="HB1"
+2023-06-13 14:04:16,108 - Arc - WARNING - line(Vsource): V_Source:SRC2, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 14:04:16,108 - Arc - WARNING - line(Vsource): V_Source:SRC1, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 14:04:16,108 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC2
+2023-06-13 14:04:16,109 - Arc - WARNING - line: S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output", 未做转换
+2023-06-13 14:04:16,109 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: SP1_stim Start=0.1 GHz Stop=20 GHz Step=0.1 GHz
+2023-06-13 14:04:16,109 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:SP1_Output
+2023-06-13 14:04:16,109 - Arc - WARNING - line: Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2, 未做转换
+2023-06-13 14:04:16,110 - Arc - WARNING - line: Z_l_2=10*Z0 + j*0, 未做转换
+2023-06-13 14:04:16,110 - Arc - WARNING - line: Z_l_fund=10 + j*0, 未做转换
+2023-06-13 14:04:16,110 - Arc - WARNING - line: Z_l_3 =10*Z0 + j*0, 未做转换
+2023-06-13 14:04:16,110 - Arc - WARNING - line: Z_l_4 =10* Z0 + j*0, 未做转换
+2023-06-13 14:04:16,110 - Arc - WARNING - line: Z_l_5 =10* Z0 + j*0, 未做转换
+2023-06-13 14:04:16,110 - Arc - WARNING - line: Z_s_fund =10 + j*0, 未做转换
+2023-06-13 14:04:16,111 - Arc - WARNING - line: Z_s_2 = 10* Z0 +j*0, 未做转换
+2023-06-13 14:04:16,111 - Arc - WARNING - line: Z_s_3 = 10* Z0 +j*0, 未做转换
+2023-06-13 14:04:16,111 - Arc - WARNING - line: Z_s_4 = 10* Z0 +j*0, 未做转换
+2023-06-13 14:04:16,111 - Arc - WARNING - line: Z_s_5 = 10* Z0 +j*0, 未做转换
+2023-06-13 14:04:16,111 - Arc - WARNING - line: P_Probe:P_Load N__30 N__31, 未做转换
+2023-06-13 14:04:16,111 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options:OPtions1
+2023-06-13 14:04:16,111 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:Term2
+2023-06-13 14:04:16,112 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC4
+2023-06-13 14:04:16,112 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC3
+2023-06-13 14:04:16,112 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:PORT1
+2023-06-13 14:04:16,112 - Arc - WARNING - line: PwrSplit2:PwR1 V_In N__19 N__17 SP21=0.707 SP31=0.707 SP11=0. SP22=0. Isolation=100. dB ZRef=50. Ohm CheckPassivity=1, 未做转换
+2023-06-13 14:04:16,112 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC6
+2023-06-13 14:04:16,112 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC1
+2023-06-13 14:04:16,113 - Arc - WARNING - line(R): R:R2, 暂未支持该语法转换：E=90
+2023-06-13 14:04:16,113 - Arc - WARNING - line(R): R:R2, 暂未支持该语法转换：F=RFfreq
+2023-06-13 14:04:16,113 - Arc - WARNING - line(R): R:R2, 暂未支持该语法转换：GHz
+2023-06-13 14:04:16,113 - Arc - WARNING - line: TLIN:TL1 N__17 N__26 Z=50.0 Ohm E=90 F=RFfreq GHz, 未做转换
+2023-06-13 14:04:16,113 - Arc - WARNING - line: SRC:SRC10 N__30 N__25 R=0.1 Ohm C=Cpm1_2 pF, 未做转换
+2023-06-13 14:04:16,113 - Arc - WARNING - line: SRC:SRC8 N__10 0 R=0.1 Ohm C=Cpeak2_1 pF, 未做转换
+2023-06-13 14:04:16,114 - Arc - WARNING - line: SRC:SRC9 N__25 0 R=0.1 Ohm C=Cpm1_1 pF, 未做转换
+2023-06-13 14:04:16,114 - Arc - WARNING - line: SRC:SRC7 N__23 N__29 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 14:04:16,114 - Arc - WARNING - line: SRC:SRC4 N__24 N__11 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 14:04:16,114 - Arc - WARNING - line: SRC:SRC6 N__13 0 R=0.1 Ohm C=Cmain2_2 pF, 未做转换
+2023-06-13 14:04:16,114 - Arc - WARNING - line: SRC:SRC5 N__27 0 R=0.1 Ohm C=Cmain2_1 pF, 未做转换
+2023-06-13 14:04:16,114 - Arc - WARNING - line: ParamSweep:Sweep1 SimInstanceName[1]="HB1" StatusLevel=2 SweepVar="Pavs" SweepPlan="Sweep1_stim", 未做转换
+2023-06-13 14:04:16,115 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: Sweep1_stim Start=-10 Stop=0 Step=1
+2023-06-13 14:04:16,115 - Arc - WARNING - line(MODEL): VBIC, 暂未支持该语法转换：//model VBICM1 VBIC
+2023-06-13 14:04:16,115 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC5
+2023-06-13 14:04:16,115 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB2 MaxOrder=4 Freq[1]=RFfreq GHz Order[1]=5 StatusLevel=2 CalcS_Params=yes LSSP_FreqAtPort[1]=RFfreq GHz LSSP_FreqAtPort[2]=RFfreq GHz SweepVar="RFfreq" SweepPlan="HB2_stim" OutputPlan="HB2_Output"
+2023-06-13 14:04:16,116 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: HB2_stim Start=2.1 Stop=2.5 Step=0.1
+2023-06-13 14:04:16,116 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:HB2_Output
+2023-06-13 14:04:16,116 - Arc - INFO - ********************开始转换ads网表：F:\工作文件\ADS_files\A_netliat\other_case\tc02t_pa_hb_twotone\tc02t_pa_hb_twotone.ads********************
+2023-06-13 14:04:16,123 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options
+2023-06-13 14:04:16,123 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：HB:HB1 MaxOrder=5 Freq[1]=(RFfreq-0.01) GHz Freq[2]=(RFfreq+0.01) GHz Order[1]=9 Order[2]=9 StatusLevel=2 HBSS_WSP=0 OutputPlan="HB1_Output"
+2023-06-13 14:04:16,124 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:HB1_Output
+2023-06-13 14:04:16,124 - Arc - WARNING - line: Tran:HB1_tran HB_Sol=1 StendyState=1 StatusLevel=3 Freq[1]=(RFfreq-0.01) GHz Order[1]=9, 未做转换
+2023-06-13 14:04:16,124 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：Component:tahb_HB1 Module="ATAHB" Type="ModelExtractor"  Tran_Analysis="HB1_tran" HB_Analysis="HB1"
+2023-06-13 14:04:16,124 - Arc - WARNING - line(Vsource): V_Source:SRC2, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 14:04:16,124 - Arc - WARNING - line(Vsource): V_Source:SRC1, 暂未支持该语法转换：SaveCurrent=1
+2023-06-13 14:04:16,125 - Arc - WARNING - line: S_Param:SP1 CalcS=yes CalcY=no CalcZ=no GroupDelayAperture=1e-4 FreqConversion=no FreqConversionPort=1 StatusLevel=2 CalcNoise=no SortNoise=0 BandwidthForNoise=1.0 Hz DevOpPtLevel=0 SweepVar="freq" SweepPlan="SP1_stim" OutputPlan="SP1_Output", 未做转换
+2023-06-13 14:04:16,125 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: SP1_stim Start=0.1 GHz Stop=20 GHz Step=0.1 GHz
+2023-06-13 14:04:16,125 - Arc - WARNING - line(OUTPUT): 暂未支持 output 的转换：OutputPlan:SP1_Output
+2023-06-13 14:04:16,125 - Arc - WARNING - line: Component Module="LinearCollapse" Type="ModelExtractor" NetworkRepresentation=2, 未做转换
+2023-06-13 14:04:16,125 - Arc - WARNING - line: P_Probe:P_Load  N__30 N__31, 未做转换
+2023-06-13 14:04:16,126 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options:Options1
+2023-06-13 14:04:16,126 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:Term2
+2023-06-13 14:04:16,126 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC6
+2023-06-13 14:04:16,126 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC7
+2023-06-13 14:04:16,126 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:PORT1
+2023-06-13 14:04:16,126 - Arc - WARNING - line: PwrSplit2:PWR1 V_In N__19 N__17 SP21=0.707 SP31=0.707 SP11=0. SP22=0. Isolation=100. dB ZRef=50. Ohm CheckPassivity=1, 未做转换
+2023-06-13 14:04:16,127 - Arc - WARNING - line(MODEL): VBIC, 暂未支持该语法转换：//model VBICM1 VBIC
+2023-06-13 14:04:16,127 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC8
+2023-06-13 14:04:16,127 - Arc - WARNING - line: TLIN:TL1 N__17 N__26 Z=50.0 Ohm E=90 F=RFfreq GHz, 未做转换
+2023-06-13 14:04:16,127 - Arc - WARNING - line: SRC:SRC10  N__30 N__25 R=0.1 Ohm C=Cpm1_2 pF, 未做转换
+2023-06-13 14:04:16,127 - Arc - WARNING - line: SRC:SRC8  N__10 0 R=0.1 Ohm C=Cpeak2_1 pF, 未做转换
+2023-06-13 14:04:16,127 - Arc - WARNING - line: SRC:SRC9  N__25 0 R=0.1 Ohm C=Cpm1_1 pF, 未做转换
+2023-06-13 14:04:16,128 - Arc - WARNING - line: SRC:SRC7  N__23 N__29 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 14:04:16,128 - Arc - WARNING - line: SRC:SRC4  N__24 N__11 R=0.1 Ohm C=6.45 pF, 未做转换
+2023-06-13 14:04:16,128 - Arc - WARNING - line: SRC:SRC6  N__13 0 R=0.1 Ohm C=Cmain2_2 pF, 未做转换
+2023-06-13 14:04:16,128 - Arc - WARNING - line: SRC:SRC5  N__27 0 R=0.1 Ohm C=Cmain2_1 pF, 未做转换
+2023-06-13 14:04:16,128 - Arc - WARNING - line: ParamSweep:Sweep1 SimInstanceName[1]="HB1" StatusLevel=2 SweepVar="Pavs" SweepPlan="Sweep1_stim", 未做转换
+2023-06-13 14:04:16,128 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan: Sweep1_stim Start=-10 Stop=0 Step=1
+2023-06-13 14:04:16,129 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC5
+2023-06-13 14:04:16,129 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC4
+2023-06-13 14:04:16,129 - Arc - WARNING - line(VBICM1): 暂未支持该 model 的转换："VBICM1":VBIC9

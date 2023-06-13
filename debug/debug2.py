@@ -28,12 +28,18 @@ class Testing():
     def s_method(self, index):
         # data = dict()
         
-        time.sleep(10)
+        time.sleep(30-5*index)
         self.data[index]["tag"] = "ASD"
         self.data[index]["ppid"] = os.getppid()
         self.data[index]["pid"] = os.getpid()
-        print(self.data[index])
+        print("s_method:",self.data[index])
         # print(self.data)
+        k_l = []
+        for k in self.data.keys():
+            if self.data[k].keys() == []:
+                k_l.append(k)
+        print(f"case{k_l} 正在仿真")
+        print("*"*50)
 
     def processing_start(self, t_l):
         for i in t_l:
@@ -62,10 +68,11 @@ if __name__ == '__main__':
 
     for i in t_l:
         i.start()
+        time.sleep(2)
 
     for i in t_l:
-        i.join()  
-    
+        i.join()
+
     atc.updata_df()
     # data = dict()
     # for index in range(1,6):

@@ -1,0 +1,15 @@
+2023-06-13 14:23:51,060 - Arc - INFO - ********************开始转换ads网表：.\demo.ads********************
+2023-06-13 14:23:51,069 - Arc - WARNING - line(OPTION): 暂未支持 option 的转换：Options:Options1
+2023-06-13 14:23:51,069 - Arc - WARNING - line: simulator lang=spectre, 未做转换
+2023-06-13 14:23:51,069 - Arc - WARNING - line: global 0, 未做转换
+2023-06-13 14:23:51,069 - Arc - WARNING - line: include "../model/ads_hbt.1.modelcard", 未做转换
+2023-06-13 14:23:51,069 - Arc - WARNING - line: simulator lang=ads, 未做转换
+2023-06-13 14:23:51,070 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:PORT1
+2023-06-13 14:23:51,070 - Arc - WARNING - line(PORT): 暂未支持 PORT 的转换: Port:Term2
+2023-06-13 14:23:51,070 - Arc - WARNING - line(Isource): 暂未支持 Isource 的转换：I_Source:SRC5
+2023-06-13 14:23:51,071 - Arc - WARNING - line(HBTM1): "HBTM1":HBT1, 暂未支持该语法转换：SelfTmod=0
+2023-06-13 14:23:51,071 - Arc - WARNING - line(HBTM1): "HBTM1":HBT2, 暂未支持该语法转换：SelfTmod=0
+2023-06-13 14:23:51,071 - Arc - WARNING - line(HBTM1): "HBTM1":HBT3, 暂未支持该语法转换：SelfTmod=0
+2023-06-13 14:23:51,071 - Arc - WARNING - line(HBTM1): "HBTM1":HBT4, 暂未支持该语法转换：SelfTmod=0
+2023-06-13 14:23:51,071 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：AC:AC1  SweepVar="freq"  SweepPlan="AC1_stim"
+2023-06-13 14:23:51,071 - Arc - WARNING - line(SIM): 暂未支持 仿真分析 的转换：SweepPlan:AC1_stim  Start=ACfreq GHz  Stop=(10*ACfreq) GHz  Step=ACfreq GHz

@@ -1,0 +1,19 @@
+; -*- coding: utf-8 -*-
+ads2spectre.py
+
+将ADS语法的网表转换成spectre语法的网表
+其中已经支持R、L、C、Short、INDQ_Z、CAPQ器件的转换
+对于I_Source、V_Source、PORT等其他还需要人工转换
+目前暂不支持分析的转换，需要人工转换
+未做转换的语句将会在控制台打印,并且写入到执行命令所在目录下的ads2spectre.log文件中
+
+该脚本支持单个网表转换、多个网表批量转换
+传入参数：
+    -i 需要转换的文件路径或者目录
+    -O 指定输出目录
+    +b 是否批量处理，后面不跟参数，默认不进行批量处理，命令中加入+b则开启批量处理模式
+
+脚本执行示例：
+	python ads2spectre.py -i ./testtmp/ -o ./result/ +b
+
+可以通过 python ads2spectre.py -h 查看详细信息

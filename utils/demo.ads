@@ -42,7 +42,7 @@ CAPQ:C7 Vcc 0 C=50 fF Q=50.0 F=1000.0 MHz Mode=1
 
 INDQ_Z:L2 N__21 T_c L=16 nH Q=50.0 F=1000.0 MHz Mode=1 Rdc=0.0 Ohm
 INDQ_Z:L3 T_c Vcc L=16 nH Q=50.0 F=1000.0 MHz Mode=1 Rdc=0.0 Ohm
-INDQ_Z:L4 T_e 0 L=5 pH Q=50.0 F=1000 MHZ Mode=1 Rdc=0.0 Ohm
+INDQ_Z:L4 T_e 0 L=5 pH Q=50.0 F=1000 MHz Mode=1 Rdc=0.0 Ohm
 
 Short:Iinput Vinput N__14 Mode=0 SaveCurrent =yes
 Short:Iload N__6 Vload Mode=0 SaveCurrent=yes
